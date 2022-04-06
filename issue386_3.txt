@@ -1,0 +1,17 @@
+[Q1]  I am testing the that min/max of the input works.  I set the min to 5 and the max to 10.
+
+|__|__|min=5 max=10|
+
+[Q2!] Now let's test that I can use the old functions to set the min and the max.  The min is the value from Q1 ({$Q1}) and the max is five plus min.
+
+|__|__|min=isDefined(Q1,0) max=sum(isDefined(Q1,0),5)|
+
+[Q3!] Now let's test that I can use the new functions to set the min and the max.  The min is the value from Q1 ({$Q1}) and the max is five plus min.
+
+|__|__|min=valueOrDefault('Q1',0) max=valueOrDefault('Q1',0)+5|
+
+[Q4!] Now let's test that I can use the new functions to set the min and the max using double quotes.  The min is the value from Q1 ({$Q1}) and the max is five plus min.
+
+|__|__|min=valueOrDefault("Q1",0) max=valueOrDefault("Q1",0)+5|
+
+[END] all done

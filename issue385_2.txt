@@ -1,0 +1,41 @@
+
+
+[INTROM3] The next questions are about your tobacco, nicotine, marijuana, and alcohol use. In the last section, we will ask you about your exposure to the sun and use of tanning beds.
+
+[SECTION1] Tobacco and Nicotine
+
+[INTROSMO] First, we will ask you about your use of tobacco and nicotine products. Many questions will ask you to share the age you were when you started or stopped using a product. Please make your best guess if you are not sure about the age you were when you started or stopped using a product.
+
+Please remember that we protect your privacy. We remove information that can identify you from your survey answers before we share them with researchers.
+
+[TOBACCO?] Have you ever used any of these tobacco products, even once? Select all that apply.
+[0] Cigarettes (manufactured or hand-rolled)
+[1] Electronic delivery devices that can be vaped, such as e-cigarettes, Juul, blue, and NJOY. These electronic delivery devices are battery-powered and create vapor.
+[2] Cigars, cigarillos, or little filtered cigars; some of the most popular brands include Macanudo, Romeo y Julieta, Black and Mild, Swisher Sweets, Prime Time, and Cheyenne. Please do not include blunts as we will be asking about marijuana use in a later section.
+[3] Chewing tobacco, snus, snuff, or dip; some of the most popular brands are Red Man, Levi Garrett, BEECH-NUT, Skoal, and Copenhagen.
+[4] Hookah or water pipe
+[5] Tobacco pipe
+[88*] I have not used any of these tobacco products
+< #NR-> END >
+
+[CIG1?,displayif=equals(TOBACCO,0)]Cigarettes
+
+How many cigarettes have you smoked in your life?
+(0) 10 or less ->END
+(1) 11 to 49 -> END
+(2) 50 to 99 -> CIG2
+(3) 100 or more -> CIG2
+
+[CIG2?,displayif=equals(TOBACCO,0)] How old were you when you first smoked a cigarette?
+
+Age first smoked a cigarette |__|__|min=0 max=sum(isDefined(AGE,age),1)|
+
+[CIG3?,displayif=equals(TOBACCO,0)] |displayif=noneExist('AGE','age')| <p style="background-color:red;color:white;text-align:center">ERROR: AGE and age are undefined </p> |
+How old were you when you started smoking cigarettes on a |popup|regular basis|Informational Text|We understand that the meaning of 'regular basis' might be different for different people. When you answer this question, please think about what 'regular basis' means to you.|?
+
+Age started smoking cigarettes on a regular basis |__|__|id=CIG3_AGE min=valueOrDefault("CIG2",0) max=sum(isDefined(AGE,age),1)|
+
+[44*] Never
+
+[END] end
+

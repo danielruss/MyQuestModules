@@ -1,0 +1,11 @@
+[AGE]
+Age started smoking cigarettes on a regular basis |__|__|id=CIG3_AGE min=0 max=125|
+
+[CIG3X]
+How old were you when you started smoking cigarettes on a |popup|regular basis|Informational Text|We understand that the meaning of 'regular basis' might be different for different people. When you answer this question, please think about what 'regular basis' means to you.|?
+
+Age started smoking cigarettes on a regular basis |__|__|id=CIG3_AGE min=valueOrDefault("AGE",0) max=sum(isDefined(AGE,age),1)|
+
+[44*] Never
+
+[END] all done

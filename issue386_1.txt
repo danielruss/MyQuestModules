@@ -1,0 +1,42 @@
+
+[SEX]  What is your sex?
+
+   (1) One
+   (2) Two
+   (3) Three
+
+[GEN] What is your gender?
+   (0)
+   (1) One
+   (2) Two
+   (3) Three
+  (4). Four
+  (55)  Fifty-five
+
+[HORNONCISWOM,displayif=and(or(equals(SEX,1),equals(SEX,2)),or(or(equals(GEN,0),equals(GEN,3)),or(equals(GEN,4),equals(GEN,55))))] Have you ever used hormones or other medications to make your body better reflect your gender (for example, estrogen or testosterone-blockers)?
+(0) No
+(1) Yes, I used hormones or other medications to make my body look more feminine in the past
+(2) Yes, I am currently using hormones or other medications to make my body look more feminine
+
+[Q2] Q2….
+
+SEX:  {$SEX} 
+GEN: {$GEN}
+
+[END]. That's alll
+
+=========== 
+[Q1] Q1….  
+
+SEX:  {$SEX} 
+GEN: {$GEN}
+
+[HORNONCISWOM,displayif=and(or(equals(SEX,1),equals(SEX,2)),or(or(equals(GEN,0),equals(GEN,3)),or(equals(GEN,4),equals(GEN,55))))] Have you ever used hormones or other medications to make your body better reflect your gender (for example, estrogen or testosterone-blockers)?
+(0) No
+(1) Yes, I used hormones or other medications to make my body look more feminine in the past
+(2) Yes, I am currently using hormones or other medications to make my body look more feminine
+
+
+[Q2] Q2….
+
+[END] That's all
