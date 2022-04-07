@@ -1,0 +1,537 @@
+//This file was last modified on Tue Apr 5 23:36:07 2022 -0400 (short timestamp = 2022-04-06-03-36-07)
+{"name":"Module4"}
+
+[INTROM4] The questions in this section are about places where you have lived and worked. Where we live and our daily commute to and from our homes, work, and school can affect our health in a number of ways.
+
+[SECTION1] <b>Residential History</b>
+
+[INTRORH] The next questions ask about where you live now and where you have lived in the past. It is important that you share exact addresses, if possible. If you cannot remember your full address, please share as much information as you can.
+
+You can include rural routes (RR) in your answers, but please do <b>not</b> include post office (PO) boxes.
+
+[HOMEADD1_1?] What is the full street address of the place where you live now?
+
+Street number |__|__|id=STNUM min=0 max=999999|
+Full Street name |__|id=FULLST|
+Apartment, suite, unit, building, etc. |__|__|id=APT|
+City |__|id=CITY|
+State/Province |__|id=ST|
+Zip code |__|__|id=ZIP min=0|
+Country |__|id=COUNTRY|
+
+[HOMEADD2_1?,displayif=or(or(isNotDefined(CITY,false),isNotDefined(ST,false)),or(isNotDefined(ZIP,false),isNotDefined(COUNTRY,false)))] Please provide the following information:
+City: |displayif=exists("CITY")|{$CITY}|
+|__|id=CITY_FOLLOWUP displayif=doesNotExist("CITY")|
+
+State/Province: |displayif=exists("ST")| {$ST}|
+|__|id=ST_FOLLOWUP displayif=doesNotExist("ST")|
+
+Zip code: |displayif=exists("ZIP") | {$ZIP}|
+|__|id=ZIP_FOLLOWUP min=0 displayif=doesNotExist("ZIP")|
+
+Country: |displayif=exists("COUNTRY")| {$COUNTRY}|
+|__|id=COUNTRY_FOLLOWUP displayif=doesNotExist("COUNTRY")|
+[77*] Don't know
+
+
+[HOMEADD3_1?,displayif=and(or(isNotDefined(STNUM,false),isNotDefined(FULLST,false)),or(or(equals(isNotDefined(CITY,false),false),equals(isNotDefined(ST,false),false)),or(equals(isNotDefined(ZIP,false),false),equals(isNotDefined(COUNTRY,false),false))))] Please provide the cross streets of the intersection closest to this address:
+
+Full Street name #1 |__|id=STRNAME1|
+Full Street name #2 |__|id=STRTNAME1|
+[77*] Don't know
+< -> HOMEADD4_1 >
+
+[HOMEADD4_1] Here is the information you gave us for this location:
+|displayif=or(equals(isNotDefined(STNUM,""),false),or(equals(isNotDefined(FULLST,""),false),or(equals(isNotDefined(APT,""),false),or(equals(isNotDefined(CITY,""),false),or(equals(isNotDefined(CITY_FOLLOWUP,""),false),or(equals(isNotDefined(ST,""),false),or(equals(isNotDefined(ST_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP,""),false),or(equals(isNotDefined(ZIP_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY,""),false),equals(isNotDefined(COUNTRY_FOLLOWUP,""),false)))))))))))|{$STNUM} {$FULLST} {$APT} {$CITY} {$CITY_FOLLOWUP}{$ST} {$ST_FOLLOWUP} {$ZIP} {$ZIP_FOLLOWUP} {$COUNTRY} {$COUNTRY_FOLLOWUP}|
+|displayif=noneExist("STNUM","FULLST","APT","CITY","CITY_FOLLOWUP","ST","ST_FOLLOWUP","ZIP","ZIP_FOLLOWUP","COUNTRY","COUNTRY_FOLLOWUP")|Current Address|
+
+
+If this information is <b>not</b> correct, please click the “Back” button to edit your answers before moving on.
+< -> HOMEADDOTH1 >
+
+[HOMEADDOTH1?] Within the <b>past 20 years</b>, have you lived anywhere else for <b>at least two years</b>?
+(1) Yes -> HOMEADD1_2
+(0) No -> HOMEADDSUM
+< #NR-> HOMEADDSUM >
+
+[HOMEADD1_2?] What is the full street address of the place you lived before you lived at |displayif=or(equals(isNotDefined(STNUM,""),false),or(equals(isNotDefined(FULLST,""),false),or(equals(isNotDefined(APT,""),false),or(equals(isNotDefined(CITY,""),false),or(equals(isNotDefined(CITY_FOLLOWUP,""),false),or(equals(isNotDefined(ST,""),false),or(equals(isNotDefined(ST_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP,""),false),or(equals(isNotDefined(ZIP_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY,""),false),equals(isNotDefined(COUNTRY_FOLLOWUP,""),false)))))))))))|{$STNUM} {$FULLST} {$APT} {$CITY} {$CITY_FOLLOWUP}{$ST} {$ST_FOLLOWUP} {$ZIP} {$ZIP_FOLLOWUP} {$COUNTRY} {$COUNTRY_FOLLOWUP}|
+|displayif=noneExist("STNUM","FULLST","APT","CITY","CITY_FOLLOWUP","ST","ST_FOLLOWUP","ZIP","ZIP_FOLLOWUP","COUNTRY","COUNTRY_FOLLOWUP")|Current Address|? Please only include addresses where you have lived for <b>at least two years</b>.
+
+Street number |__|__|id=STNUM1 min=0 max=999999|
+Full Street name |__|id=FULLST1|
+Apartment, suite, unit, building, etc. |__|__|id=APT1|
+City |__|id=CITY1|
+State/Province |__|id=ST1|
+Zip code |__|__|id=ZIP1 min=0|
+Country |__|id=COUNTRY1|
+
+[HOMEADD2_2?,displayif=or(or(isNotDefined(CITY1,false),isNotDefined(ST1,false)),or(isNotDefined(ZIP1,false),isNotDefined(COUNTRY1,false)))] Please provide the following information:
+City: |displayif=exists("CITY1")|{$CITY1}|
+|__|id=CITY1_FOLLOWUP displayif=doesNotExist("CITY1")|
+
+State/Province: |displayif=exists("ST1")| {$ST1}|
+|__|id=ST1_FOLLOWUP displayif=doesNotExist("ST1")|
+
+Zip code: |displayif=exists("ZIP1") | {$ZIP1}|
+|__|id=ZIP1_FOLLOWUP min=0 displayif=doesNotExist("ZIP1")|
+
+Country: |displayif=exists("COUNTRY1")| {$COUNTRY1}|
+|__|id=COUNTRY1_FOLLOWUP displayif=doesNotExist("COUNTRY1")|
+[77*] Don't know
+
+
+
+[HOMEADD3_2?,displayif=and(or(isNotDefined(STNUM1,false),isNotDefined(FULLST1,false)),or(or(equals(isNotDefined(CITY1,false),false),equals(isNotDefined(ST1,false),false)),or(equals(isNotDefined(ZIP1,false),false),equals(isNotDefined(COUNTRY1,false),false))))] Please provide the cross streets of the intersection closest to this address:
+
+Full Street name #1 |__|id=STRNAME2|
+Full Street name #2 |__|id=STRTNAME2|
+[77*] Don't know
+< -> HOMEADD4_2 >
+
+[HOMEADD4_2] Here is the information you gave us for this location:
+
+|displayif=noneExist("STNUM1","FULLST1","APT1","CITY1","CITY1_FOLLOWUP","ST1","ST1_FOLLOWUP","ZIP1","ZIP1_FOLLOWUP","COUNTRY1","COUNTRY1_FOLLOWUP")|2nd Address:||displayif=or(equals(isNotDefined(STNUM1,""),false),or(equals(isNotDefined(FULLST1,""),false),or(equals(isNotDefined(APT1,""),false),or(equals(isNotDefined(CITY1,""),false),or(equals(isNotDefined(CITY1_FOLLOWUP,""),false),or(equals(isNotDefined(ST1,""),false),or(equals(isNotDefined(ST1_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP1,""),false),or(equals(isNotDefined(ZIP1_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY1,""),false),equals(isNotDefined(COUNTRY1_FOLLOWUP,""),false)))))))))))|{$STNUM1} {$FULLST1} {$APT1} {$CITY1} {$CITY1_FOLLOWUP} {$ST1} {$ST1_FOLLOWUP} {$ZIP1} {$ZIP1_FOLLOWUP} {$COUNTRY1} {$COUNTRY1_FOLLOWUP}|
+
+
+If this information is <b>not</b> correct, please click the “Back” button to edit your answers before moving on.
+
+< -> HOMEADDOTH2>
+
+[HOMEADDOTH2?] Within the <b>past 20 years</b>, have you lived anywhere else for <b>at least two years</b>?
+(1) Yes -> HOMEADD1_3
+(0) No -> HOMEADDSUM
+< #NR-> HOMEADDSUM >
+
+[HOMEADD1_3?] What is the full street address of the place you lived before you lived at 
+|displayif=noneExist("STNUM1","FULLST1","APT1","CITY1","CITY1_FOLLOWUP","ST1","ST1_FOLLOWUP","ZIP1","ZIP1_FOLLOWUP","COUNTRY1","COUNTRY1_FOLLOWUP")|2nd Address||displayif=or(equals(isNotDefined(STNUM1,""),false),or(equals(isNotDefined(FULLST1,""),false),or(equals(isNotDefined(APT1,""),false),or(equals(isNotDefined(CITY1,""),false),or(equals(isNotDefined(CITY1_FOLLOWUP,""),false),or(equals(isNotDefined(ST1,""),false),or(equals(isNotDefined(ST1_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP1,""),false),or(equals(isNotDefined(ZIP1_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY1,""),false),equals(isNotDefined(COUNTRY1_FOLLOWUP,""),false)))))))))))|{$STNUM1} {$FULLST1} {$APT1} {$CITY1} {$CITY1_FOLLOWUP} {$ST1} {$ST1_FOLLOWUP} {$ZIP1} {$ZIP1_FOLLOWUP} {$COUNTRY1} {$COUNTRY1_FOLLOWUP}|? Please only include addresses where you have lived for <b>at least two years</b>.
+
+Street number |__|__|id=STNUM2 min=0 max=999999|
+Full Street name |__|id=FULLST2|
+Apartment, suite, unit, building, etc. |__|__|id=APT2|
+City |__|id=CITY2|
+State/Province |__|id=ST2|
+Zip code |__|__|id=ZIP2 min=0|
+Country |__|id=COUNTRY2|
+
+[HOMEADD2_3?,displayif=or(or(isNotDefined(CITY2,false),isNotDefined(ST2,false)),or(isNotDefined(ZIP2,false),isNotDefined(COUNTRY2,false)))] Please provide the following information:
+City: |displayif=exists("CITY2")|{$CITY2}|
+|__|id=CITY2_FOLLOWUP displayif=doesNotExist("CITY2")|
+
+State/Province: |displayif=exists("ST2")| {$ST2}|
+|__|id=ST2_FOLLOWUP displayif=doesNotExist("ST2")|
+
+Zip code: |displayif=exists("ZIP2") | {$ZIP2}|
+|__|id=ZIP2_FOLLOWUP min=0 displayif=doesNotExist("ZIP2")|
+
+Country: |displayif=exists("COUNTRY2")| {$COUNTRY2}|
+|__|id=COUNTRY2_FOLLOWUP displayif=doesNotExist("COUNTRY2")|
+[77*] Don't know
+
+
+
+[HOMEADD3_3?,displayif=and(or(isNotDefined(STNUM2,false),isNotDefined(FULLST2,false)),or(or(equals(isNotDefined(CITY2,false),false),equals(isNotDefined(ST2,false),false)),or(equals(isNotDefined(ZIP2,false),false),equals(isNotDefined(COUNTRY2,false),false))))] Please provide the cross streets of the intersection closest to this address:
+
+Full Street name #1 |__|id=STRNAME3|
+Full Street name #2 |__|id=STRTNAME3|
+[77*] Don't know
+< -> HOMEADD4_3 >
+
+[HOMEADD4_3] Here is the information you gave us for this location:
+
+|displayif=noneExist("STNUM2","FULLST2","APT2","CITY2","CITY2_FOLLOWUP","ST2","ST2_FOLLOWUP","ZIP2","ZIP2_FOLLOWUP","COUNTRY2","COUNTRY2_FOLLOWUP")|3rd Address:||displayif=or(equals(isNotDefined(STNUM2,""),false),or(equals(isNotDefined(FULLST2,""),false),or(equals(isNotDefined(APT2,""),false),or(equals(isNotDefined(CITY2,""),false),or(equals(isNotDefined(CITY2_FOLLOWUP,""),false),or(equals(isNotDefined(ST2,""),false),or(equals(isNotDefined(ST2_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP2,""),false),or(equals(isNotDefined(ZIP2_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY2,""),false),equals(isNotDefined(COUNTRY2_FOLLOWUP,""),false)))))))))))|{$STNUM2} {$FULLST2} {$APT2} {$CITY2} {$CITY2_FOLLOWUP}{$ST2} {$ST2_FOLLOWUP} {$ZIP2} {$ZIP2_FOLLOWUP} {$COUNTRY2} {$COUNTRY2_FOLLOWUP}|
+
+If this information is <b>not</b> correct, please click the “Back” button to edit your answers before moving on.
+
+< -> HOMEADDOTH3 >
+
+[HOMEADDOTH3?] Within the <b>past 20 years</b>, have you lived anywhere else for <b>at least two years</b>?
+(1) Yes -> HOMEADD1_4
+(0) No -> HOMEADDSUM
+< #NR-> HOMEADDSUM >
+
+[HOMEADD1_4?] What is the full street address of the place you lived before you lived at
+|displayif=noneExist("STNUM2","FULLST2","APT2","CITY2","CITY2_FOLLOWUP","ST2","ST2_FOLLOWUP","ZIP2","ZIP2_FOLLOWUP","COUNTRY2","COUNTRY2_FOLLOWUP") |3rd Address||displayif=or(equals(isNotDefined(STNUM2,""),false),or(equals(isNotDefined(FULLST2,""),false),or(equals(isNotDefined(APT2,""),false),or(equals(isNotDefined(CITY2,""),false),or(equals(isNotDefined(CITY2_FOLLOWUP,""),false),or(equals(isNotDefined(ST2,""),false),or(equals(isNotDefined(ST2_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP2,""),false),or(equals(isNotDefined(ZIP2_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY2,""),false),equals(isNotDefined(COUNTRY2_FOLLOWUP,""),false)))))))))))|{$STNUM2} {$FULLST2} {$APT2} {$CITY2} {$CITY2_FOLLOWUP} {$ST2} {$ST2_FOLLOWUP} {$ZIP2} {$ZIP2_FOLLOWUP} {$COUNTRY2} {$COUNTRY2_FOLLOWUP}|
+? Please only include addresses where you have lived for <b>at least two years</b>.
+
+Street number |__|__|id=STNUM3 min=0 max=999999|
+Full Street name |__|id=FULLST3|
+Apartment, suite, unit, building, etc. |__|__|id=APT3|
+City |__|id=CITY3|
+State/Province |__|id=ST3|
+Zip code |__|__|id=ZIP3 min=0|
+Country |__|id=COUNTRY3|
+
+[HOMEADD2_4?,displayif=or(or(isNotDefined(CITY3,false),isNotDefined(ST3,false)),or(isNotDefined(ZIP3,false),isNotDefined(COUNTRY3,false)))] Please provide the following information:
+City: |displayif=exists("CITY3")|{$CITY3}|
+|__|id=CITY3_FOLLOWUP displayif=doesNotExist("CITY3")|
+
+State/Province: |displayif=exists("ST3")| {$ST3}|
+|__|id=ST3_FOLLOWUP displayif=doesNotExist("ST3")|
+
+Zip code: |displayif=exists("ZIP3") | {$ZIP3}|
+|__|id=ZIP3_FOLLOWUP min=0 displayif=doesNotExist("ZIP3")|
+
+Country: |displayif=exists("COUNTRY3")| {$COUNTRY3}|
+|__|id=COUNTRY3_FOLLOWUP displayif=doesNotExist("COUNTRY3")|
+[77*] Don't know
+
+
+
+[HOMEADD3_4?,displayif=and(or(isNotDefined(STNUM3,false),isNotDefined(FULLST3,false)),or(or(equals(isNotDefined(CITY3,false),false),equals(isNotDefined(ST3,false),false)),or(equals(isNotDefined(ZIP3,false),false),equals(isNotDefined(COUNTRY3,false),false))))] Please provide the cross streets of the intersection closest to this address:
+Full Street name #1 |__|id=STRNAME4|
+Full Street name #2 |__|id=STRTNAME4|
+[77*] Don't know
+< -> HOMEADD4_4 >
+
+[HOMEADD4_4] Here is the information you gave us for this location:
+
+|displayif=noneExist("STNUM3","FULLST3","APT3","CITY3","CITY3_FOLLOWUP","ST3","ST3_FOLLOWUP","ZIP3","ZIP3_FOLLOWUP","COUNTRY3","COUNTRY3_FOLLOWUP")|4th Address:||displayif=or(equals(isNotDefined(STNUM3,""),false),or(equals(isNotDefined(FULLST3,""),false),or(equals(isNotDefined(APT3,""),false),or(equals(isNotDefined(CITY3,""),false),or(equals(isNotDefined(CITY3_FOLLOWUP,""),false),or(equals(isNotDefined(ST3,""),false),or(equals(isNotDefined(ST3_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP3,""),false),or(equals(isNotDefined(ZIP3_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY3,""),false),equals(isNotDefined(COUNTRY3_FOLLOWUP,""),false)))))))))))|{$STNUM3} {$FULLST3} {$APT3} {$CITY3} {$CITY3_FOLLOWUP}{$ST3} {$ST3_FOLLOWUP} {$ZIP3} {$ZIP3_FOLLOWUP} {$COUNTRY3} {$COUNTRY3_FOLLOWUP}|
+
+If this information is <b>not</b> correct, please click the “Back” button to edit your answers before moving on.
+< -> HOMEADDOTH4 >
+
+[HOMEADDOTH4?] Within the <b>past 20 years</b>, have you lived anywhere else for <b>at least two years</b>?
+(1) Yes -> HOMEADD1_5
+(0) No -> HOMEADDSUM
+< #NR-> HOMEADDSUM >
+
+[HOMEADD1_5?] What is the full street address of the place you lived before you lived at|displayif=noneExist("STNUM3","FULLST3","APT3","CITY3","CITY3_FOLLOWUP","ST3","ST3_FOLLOWUP","ZIP3","ZIP3_FOLLOWUP","COUNTRY3","COUNTRY3_FOLLOWUP")| 4th Address||displayif=or(equals(isNotDefined(STNUM3,""),false),or(equals(isNotDefined(FULLST3,""),false),or(equals(isNotDefined(APT3,""),false),or(equals(isNotDefined(CITY3,""),false),or(equals(isNotDefined(CITY3_FOLLOWUP,""),false),or(equals(isNotDefined(ST3,""),false),or(equals(isNotDefined(ST3_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP3,""),false),or(equals(isNotDefined(ZIP3_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY3,""),false),equals(isNotDefined(COUNTRY3_FOLLOWUP,""),false)))))))))))| {$STNUM3} {$FULLST3} {$APT3} {$CITY3} {$CITY3_FOLLOWUP}{$ST3} {$ST3_FOLLOWUP} {$ZIP3} {$ZIP3_FOLLOWUP} {$COUNTRY3} {$COUNTRY3_FOLLOWUP}|? Please only include addresses where you have lived for <b>at least two years</b>.
+
+Street number |__|__|id=STNUM4 min=0 max=999999|
+Full Street name |__|id=FULLST4|
+Apartment, suite, unit, building, etc. |__|__|id=APT4|
+City |__|id=CITY4|
+State/Province |__|id=ST4|
+Zip code |__|__|id=ZIP4 min=0|
+Country |__|id=COUNTRY4|
+
+[HOMEADD2_5?,displayif=or(or(isNotDefined(CITY4,false),isNotDefined(ST4,false)),or(isNotDefined(ZIP4,false),isNotDefined(COUNTRY4,false)))] Please provide the following information:
+City: |displayif=exists("CITY4")|{$CITY4}|
+|__|id=CITY4_FOLLOWUP displayif=doesNotExist("CITY4")|
+
+State/Province: |displayif=exists("ST4")| {$ST4}|
+|__|id=ST4_FOLLOWUP displayif=doesNotExist("ST4")|
+
+Zip code: |displayif=exists("ZIP4") | {$ZIP4}|
+|__|id=ZIP4_FOLLOWUP min=0 displayif=doesNotExist("ZIP4")|
+
+Country: |displayif=exists("COUNTRY4")| {$COUNTRY4}|
+|__|id=COUNTRY4_FOLLOWUP displayif=doesNotExist("COUNTRY4")|
+[77*] Don't know
+
+
+[HOMEADD3_5?,displayif=and(or(isNotDefined(STNUM4,false),isNotDefined(FULLST4,false)),or(or(equals(isNotDefined(CITY4,false),false),equals(isNotDefined(ST4,false),false)),or(equals(isNotDefined(ZIP4,false),false),equals(isNotDefined(COUNTRY4,false),false))))] Please provide the cross streets of the intersection closest to this address:
+Full Street name #1 |__|id=STRNAME5|
+Full Street name #2 |__|id=STRTNAME5|
+[77*] Don't know
+< -> HOMEADD4_5 >
+
+[HOMEADD4_5] Here is the information you gave us for this location:
+
+|displayif=noneExist("STNUM4","FULLST4","APT4","CITY4","CITY4_FOLLOWUP","ST4","ST4_FOLLOWUP","ZIP4","ZIP4_FOLLOWUP","COUNTRY4","COUNTRY4_FOLLOWUP")|5th Address:||displayif=or(equals(isNotDefined(STNUM4,""),false),or(equals(isNotDefined(FULLST4,""),false),or(equals(isNotDefined(APT4,""),false),or(equals(isNotDefined(CITY4,""),false),or(equals(isNotDefined(CITY4_FOLLOWUP,""),false),or(equals(isNotDefined(ST4,""),false),or(equals(isNotDefined(ST4_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP4,""),false),or(equals(isNotDefined(ZIP4_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY4,""),false),equals(isNotDefined(COUNTRY4_FOLLOWUP,""),false)))))))))))|{$STNUM4} {$FULLST4} {$APT4} {$CITY4} {$CITY4_FOLLOWUP}{$ST4} {$ST4_FOLLOWUP} {$ZIP4} {$ZIP4_FOLLOWUP} {$COUNTRY4} {$COUNTRY4_FOLLOWUP}|
+
+If this information is <b>not</b> correct, please click the “Back” button to edit your answers before moving on.
+
+< -> HOMEADDOTH5 >
+
+[HOMEADDOTH5?] Within the <b>past 20 years</b>, have you lived anywhere else for <b>at least two years</b>?
+(1) Yes -> HOMEADD1_6
+(0) No -> HOMEADDSUM
+< #NR-> HOMEADDSUM >
+
+[HOMEADD1_6?] What is the full street address of the place you lived before you lived at
+|displayif=noneExist("STNUM4","FULLST4","APT4","CITY4","CITY4_FOLLOWUP","ST4","ST4_FOLLOWUP","ZIP4","ZIP4_FOLLOWUP","COUNTRY4","COUNTRY4_FOLLOWUP")| 5th Address||displayif=or(equals(isNotDefined(STNUM4,""),false),or(equals(isNotDefined(FULLST4,""),false),or(equals(isNotDefined(APT4,""),false),or(equals(isNotDefined(CITY4,""),false),or(equals(isNotDefined(CITY4_FOLLOWUP,""),false),or(equals(isNotDefined(ST4,""),false),or(equals(isNotDefined(ST4_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP4,""),false),or(equals(isNotDefined(ZIP4_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY4,""),false),equals(isNotDefined(COUNTRY4_FOLLOWUP,""),false)))))))))))|{$STNUM4} {$FULLST4} {$APT4} {$CITY4} {$CITY4_FOLLOWUP}{$ST4} {$ST4_FOLLOWUP} {$ZIP4} {$ZIP4_FOLLOWUP} {$COUNTRY4} {$COUNTRY4_FOLLOWUP}|? Please only include addresses where you have lived for <b>at least two years</b>.
+
+Street number |__|__|id=STNUM5 min=0 max=999999|
+Full Street name |__|id=FULLST5|
+Apartment, suite, unit, building, etc. |__|__|id=APT5|
+City |__|id=CITY5|
+State/Province |__|id=ST5|
+Zip code |__|__|id=ZIP5 min=0|
+Country |__|id=COUNTRY5|
+
+[HOMEADD2_6?,displayif=or(or(isNotDefined(CITY5,false),isNotDefined(ST5,false)),or(isNotDefined(ZIP5,false),isNotDefined(COUNTRY5,false)))] Please provide the following information:
+City: |displayif=exists("CITY5")|{$CITY5}|
+|__|id=CITY5_FOLLOWUP displayif=doesNotExist("CITY5")|
+
+State/Province: |displayif=exists("ST5")| {$ST5}|
+|__|id=ST5_FOLLOWUP displayif=doesNotExist("ST5")|
+
+Zip code: |displayif=exists("ZIP5") | {$ZIP5}|
+|__|id=ZIP5_FOLLOWUP min=0 displayif=doesNotExist("ZIP5")|
+
+Country: |displayif=exists("COUNTRY5")| {$COUNTRY5}|
+|__|id=COUNTRY5_FOLLOWUP displayif=doesNotExist("COUNTRY5")|
+[77*] Don't know
+
+
+
+[HOMEADD3_6?,displayif=and(or(isNotDefined(STNUM5,false),isNotDefined(FULLST5,false)),or(or(equals(isNotDefined(CITY5,false),false),equals(isNotDefined(ST5,false),false)),or(equals(isNotDefined(ZIP5,false),false),equals(isNotDefined(COUNTRY5,false),false))))] Please provide the cross streets of the intersection closest to this address:
+Full Street name #1 |__|id=STRNAME6|
+Full Street name #2 |__|id=STRTNAME6|
+[77*] Don't know
+< -> HOMEADD4_6 >
+
+[HOMEADD4_6] Here is the information you gave us for this location:
+
+|displayif=noneExist("STNUM5","FULLST5","APT5","CITY5","CITY5_FOLLOWUP","ST5","ST5_FOLLOWUP","ZIP5","ZIP5_FOLLOWUP","COUNTRY5","COUNTRY5_FOLLOWUP")|6th Address:||displayif=or(equals(isNotDefined(STNUM5,""),false),or(equals(isNotDefined(FULLST5,""),false),or(equals(isNotDefined(APT5,""),false),or(equals(isNotDefined(CITY5,""),false),or(equals(isNotDefined(CITY5_FOLLOWUP,""),false),or(equals(isNotDefined(ST5,""),false),or(equals(isNotDefined(ST5_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP5,""),false),or(equals(isNotDefined(ZIP5_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY5,""),false),equals(isNotDefined(COUNTRY5_FOLLOWUP,""),false)))))))))))|{$STNUM5} {$FULLST5} {$APT5} {$CITY5} {$CITY5_FOLLOWUP}{$ST5} {$ST5_FOLLOWUP} {$ZIP5} {$ZIP5_FOLLOWUP} {$COUNTRY5} {$COUNTRY5_FOLLOWUP}|
+
+
+If this information is <b>not</b> correct, please click the “Back” button to edit your answers before moving on.
+< -> HOMEADDOTH6 >
+
+[HOMEADDOTH6?] Within the <b>past 20 years</b>, have you lived anywhere else for <b>at least two years</b>?
+(1) Yes -> HOMEADD1_7
+(0) No -> HOMEADDSUM
+< #NR-> HOMEADDSUM >
+
+[HOMEADD1_7?] What is the full street address of the place you lived before you lived at |displayif=noneExist("STNUM5","FULLST5","APT5","CITY5","CITY5_FOLLOWUP","ST5","ST5_FOLLOWUP","ZIP5","ZIP5_FOLLOWUP","COUNTRY5","COUNTRY5_FOLLOWUP")| 6th Address||displayif=or(equals(isNotDefined(STNUM5,""),false),or(equals(isNotDefined(FULLST5,""),false),or(equals(isNotDefined(APT5,""),false),or(equals(isNotDefined(CITY5,""),false),or(equals(isNotDefined(CITY5_FOLLOWUP,""),false),or(equals(isNotDefined(ST5,""),false),or(equals(isNotDefined(ST5_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP5,""),false),or(equals(isNotDefined(ZIP5_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY5,""),false),equals(isNotDefined(COUNTRY5_FOLLOWUP,""),false)))))))))))|{$STNUM5} {$FULLST5} {$APT5} {$CITY5} {$CITY5_FOLLOWUP}{$ST5} {$ST5_FOLLOWUP} {$ZIP5} {$ZIP5_FOLLOWUP} {$COUNTRY5} {$COUNTRY5_FOLLOWUP}|? Please only include addresses where you have lived for <b>at least two years</b>?.
+
+Street number  |__|__|id=STNUM6 min=0 max=999999|
+Full Street name |__|id=FULLST6|
+Apartment, suite, unit, building, etc. |__|__|id=APT6|
+City |__|id=CITY6|
+State/Province |__|id=ST6|
+Zip code |__|__|id=ZIP6 min=0|
+Country |__|id=COUNTRY6|
+
+[HOMEADD2_7?,displayif=or(or(isNotDefined(CITY6,false),isNotDefined(ST6,false)),or(isNotDefined(ZIP6,false),isNotDefined(COUNTRY6,false)))] Please provide the following information:
+City: |displayif=exists("CITY6")|{$CITY6}|
+|__|id=CITY6_FOLLOWUP displayif=doesNotExist("CITY6")|
+
+State/Province: |displayif=exists("ST6")| {$ST6}|
+|__|id=ST6_FOLLOWUP displayif=doesNotExist("ST6")|
+
+Zip code: |displayif=exists("ZIP6") | {$ZIP6}|
+|__|id=ZIP6_FOLLOWUP min=0 displayif=doesNotExist("ZIP6")|
+
+Country: |displayif=exists("COUNTRY6")| {$COUNTRY6}|
+|__|id=COUNTRY6_FOLLOWUP displayif=doesNotExist("COUNTRY6")|
+[77*] Don't know
+
+
+
+[HOMEADD3_7?,displayif=and(or(isNotDefined(STNUM6,false),isNotDefined(FULLST6,false)),or(or(equals(isNotDefined(CITY6,false),false),equals(isNotDefined(ST6,false),false)),or(equals(isNotDefined(ZIP6,false),false),equals(isNotDefined(COUNTRY6,false),false))))] Please provide the cross streets of the intersection closest to this address:
+Full Street name #1 |__|id=STRNAME7|
+Full Street name #2 |__|id=STRTNAME7|
+[77*] Don't know
+< -> HOMEADD4_7 >
+
+[HOMEADD4_7] Here is the information you gave us for this location:
+
+|displayif=noneExist("STNUM6","FULLST6","APT6","CITY6","CITY6_FOLLOWUP","ST6","ST6_FOLLOWUP","ZIP6","ZIP6_FOLLOWUP","COUNTRY6","COUNTRY6_FOLLOWUP")|7th Address:||displayif=or(equals(isNotDefined(STNUM6,""),false),or(equals(isNotDefined(FULLST6,""),false),or(equals(isNotDefined(APT6,""),false),or(equals(isNotDefined(CITY6,""),false),or(equals(isNotDefined(CITY6_FOLLOWUP,""),false),or(equals(isNotDefined(ST6,""),false),or(equals(isNotDefined(ST6_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP6,""),false),or(equals(isNotDefined(ZIP6_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY6,""),false),equals(isNotDefined(COUNTRY6_FOLLOWUP,""),false)))))))))))|{$STNUM6} {$FULLST6} {$APT6} {$CITY6} {$CITY6_FOLLOWUP}{$ST6} {$ST6_FOLLOWUP} {$ZIP6} {$ZIP6_FOLLOWUP} {$COUNTRY6} {$COUNTRY6_FOLLOWUP}|
+
+If this information is <b>not</b> correct, please click the “Back” button to edit your answers before moving on.
+< -> HOMEADDOTH7 >
+
+[HOMEADDOTH7?] Within the <b>past 20 years</b>, have you lived anywhere else for <b>at least two years</b>?
+(1) Yes -> HOMEADD1_8
+(0) No -> HOMEADDSUM
+< #NR-> HOMEADDSUM >
+
+[HOMEADD1_8?] What is the full street address of the place you lived before you lived at|displayif=noneExist("STNUM6","FULLST6","APT6","CITY6","CITY6_FOLLOWUP","ST6","ST6_FOLLOWUP","ZIP6","ZIP6_FOLLOWUP","COUNTRY6","COUNTRY6_FOLLOWUP")| 7th Address||displayif=or(equals(isNotDefined(STNUM6,""),false),or(equals(isNotDefined(FULLST6,""),false),or(equals(isNotDefined(APT6,""),false),or(equals(isNotDefined(CITY6,""),false),or(equals(isNotDefined(CITY6_FOLLOWUP,""),false),or(equals(isNotDefined(ST6,""),false),or(equals(isNotDefined(ST6_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP6,""),false),or(equals(isNotDefined(ZIP6_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY6,""),false),equals(isNotDefined(COUNTRY6_FOLLOWUP,""),false)))))))))))| {$STNUM6} {$FULLST6} {$APT6} {$CITY6} {$CITY6_FOLLOWUP}{$ST6} {$ST6_FOLLOWUP} {$ZIP6} {$ZIP6_FOLLOWUP} {$COUNTRY6} {$COUNTRY6_FOLLOWUP}|? Please only include addresses where you have lived for <b>at least two years</b>.
+
+Street number |__|__|id=STNUM7 min=0 max=999999|
+Full Street name |__|id=FULLST7|
+Apartment, suite, unit, building, etc. |__|__|id=APT7|
+City |__|id=CITY7|
+State/Province |__|id=ST7|
+Zip code |__|__|id=ZIP7 min=0|
+Country |__|id=COUNTRY7|
+
+[HOMEADD2_8?,displayif=or(or(isNotDefined(CITY7,false),isNotDefined(ST7,false)),or(isNotDefined(ZIP7,false),isNotDefined(COUNTRY7,false)))] Please provide the following information:
+City: |displayif=exists("CITY7")|{$CITY7}|
+|__|id=CITY7_FOLLOWUP displayif=doesNotExist("CITY7")|
+
+State/Province: |displayif=exists("ST7")| {$ST7}|
+|__|id=ST7_FOLLOWUP displayif=doesNotExist("ST7")|
+
+Zip code: |displayif=exists("ZIP7") | {$ZIP7}|
+|__|id=ZIP7_FOLLOWUP min=0 displayif=doesNotExist("ZIP7")|
+
+Country: |displayif=exists("COUNTRY7")| {$COUNTRY7}|
+|__|id=COUNTRY7_FOLLOWUP displayif=doesNotExist("COUNTRY7")|
+[77*] Don't know
+
+
+
+[HOMEADD3_8?,displayif=and(or(isNotDefined(STNUM7,false),isNotDefined(FULLST7,false)),or(or(equals(isNotDefined(CITY7,false),false),equals(isNotDefined(ST7,false),false)),or(equals(isNotDefined(ZIP7,false),false),equals(isNotDefined(COUNTRY7,false),false))))] Please provide the cross streets of the intersection closest to this address:
+Full Street name #1 |__|id=STRNAME8|
+Full Street name #2 |__|id=STRTNAME8|
+[77*] Don't know
+< -> HOMEADD4_8 >
+
+[HOMEADD4_8] Here is the information you gave us for this location:
+
+|displayif=noneExist("STNUM7","FULLST7","APT7","CITY7","CITY7_FOLLOWUP","ST7","ST7_FOLLOWUP","ZIP7","ZIP7_FOLLOWUP","COUNTRY7","COUNTRY7_FOLLOWUP")|8th Address:||displayif=or(equals(isNotDefined(STNUM7,""),false),or(equals(isNotDefined(FULLST7,""),false),or(equals(isNotDefined(APT7,""),false),or(equals(isNotDefined(CITY7,""),false),or(equals(isNotDefined(CITY7_FOLLOWUP,""),false),or(equals(isNotDefined(ST7,""),false),or(equals(isNotDefined(ST7_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP7,""),false),or(equals(isNotDefined(ZIP7_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY7,""),false),equals(isNotDefined(COUNTRY7_FOLLOWUP,""),false)))))))))))|{$STNUM7} {$FULLST7} {$APT7} {$CITY7} {$CITY7_FOLLOWUP}{$ST7} {$ST7_FOLLOWUP} {$ZIP7} {$ZIP7_FOLLOWUP} {$COUNTRY7} {$COUNTRY7_FOLLOWUP}|
+
+If this information is <b>not</b> correct, please click the “Back” button to edit your answers before moving on.
+< -> HOMEADDOTH8 >
+
+[HOMEADDOTH8?] Within the <b>past 20 years</b>, have you lived anywhere else for <b>at least two years</b>?
+(1) Yes -> HOMEADD1_9
+(0) No -> HOMEADDSUM
+< #NR-> HOMEADDSUM >
+
+[HOMEADD1_9?] What is the full street address of the place you lived before you lived at|displayif=noneExist("STNUM7","FULLST7","APT7","CITY7","CITY7_FOLLOWUP","ST7","ST7_FOLLOWUP","ZIP7","ZIP7_FOLLOWUP","COUNTRY7","COUNTRY7_FOLLOWUP")| 8th Address||displayif=or(equals(isNotDefined(STNUM7,""),false),or(equals(isNotDefined(FULLST7,""),false),or(equals(isNotDefined(APT7,""),false),or(equals(isNotDefined(CITY7,""),false),or(equals(isNotDefined(CITY7_FOLLOWUP,""),false),or(equals(isNotDefined(ST7,""),false),or(equals(isNotDefined(ST7_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP7,""),false),or(equals(isNotDefined(ZIP7_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY7,""),false),equals(isNotDefined(COUNTRY7_FOLLOWUP,""),false)))))))))))| {$STNUM7} {$FULLST7} {$APT7} {$CITY7} {$CITY7_FOLLOWUP}{$ST7} {$ST7_FOLLOWUP} {$ZIP7} {$ZIP7_FOLLOWUP} {$COUNTRY7} {$COUNTRY7_FOLLOWUP}|? Please only include addresses where you have lived for <b>at least two years</b>.
+
+Street number |__|__|id=STNUM8 min=0 max=999999|
+Full Street name |__|id=FULLST8|
+Apartment, suite, unit, building, etc. |__|__|id=APT8|
+City |__|id=CITY8|
+State/Province |__|id=ST8|
+Zip code |__|__|id=ZIP8 min=0|
+Country |__|id=COUNTRY8|
+
+[HOMEADD2_9?,displayif=or(or(isNotDefined(CITY8,false),isNotDefined(ST8,false)),or(isNotDefined(ZIP8,false),isNotDefined(COUNTRY8,false)))] Please provide the following information:
+City: |displayif=exists("CITY8")|{$CITY8}|
+|__|id=CITY8_FOLLOWUP displayif=doesNotExist("CITY8")|
+
+State/Province: |displayif=exists("ST8")| {$ST8}|
+|__|id=ST8_FOLLOWUP displayif=doesNotExist("ST8")|
+
+Zip code: |displayif=exists("ZIP8") | {$ZIP8}|
+|__|id=ZIP8_FOLLOWUP min=0 displayif=doesNotExist("ZIP8")|
+
+Country: |displayif=exists("COUNTRY8")| {$COUNTRY8}|
+|__|id=COUNTRY8_FOLLOWUP displayif=doesNotExist("COUNTRY8")|
+[77*] Don't know
+
+
+
+[HOMEADD3_9?,displayif=and(or(isNotDefined(STNUM8,false),isNotDefined(FULLST8,false)),or(or(equals(isNotDefined(CITY8,false),false),equals(isNotDefined(ST8,false),false)),or(equals(isNotDefined(ZIP8,false),false),equals(isNotDefined(COUNTRY8,false),false))))] Please provide the cross streets of the intersection closest to this address:
+Full Street name #1 |__|id=STRNAME9|
+Full Street name #2 |__|id=STRTNAME9|
+[77*] Don't know
+< -> HOMEADD4_9 >
+
+[HOMEADD4_9] Here is the information you gave us for this location:
+
+|displayif=noneExist("STNUM8","FULLST8","APT8","CITY8","CITY8_FOLLOWUP","ST8","ST8_FOLLOWUP","ZIP8","ZIP8_FOLLOWUP","COUNTRY8","COUNTRY8_FOLLOWUP")|9th Address:||displayif=or(equals(isNotDefined(STNUM8,""),false),or(equals(isNotDefined(FULLST8,""),false),or(equals(isNotDefined(APT8,""),false),or(equals(isNotDefined(CITY8,""),false),or(equals(isNotDefined(CITY8_FOLLOWUP,""),false),or(equals(isNotDefined(ST8,""),false),or(equals(isNotDefined(ST8_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP8,""),false),or(equals(isNotDefined(ZIP8_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY8,""),false),equals(isNotDefined(COUNTRY8_FOLLOWUP,""),false)))))))))))|{$STNUM8} {$FULLST8} {$APT8} {$CITY8} {$CITY8_FOLLOWUP}{$ST8} {$ST8_FOLLOWUP} {$ZIP8} {$ZIP8_FOLLOWUP} {$COUNTRY8} {$COUNTRY8_FOLLOWUP}|
+
+If this information is <b>not</b> correct, please click the “Back” button to edit your answers before moving on.
+< -> HOMEADDOTH9 >
+
+[HOMEADDOTH9?] Within the <b>past 20 years</b>, have you lived anywhere else for <b>at least two years</b>?
+(1) Yes -> HOMEADD1_10
+(0) No -> HOMEADDSUM
+< #NR-> HOMEADDSUM >
+
+[HOMEADD1_10?] What is the full street address of the place you lived before you lived at |displayif=noneExist("STNUM8","FULLST8","APT8","CITY8","CITY8_FOLLOWUP","ST8","ST8_FOLLOWUP","ZIP8","ZIP8_FOLLOWUP","COUNTRY8","COUNTRY8_FOLLOWUP")| 9th Address||displayif=or(equals(isNotDefined(STNUM8,""),false),or(equals(isNotDefined(FULLST8,""),false),or(equals(isNotDefined(APT8,""),false),or(equals(isNotDefined(CITY8,""),false),or(equals(isNotDefined(CITY8_FOLLOWUP,""),false),or(equals(isNotDefined(ST8,""),false),or(equals(isNotDefined(ST8_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP8,""),false),or(equals(isNotDefined(ZIP8_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY8,""),false),equals(isNotDefined(COUNTRY8_FOLLOWUP,""),false)))))))))))| {$STNUM8} {$FULLST8} {$APT8} {$CITY8} {$CITY8_FOLLOWUP}{$ST8} {$ST8_FOLLOWUP} {$ZIP8} {$ZIP8_FOLLOWUP} {$COUNTRY8} {$COUNTRY8_FOLLOWUP}|? Please only include addresses where you have lived for <b>at least two years</b>.
+
+Street number |__|__|id=STNUM9 min=0 max=999999|
+Full Street name |__|id=FULLST9|
+Apartment, suite, unit, building, etc. |__|__|id=APT9|
+City |__|id=CITY9|
+State/Province |__|id=ST9|
+Zip code |__|__|id=ZIP9 min=0|
+Country |__|id=COUNTRY9|
+
+[HOMEADD2_10?,displayif=or(or(isNotDefined(CITY9,false),isNotDefined(ST9,false)),or(isNotDefined(ZIP9,false),isNotDefined(COUNTRY9,false)))] Please provide the following information:
+City: |displayif=exists("CITY9")|{$CITY9}|
+|__|id=CITY9_FOLLOWUP displayif=doesNotExist("CITY9")|
+
+State/Province: |displayif=exists("ST9")| {$ST9}|
+|__|id=ST9_FOLLOWUP displayif=doesNotExist("ST9")|
+
+Zip code: |displayif=exists("ZIP9") | {$ZIP9}|
+|__|id=ZIP9_FOLLOWUP min=0 displayif=doesNotExist("ZIP9")|
+
+Country: |displayif=exists("COUNTRY9")| {$COUNTRY9}|
+|__|id=COUNTRY9_FOLLOWUP displayif=doesNotExist("COUNTRY9")|
+[77*] Don't know
+
+
+
+[HOMEADD3_10?,displayif=and(or(isNotDefined(STNUM9,false),isNotDefined(FULLST9,false)),or(or(equals(isNotDefined(CITY9,false),false),equals(isNotDefined(ST9,false),false)),or(equals(isNotDefined(ZIP9,false),false),equals(isNotDefined(COUNTRY9,false),false))))] Please provide the cross streets of the intersection closest to this address:
+Full Street name #1 |__|id=STRNAME10|
+Full Street name #2 |__|id=STRTNAME10|
+[77*] Don't know
+< -> HOMEADD4_10 >
+
+[HOMEADD4_10] Here is the information you gave us for this location:
+
+|displayif=noneExist("STNUM9","FULLST9","APT9","CITY9","CITY9_FOLLOWUP","ST9","ST9_FOLLOWUP","ZIP9","ZIP9_FOLLOWUP","COUNTRY9","COUNTRY9_FOLLOWUP")|10th Address||displayif=or(equals(isNotDefined(STNUM9,""),false),or(equals(isNotDefined(FULLST9,""),false),or(equals(isNotDefined(APT9,""),false),or(equals(isNotDefined(CITY9,""),false),or(equals(isNotDefined(CITY9_FOLLOWUP,""),false),or(equals(isNotDefined(ST9,""),false),or(equals(isNotDefined(ST9_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP9,""),false),or(equals(isNotDefined(ZIP9_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY9,""),false),equals(isNotDefined(COUNTRY9_FOLLOWUP,""),false)))))))))))|{$STNUM9} {$FULLST9} {$APT9} {$CITY9} {$CITY9_FOLLOWUP}{$ST9} {$ST9_FOLLOWUP} {$ZIP9} {$ZIP9_FOLLOWUP} {$COUNTRY9} {$COUNTRY9_FOLLOWUP}|
+
+If this information is <b>not</b> correct, please click the “Back” button to edit your answers before moving on.
+< -> HOMEADDOTH10 >
+
+[HOMEADDOTH10?] Within the <b>past 20 years</b>, have you lived anywhere else for <b>at least two years</b>?
+(1) Yes -> HOMEADD1_11
+(0) No -> HOMEADDSUM
+< #NR-> HOMEADDSUM >
+
+[HOMEADD1_11?] What is the full street address of the place you lived before you lived at|displayif=noneExist("STNUM9","FULLST9","APT9","CITY9","CITY9_FOLLOWUP","ST9","ST9_FOLLOWUP","ZIP9","ZIP9_FOLLOWUP","COUNTRY9","COUNTRY9_FOLLOWUP")| 10th Address:||displayif=or(equals(isNotDefined(STNUM9,""),false),or(equals(isNotDefined(FULLST9,""),false),or(equals(isNotDefined(APT9,""),false),or(equals(isNotDefined(CITY9,""),false),or(equals(isNotDefined(CITY9_FOLLOWUP,""),false),or(equals(isNotDefined(ST9,""),false),or(equals(isNotDefined(ST9_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP9,""),false),or(equals(isNotDefined(ZIP9_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY9,""),false),equals(isNotDefined(COUNTRY9_FOLLOWUP,""),false)))))))))))| {$STNUM9} {$FULLST9} {$APT9} {$CITY9} {$CITY9_FOLLOWUP}{$ST9} {$ST9_FOLLOWUP} {$ZIP9} {$ZIP9_FOLLOWUP} {$COUNTRY9} {$COUNTRY9_FOLLOWUP}|? Please only include addresses where you have lived for <b>at least two years</b>.
+
+Street number  |__|__|id=STNUM10 min=0 max=999999|
+Full Street name |__|id=FULLST10|
+Apartment, suite, unit, building, etc. |__|__|id=APT10|
+City |__|id=CITY10|
+State/Province |__|id=ST10|
+Zip code |__|__|id=ZIP10 min=0|
+Country |__|id=COUNTRY10|
+
+[HOMEADD2_11?,displayif=or(or(isNotDefined(CITY10,false),isNotDefined(ST10,false)),or(isNotDefined(ZIP10,false),isNotDefined(COUNTRY10,false)))] Please provide the following information:
+City: |displayif=exists("CITY10")|{$CITY10}|
+|__|id=CITY10_FOLLOWUP displayif=doesNotExist("CITY10")|
+
+State/Province: |displayif=exists("ST10")| {$ST10}|
+|__|id=ST10_FOLLOWUP displayif=doesNotExist("ST10")|
+
+Zip code: |displayif=exists("ZIP10") | {$ZIP10}|
+|__|id=ZIP10_FOLLOWUP min=0 displayif=doesNotExist("ZIP10")|
+
+Country: |displayif=exists("COUNTRY10")| {$COUNTRY10}|
+|__|id=COUNTRY10_FOLLOWUP displayif=doesNotExist("COUNTRY10")|
+[77*] Don't know
+
+
+
+[HOMEADD3_11?,displayif=and(or(isNotDefined(STNUM10,false),isNotDefined(FULLST10,false)),or(or(equals(isNotDefined(CITY10,false),false),equals(isNotDefined(ST10,false),false)),or(equals(isNotDefined(ZIP10,false),false),equals(isNotDefined(COUNTRY10,false),false))))] Please provide the cross streets of intersection closest to this address:
+Full Street name #1 |__|id=STRNAME11|
+Full Street name #2 |__|id=STRTNAME11|
+[77*] Don't know
+< -> HOMEADD4_11 >
+
+[HOMEADD4_11] Here is the information you gave us for this location:
+
+|displayif=noneExist("STNUM10","FULLST10","APT10","CITY10","CITY10_FOLLOWUP","ST10","ST10_FOLLOWUP","ZIP10","ZIP10_FOLLOWUP","COUNTRY10","COUNTRY10_FOLLOWUP")|11th Address:||displayif=or(equals(isNotDefined(STNUM10,""),false),or(equals(isNotDefined(FULLST10,""),false),or(equals(isNotDefined(APT10,""),false),or(equals(isNotDefined(CITY10,""),false),or(equals(isNotDefined(CITY10_FOLLOWUP,""),false),or(equals(isNotDefined(ST10,""),false),or(equals(isNotDefined(ST10_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP10,""),false),or(equals(isNotDefined(ZIP10_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY10,""),false),equals(isNotDefined(COUNTRY10_FOLLOWUP,""),false)))))))))))|{$STNUM10} {$FULLST10} {$APT10} {$CITY10} {$CITY10_FOLLOWUP}{$ST10} {$ST10_FOLLOWUP} {$ZIP10} {$ZIP10_FOLLOWUP} {$COUNTRY10} {$COUNTRY10_FOLLOWUP}|
+
+If this information is <b>not</b> correct, please click the “Back” button to edit your answers before moving on.
+< -> HOMEADDSUM >
+
+[HOMEADDSUM] Please review the list below and tell us if it includes all of the addresses where you have lived for at least two years in the last 20 years.
+
+|displayif=or(equals(isNotDefined(STNUM,""),false),or(equals(isNotDefined(FULLST,""),false),or(equals(isNotDefined(APT,""),false),or(equals(isNotDefined(CITY,""),false),or(equals(isNotDefined(CITY_FOLLOWUP,""),false),or(equals(isNotDefined(ST,""),false),or(equals(isNotDefined(ST_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP,""),false),or(equals(isNotDefined(ZIP_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY,""),false),equals(isNotDefined(COUNTRY_FOLLOWUP,""),false)))))))))))|{$STNUM} {$FULLST} {$APT} {$CITY} {$CITY_FOLLOWUP} {$ST} {$ST_FOLLOWUP} {$ZIP} {$ZIP_FOLLOWUP} {$COUNTRY} {$COUNTRY_FOLLOWUP}||displayif=noneExist("STNUM","FULLST","APT","CITY","CITY_FOLLOWUP","ST","ST_FOLLOWUP","ZIP","ZIP_FOLLOWUP","COUNTRY","COUNTRY_FOLLOWUP")| Current Address|
+|displayif=noneExist("STNUM1","FULLST1","APT1","CITY1","CITY1_FOLLOWUP","ST1","ST1_FOLLOWUP","ZIP1","ZIP1_FOLLOWUP","COUNTRY1","COUNTRY1_FOLLOWUP") and valueEquals("HOMEADDOTH1",1)|2nd Address:||displayif=or(equals(isNotDefined(STNUM1,""),false),or(equals(isNotDefined(FULLST1,""),false),or(equals(isNotDefined(APT1,""),false),or(equals(isNotDefined(CITY1,""),false),or(equals(isNotDefined(CITY1_FOLLOWUP,""),false),or(equals(isNotDefined(ST1,""),false),or(equals(isNotDefined(ST1_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP1,""),false),or(equals(isNotDefined(ZIP1_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY1,""),false),equals(isNotDefined(COUNTRY1_FOLLOWUP,""),false)))))))))))|{$STNUM1} {$FULLST1} {$APT1} {$CITY1} {$CITY1_FOLLOWUP} {$ST1} {$ST1_FOLLOWUP} {$ZIP1} {$ZIP1_FOLLOWUP} {$COUNTRY1} {$COUNTRY1_FOLLOWUP}|
+|displayif=noneExist("STNUM2","FULLST2","APT2","CITY2","CITY2_FOLLOWUP","ST2","ST2_FOLLOWUP","ZIP2","ZIP2_FOLLOWUP","COUNTRY2","COUNTRY2_FOLLOWUP") and valueEquals("HOMEADDOTH2",1)|3rd Address:||displayif=or(equals(isNotDefined(STNUM2,""),false),or(equals(isNotDefined(FULLST2,""),false),or(equals(isNotDefined(APT2,""),false),or(equals(isNotDefined(CITY2,""),false),or(equals(isNotDefined(CITY2_FOLLOWUP,""),false),or(equals(isNotDefined(ST2,""),false),or(equals(isNotDefined(ST2_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP2,""),false),or(equals(isNotDefined(ZIP2_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY2,""),false),equals(isNotDefined(COUNTRY2_FOLLOWUP,""),false)))))))))))|{$STNUM2} {$FULLST2} {$APT2} {$CITY2} {$CITY2_FOLLOWUP} {$ST2} {$ST2_FOLLOWUP} {$ZIP2} {$ZIP2_FOLLOWUP} {$COUNTRY2} {$COUNTRY2_FOLLOWUP}|
+|displayif=noneExist("STNUM3","FULLST3","APT3","CITY3","CITY3_FOLLOWUP","ST3","ST3_FOLLOWUP","ZIP3","ZIP3_FOLLOWUP","COUNTRY3","COUNTRY3_FOLLOWUP") and valueEquals("HOMEADDOTH3",1)|4th Address:||displayif=or(equals(isNotDefined(STNUM3,""),false),or(equals(isNotDefined(FULLST3,""),false),or(equals(isNotDefined(APT3,""),false),or(equals(isNotDefined(CITY3,""),false),or(equals(isNotDefined(CITY3_FOLLOWUP,""),false),or(equals(isNotDefined(ST3,""),false),or(equals(isNotDefined(ST3_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP3,""),false),or(equals(isNotDefined(ZIP3_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY3,""),false),equals(isNotDefined(COUNTRY3_FOLLOWUP,""),false)))))))))))|{$STNUM3} {$FULLST3} {$APT3} {$CITY3} {$CITY3_FOLLOWUP} {$ST3} {$ST3_FOLLOWUP} {$ZIP3} {$ZIP3_FOLLOWUP}  {$COUNTRY3} {$COUNTRY3_FOLLOWUP}|
+|displayif=noneExist("STNUM4","FULLST4","APT4","CITY4","CITY4_FOLLOWUP","ST4","ST4_FOLLOWUP","ZIP4","ZIP4_FOLLOWUP","COUNTRY4","COUNTRY4_FOLLOWUP") and valueEquals("HOMEADDOTH4",1)|5th  Address:||displayif=or(equals(isNotDefined(STNUM4,""),false),or(equals(isNotDefined(FULLST4,""),false),or(equals(isNotDefined(APT4,""),false),or(equals(isNotDefined(CITY4,""),false),or(equals(isNotDefined(CITY4_FOLLOWUP,""),false),or(equals(isNotDefined(ST4,""),false),or(equals(isNotDefined(ST4_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP4,""),false),or(equals(isNotDefined(ZIP4_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY4,""),false),equals(isNotDefined(COUNTRY4_FOLLOWUP,""),false)))))))))))|{$STNUM4} {$FULLST4} {$APT4} {$CITY4} {$CITY4_FOLLOWUP} {$ST4} {$ST4_FOLLOWUP} {$ZIP4} {$ZIP4_FOLLOWUP} {$COUNTRY4} {$COUNTRY4_FOLLOWUP}|
+|displayif=noneExist("STNUM5","FULLST5","APT5","CITY5","CITY5_FOLLOWUP","ST5","ST5_FOLLOWUP","ZIP5","ZIP5_FOLLOWUP","COUNTRY5","COUNTRY5_FOLLOWUP") and valueEquals("HOMEADDOTH5",1)|6th Address:||displayif=or(equals(isNotDefined(STNUM5,""),false),or(equals(isNotDefined(FULLST5,""),false),or(equals(isNotDefined(APT5,""),false),or(equals(isNotDefined(CITY5,""),false),or(equals(isNotDefined(CITY5_FOLLOWUP,""),false),or(equals(isNotDefined(ST5,""),false),or(equals(isNotDefined(ST5_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP5,""),false),or(equals(isNotDefined(ZIP5_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY5,""),false),equals(isNotDefined(COUNTRY5_FOLLOWUP,""),false)))))))))))|{$STNUM5} {$FULLST5} {$APT5} {$CITY5} {$CITY5_FOLLOWUP} {$ST5} {$ST5_FOLLOWUP} {$ZIP5} {$ZIP5_FOLLOWUP} {$COUNTRY5} {$COUNTRY5_FOLLOWUP}|
+|displayif=noneExist("STNUM6","FULLST6","APT6","CITY6","CITY6_FOLLOWUP","ST6","ST6_FOLLOWUP","ZIP6","ZIP6_FOLLOWUP","COUNTRY6","COUNTRY6_FOLLOWUP") and valueEquals("HOMEADDOTH6",1)|7th  Address:||displayif=or(equals(isNotDefined(STNUM6,""),false),or(equals(isNotDefined(FULLST6,""),false),or(equals(isNotDefined(APT6,""),false),or(equals(isNotDefined(CITY6,""),false),or(equals(isNotDefined(CITY6_FOLLOWUP,""),false),or(equals(isNotDefined(ST6,""),false),or(equals(isNotDefined(ST6_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP6,""),false),or(equals(isNotDefined(ZIP6_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY6,""),false),equals(isNotDefined(COUNTRY6_FOLLOWUP,""),false)))))))))))|{$STNUM6} {$FULLST6} {$APT6} {$CITY6} {$CITY6_FOLLOWUP} {$ST6} {$ST6_FOLLOWUP} {$ZIP6} {$ZIP6_FOLLOWUP} {$COUNTRY6} {$COUNTRY6_FOLLOWUP}|
+|displayif=noneExist("STNUM7","FULLST7","APT7","CITY7","CITY7_FOLLOWUP","ST7","ST7_FOLLOWUP","ZIP7","ZIP7_FOLLOWUP","COUNTRY7","COUNTRY7_FOLLOWUP") and valueEquals("HOMEADDOTH7",1)|8th  Address:||displayif=or(equals(isNotDefined(STNUM7,""),false),or(equals(isNotDefined(FULLST7,""),false),or(equals(isNotDefined(APT7,""),false),or(equals(isNotDefined(CITY7,""),false),or(equals(isNotDefined(CITY7_FOLLOWUP,""),false),or(equals(isNotDefined(ST7,""),false),or(equals(isNotDefined(ST7_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP7,""),false),or(equals(isNotDefined(ZIP7_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY7,""),false),equals(isNotDefined(COUNTRY7_FOLLOWUP,""),false)))))))))))|{$STNUM7} {$FULLST7} {$APT7} {$CITY7} {$CITY7_FOLLOWUP} {$ST7} {$ST7_FOLLOWUP} {$ZIP7} {$ZIP7_FOLLOWUP} {$COUNTRY7} {$COUNTRY7_FOLLOWUP}|
+|displayif=noneExist("STNUM8","FULLST8","APT8","CITY8","CITY8_FOLLOWUP","ST8","ST8_FOLLOWUP","ZIP8","ZIP8_FOLLOWUP","COUNTRY8","COUNTRY8_FOLLOWUP") and valueEquals("HOMEADDOTH8",1)|9th Address:||displayif=or(equals(isNotDefined(STNUM8,""),false),or(equals(isNotDefined(FULLST8,""),false),or(equals(isNotDefined(APT8,""),false),or(equals(isNotDefined(CITY8,""),false),or(equals(isNotDefined(CITY8_FOLLOWUP,""),false),or(equals(isNotDefined(ST8,""),false),or(equals(isNotDefined(ST8_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP8,""),false),or(equals(isNotDefined(ZIP8_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY8,""),false),equals(isNotDefined(COUNTRY8_FOLLOWUP,""),false)))))))))))|{$STNUM8} {$FULLST8} {$APT8} {$CITY8} {$CITY8_FOLLOWUP} {$ST8} {$ST8_FOLLOWUP} {$ZIP8} {$ZIP8_FOLLOWUP} {$COUNTRY8} {$COUNTRY8_FOLLOWUP}|
+|displayif=noneExist("STNUM9","FULLST9","APT9","CITY9","CITY9_FOLLOWUP","ST9","ST9_FOLLOWUP","ZIP9","ZIP9_FOLLOWUP","COUNTRY9","COUNTRY9_FOLLOWUP") and valueEquals("HOMEADDOTH9",1)|10th  Address:||displayif=or(equals(isNotDefined(STNUM9,""),false),or(equals(isNotDefined(FULLST9,""),false),or(equals(isNotDefined(APT9,""),false),or(equals(isNotDefined(CITY9,""),false),or(equals(isNotDefined(CITY9_FOLLOWUP,""),false),or(equals(isNotDefined(ST9,""),false),or(equals(isNotDefined(ST9_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP9,""),false),or(equals(isNotDefined(ZIP9_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY9,""),false),equals(isNotDefined(COUNTRY9_FOLLOWUP,""),false)))))))))))|{$STNUM9} {$FULLST9} {$APT9} {$CITY9} {$CITY9_FOLLOWUP} {$ST9} {$ST9_FOLLOWUP} {$ZIP9} {$ZIP9_FOLLOWUP} {$COUNTRY9} {$COUNTRY9_FOLLOWUP}|
+|displayif=noneExist("STNUM10","FULLST10","APT10","CITY10","CITY10_FOLLOWUP","ST10","ST10_FOLLOWUP","ZIP10","ZIP10_FOLLOWUP","COUNTRY10","COUNTRY10_FOLLOWUP") and valueEquals("HOMEADDOTH10",1)|11th Address:||displayif=or(equals(isNotDefined(STNUM10,""),false),or(equals(isNotDefined(FULLST10,""),false),or(equals(isNotDefined(APT10,""),false),or(equals(isNotDefined(CITY10,""),false),or(equals(isNotDefined(CITY10_FOLLOWUP,""),false),or(equals(isNotDefined(ST10,""),false),or(equals(isNotDefined(ST10_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP10,""),false),or(equals(isNotDefined(ZIP10_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY10,""),false),equals(isNotDefined(COUNTRY10_FOLLOWUP,""),false)))))))))))|{$STNUM10} {$FULLST10} {$APT10} {$CITY10} {$CITY10_FOLLOWUP} {$ST10_FOLLOWUP} {$ST10} {$ZIP10} {$COUNTRY10} {$COUNTRY10_FOLLOWUP}|
+
+Once you move on from this screen, you will <b>not</b> be able to add another address or edit your answers.
+/* any address not defined */|displayif=or(or(and(equals(isNotDefined(STNUM,""),true),and(equals(isNotDefined(FULLST,""),true),and(equals(isNotDefined(APT,""),true),and(equals(isNotDefined(CITY,""),true),and(equals(isNotDefined(CITY_FOLLOWUP,""),true),and(equals(isNotDefined(ST,""),true),and(equals(isNotDefined(ST_FOLLOWUP,""),true),and(equals(isNotDefined(ZIP,""),true),and(equals(isNotDefined(ZIP_FOLLOWUP,""),true),and(equals(isNotDefined(COUNTRY,""),true),equals(isNotDefined(COUNTRY_FOLLOWUP,""),true))))))))))),and(equals(isNotDefined(STNUM1,""),true),and(equals(isNotDefined(FULLST1,""),true),and(equals(isNotDefined(APT1,""),true),and(equals(isNotDefined(CITY1,""),true),and(equals(isNotDefined(CITY1_FOLLOWUP,""),true),and(equals(isNotDefined(ST1,""),true),and(equals(isNotDefined(ST1_FOLLOWUP,""),true),and(equals(isNotDefined(ZIP1,""),true),and(equals(isNotDefined(ZIP1_FOLLOWUP,""),true),and(equals(isNotDefined(COUNTRY1,""),true),equals(isNotDefined(COUNTRY1_FOLLOWUP,""),true)))))))))))),or(or(and(equals(isNotDefined(STNUM2,""),true),and(equals(isNotDefined(FULLST2,""),true),and(equals(isNotDefined(APT2,""),true),and(equals(isNotDefined(CITY2,""),true),and(equals(isNotDefined(CITY2_FOLLOWUP,""),true),and(equals(isNotDefined(ST2,""),true),and(equals(isNotDefined(ST2_FOLLOWUP,""),true),and(equals(isNotDefined(ZIP2,""),true),and(equals(isNotDefined(ZIP2_FOLLOWUP,""),true),and(equals(isNotDefined(COUNTRY2,""),true),equals(isNotDefined(COUNTRY2_FOLLOWUP,""),true))))))))))),and(equals(isNotDefined(STNUM3,""),true),and(equals(isNotDefined(FULLST3,""),true),and(equals(isNotDefined(APT3,""),true),and(equals(isNotDefined(CITY3,""),true),and(equals(isNotDefined(CITY3_FOLLOWUP,""),true),and(equals(isNotDefined(ST3,""),true),and(equals(isNotDefined(ST3_FOLLOWUP,""),true),and(equals(isNotDefined(ZIP3,""),true),and(equals(isNotDefined(ZIP3_FOLLOWUP,""),true),and(equals(isNotDefined(COUNTRY3,""),true),equals(isNotDefined(COUNTRY3_FOLLOWUP,""),true)))))))))))),or(or(and(equals(isNotDefined(STNUM4,""),true),and(equals(isNotDefined(FULLST4,""),true),and(equals(isNotDefined(APT4,""),true),and(equals(isNotDefined(CITY4,""),true),and(equals(isNotDefined(CITY4_FOLLOWUP,""),true),and(equals(isNotDefined(ST4,""),true),and(equals(isNotDefined(ST4_FOLLOWUP,""),true),and(equals(isNotDefined(ZIP4,""),true),and(equals(isNotDefined(ZIP4_FOLLOWUP,""),true),and(equals(isNotDefined(COUNTRY4,""),true),equals(isNotDefined(COUNTRY4_FOLLOWUP,""),true))))))))))),and(equals(isNotDefined(STNUM5,""),true),and(equals(isNotDefined(FULLST5,""),true),and(equals(isNotDefined(APT5,""),true),and(equals(isNotDefined(CITY5,""),true),and(equals(isNotDefined(CITY5_FOLLOWUP,""),true),and(equals(isNotDefined(ST5,""),true),and(equals(isNotDefined(ST5_FOLLOWUP,""),true),and(equals(isNotDefined(ZIP5,""),true),and(equals(isNotDefined(ZIP5_FOLLOWUP,""),true),and(equals(isNotDefined(COUNTRY5,""),true),equals(isNotDefined(COUNTRY5_FOLLOWUP,""),true)))))))))))),or(or(and(equals(isNotDefined(STNUM6,""),true),and(equals(isNotDefined(FULLST6,""),true),and(equals(isNotDefined(APT6,""),true),and(equals(isNotDefined(CITY6,""),true),and(equals(isNotDefined(CITY6_FOLLOWUP,""),true),and(equals(isNotDefined(ST6,""),true),and(equals(isNotDefined(ST6_FOLLOWUP,""),true),and(equals(isNotDefined(ZIP6,""),true),and(equals(isNotDefined(ZIP6_FOLLOWUP,""),true),and(equals(isNotDefined(COUNTRY6,""),true),equals(isNotDefined(COUNTRY6_FOLLOWUP,""),true))))))))))),and(equals(isNotDefined(STNUM7,""),true),and(equals(isNotDefined(FULLST7,""),true),and(equals(isNotDefined(APT7,""),true),and(equals(isNotDefined(CITY7,""),true),and(equals(isNotDefined(CITY7_FOLLOWUP,""),true),and(equals(isNotDefined(ST7,""),true),and(equals(isNotDefined(ST7_FOLLOWUP,""),true),and(equals(isNotDefined(ZIP7,""),true),and(equals(isNotDefined(ZIP7_FOLLOWUP,""),true),and(equals(isNotDefined(COUNTRY7,""),true),equals(isNotDefined(COUNTRY7_FOLLOWUP,""),true)))))))))))),or(or(and(equals(isNotDefined(STNUM8,""),true),and(equals(isNotDefined(FULLST8,""),true),and(equals(isNotDefined(APT8,""),true),and(equals(isNotDefined(CITY8,""),true),and(equals(isNotDefined(CITY8_FOLLOWUP,""),true),and(equals(isNotDefined(ST8,""),true),and(equals(isNotDefined(ST8_FOLLOWUP,""),true),and(equals(isNotDefined(ZIP8,""),true),and(equals(isNotDefined(ZIP8_FOLLOWUP,""),true),and(equals(isNotDefined(COUNTRY8,""),true),equals(isNotDefined(COUNTRY8_FOLLOWUP,""),true))))))))))),and(equals(isNotDefined(STNUM9,""),true),and(equals(isNotDefined(FULLST9,""),true),and(equals(isNotDefined(APT9,""),true),and(equals(isNotDefined(CITY9,""),true),and(equals(isNotDefined(CITY9_FOLLOWUP,""),true),and(equals(isNotDefined(ST9,""),true),and(equals(isNotDefined(ST9_FOLLOWUP,""),true),and(equals(isNotDefined(ZIP9,""),true),and(equals(isNotDefined(ZIP9_FOLLOWUP,""),true),and(equals(isNotDefined(COUNTRY9,""),true),equals(isNotDefined(COUNTRY9_FOLLOWUP,""),true)))))))))))),and(equals(isNotDefined(STNUM10,""),true),and(equals(isNotDefined(FULLST10,""),true),and(equals(isNotDefined(APT10,""),true),and(equals(isNotDefined(CITY10,""),true),and(equals(isNotDefined(CITY10_FOLLOWUP,""),true),and(equals(isNotDefined(ST10,""),true),and(equals(isNotDefined(ST10_FOLLOWUP,""),true),and(equals(isNotDefined(ZIP10,""),true),and(equals(isNotDefined(ZIP10_FOLLOWUP,""),true),and(equals(isNotDefined(COUNTRY10,""),true),equals(isNotDefined(COUNTRY10_FOLLOWUP,""),true))))))))))))))))|If you would like to add another address or edit your answers, please select "No, I want to add another address."|
+
+/* not final address exists */(0,displayif=and(equals(isNotDefined(STNUM10,""),true),and(equals(isNotDefined(FULLST10,""),true),and(equals(isNotDefined(APT10,""),true),and(equals(isNotDefined(CITY10,""),true),and(equals(isNotDefined(CITY10_FOLLOWUP,""),true),and(equals(isNotDefined(ST10,""),true),and(equals(isNotDefined(ST10_FOLLOWUP,""),true),and(equals(isNotDefined(ZIP10,""),true),and(equals(isNotDefined(ZIP10_FOLLOWUP,""),true),and(equals(isNotDefined(COUNTRY10,""),true),equals(isNotDefined(COUNTRY10_FOLLOWUP,""),true)))))))))))) Yes, this list is complete -> HOMEMOVEIN1
+/* not address 1 */(1,displayif=and(equals(isNotDefined(STNUM,""),true),and(equals(isNotDefined(FULLST,""),true),and(equals(isNotDefined(APT,""),true),and(equals(isNotDefined(CITY,""),true),and(equals(isNotDefined(CITY_FOLLOWUP,""),true),and(equals(isNotDefined(ST,""),true),and(equals(isNotDefined(ST_FOLLOWUP,""),true),and(equals(isNotDefined(ZIP,""),true),and(equals(isNotDefined(ZIP_FOLLOWUP,""),true),and(equals(isNotDefined(COUNTRY,""),true),equals(isNotDefined(COUNTRY_FOLLOWUP,""),true)))))))))))) No, I want to add another address  -> HOMEADD1_1
+/* not address 2 & has address 1 */(2,displayif=and(and(equals(isNotDefined(STNUM1,""),true),and(equals(isNotDefined(FULLST1,""),true),and(equals(isNotDefined(APT1,""),true),and(equals(isNotDefined(CITY1,""),true),and(equals(isNotDefined(CITY1_FOLLOWUP,""),true),and(equals(isNotDefined(ST1,""),true),and(equals(isNotDefined(ST1_FOLLOWUP,""),true),and(equals(isNotDefined(ZIP1,""),true),and(equals(isNotDefined(ZIP1_FOLLOWUP,""),true),and(equals(isNotDefined(COUNTRY1,""),true),equals(isNotDefined(COUNTRY1_FOLLOWUP,""),true))))))))))),or(equals(isNotDefined(STNUM,""),false),or(equals(isNotDefined(FULLST,""),false),or(equals(isNotDefined(APT,""),false),or(equals(isNotDefined(CITY,""),false),or(equals(isNotDefined(CITY_FOLLOWUP,""),false),or(equals(isNotDefined(ST,""),false),or(equals(isNotDefined(ST_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP,""),false),or(equals(isNotDefined(ZIP_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY,""),false),equals(isNotDefined(COUNTRY_FOLLOWUP,""),false))))))))))))) No, I want to add another address  -> HOMEADD1_2
+/* not address 3 & has address 1 & 2 */(3,displayif=and(and(equals(isNotDefined(STNUM2,""),true),and(equals(isNotDefined(FULLST2,""),true),and(equals(isNotDefined(APT2,""),true),and(equals(isNotDefined(CITY2,""),true),and(equals(isNotDefined(CITY2_FOLLOWUP,""),true),and(equals(isNotDefined(ST2,""),true),and(equals(isNotDefined(ST2_FOLLOWUP,""),true),and(equals(isNotDefined(ZIP2,""),true),and(equals(isNotDefined(ZIP2_FOLLOWUP,""),true),and(equals(isNotDefined(COUNTRY2,""),true),equals(isNotDefined(COUNTRY2_FOLLOWUP,""),true))))))))))),and(or(equals(isNotDefined(STNUM,""),false),or(equals(isNotDefined(FULLST,""),false),or(equals(isNotDefined(APT,""),false),or(equals(isNotDefined(CITY,""),false),or(equals(isNotDefined(CITY_FOLLOWUP,""),false),or(equals(isNotDefined(ST,""),false),or(equals(isNotDefined(ST_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP,""),false),or(equals(isNotDefined(ZIP_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY,""),false),equals(isNotDefined(COUNTRY_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM1,""),false),or(equals(isNotDefined(FULLST1,""),false),or(equals(isNotDefined(APT1,""),false),or(equals(isNotDefined(CITY1,""),false),or(equals(isNotDefined(CITY1_FOLLOWUP,""),false),or(equals(isNotDefined(ST1,""),false),or(equals(isNotDefined(ST1_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP1,""),false),or(equals(isNotDefined(ZIP1_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY1,""),false),equals(isNotDefined(COUNTRY1_FOLLOWUP,""),false)))))))))))))) No, I want to add another address  -> HOMEADD1_3
+/* not address 4 & has address 1 & 2 & 3 */(4,displayif=and(and(equals(isNotDefined(STNUM3,""),true),and(equals(isNotDefined(FULLST3,""),true),and(equals(isNotDefined(APT3,""),true),and(equals(isNotDefined(CITY3,""),true),and(equals(isNotDefined(CITY3_FOLLOWUP,""),true),and(equals(isNotDefined(ST3,""),true),and(equals(isNotDefined(ST3_FOLLOWUP,""),true),and(equals(isNotDefined(ZIP3,""),true),and(equals(isNotDefined(ZIP3_FOLLOWUP,""),true),and(equals(isNotDefined(COUNTRY3,""),true),equals(isNotDefined(COUNTRY3_FOLLOWUP,""),true))))))))))),and(and(or(equals(isNotDefined(STNUM,""),false),or(equals(isNotDefined(FULLST,""),false),or(equals(isNotDefined(APT,""),false),or(equals(isNotDefined(CITY,""),false),or(equals(isNotDefined(CITY_FOLLOWUP,""),false),or(equals(isNotDefined(ST,""),false),or(equals(isNotDefined(ST_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP,""),false),or(equals(isNotDefined(ZIP_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY,""),false),equals(isNotDefined(COUNTRY_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM1,""),false),or(equals(isNotDefined(FULLST1,""),false),or(equals(isNotDefined(APT1,""),false),or(equals(isNotDefined(CITY1,""),false),or(equals(isNotDefined(CITY1_FOLLOWUP,""),false),or(equals(isNotDefined(ST1,""),false),or(equals(isNotDefined(ST1_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP1,""),false),or(equals(isNotDefined(ZIP1_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY1,""),false),equals(isNotDefined(COUNTRY1_FOLLOWUP,""),false)))))))))))),or(equals(isNotDefined(STNUM2,""),false),or(equals(isNotDefined(FULLST2,""),false),or(equals(isNotDefined(APT2,""),false),or(equals(isNotDefined(CITY2,""),false),or(equals(isNotDefined(CITY2_FOLLOWUP,""),false),or(equals(isNotDefined(ST2,""),false),or(equals(isNotDefined(ST2_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP2,""),false),or(equals(isNotDefined(ZIP2_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY2,""),false),equals(isNotDefined(COUNTRY2_FOLLOWUP,""),false)))))))))))))) No, I want to add another address  -> HOMEADD1_4
+/* not address 5 & has address 1 & 2 & 3 & 4 */(5,displayif=and(and(equals(isNotDefined(STNUM4,""),true),and(equals(isNotDefined(FULLST4,""),true),and(equals(isNotDefined(APT4,""),true),and(equals(isNotDefined(CITY4,""),true),and(equals(isNotDefined(CITY4_FOLLOWUP,""),true),and(equals(isNotDefined(ST4,""),true),and(equals(isNotDefined(ST4_FOLLOWUP,""),true),and(equals(isNotDefined(ZIP4,""),true),and(equals(isNotDefined(ZIP4_FOLLOWUP,""),true),and(equals(isNotDefined(COUNTRY4,""),true),equals(isNotDefined(COUNTRY4_FOLLOWUP,""),true))))))))))),and(and(or(equals(isNotDefined(STNUM,""),false),or(equals(isNotDefined(FULLST,""),false),or(equals(isNotDefined(APT,""),false),or(equals(isNotDefined(CITY,""),false),or(equals(isNotDefined(CITY_FOLLOWUP,""),false),or(equals(isNotDefined(ST,""),false),or(equals(isNotDefined(ST_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP,""),false),or(equals(isNotDefined(ZIP_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY,""),false),equals(isNotDefined(COUNTRY_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM1,""),false),or(equals(isNotDefined(FULLST1,""),false),or(equals(isNotDefined(APT1,""),false),or(equals(isNotDefined(CITY1,""),false),or(equals(isNotDefined(CITY1_FOLLOWUP,""),false),or(equals(isNotDefined(ST1,""),false),or(equals(isNotDefined(ST1_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP1,""),false),or(equals(isNotDefined(ZIP1_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY1,""),false),equals(isNotDefined(COUNTRY1_FOLLOWUP,""),false)))))))))))),and(or(equals(isNotDefined(STNUM2,""),false),or(equals(isNotDefined(FULLST2,""),false),or(equals(isNotDefined(APT2,""),false),or(equals(isNotDefined(CITY2,""),false),or(equals(isNotDefined(CITY2_FOLLOWUP,""),false),or(equals(isNotDefined(ST2,""),false),or(equals(isNotDefined(ST2_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP2,""),false),or(equals(isNotDefined(ZIP2_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY2,""),false),equals(isNotDefined(COUNTRY2_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM3,""),false),or(equals(isNotDefined(FULLST3,""),false),or(equals(isNotDefined(APT3,""),false),or(equals(isNotDefined(CITY3,""),false),or(equals(isNotDefined(CITY3_FOLLOWUP,""),false),or(equals(isNotDefined(ST3,""),false),or(equals(isNotDefined(ST3_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP3,""),false),or(equals(isNotDefined(ZIP3_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY3,""),false),equals(isNotDefined(COUNTRY3_FOLLOWUP,""),false))))))))))))))) No, I want to add another address  -> HOMEADD1_5
+/* not address 6 & has address 1 & 2 & 3 & 4 & 5 */(6,displayif=and(and(equals(isNotDefined(STNUM5,""),true),and(equals(isNotDefined(FULLST5,""),true),and(equals(isNotDefined(APT5,""),true),and(equals(isNotDefined(CITY5,""),true),and(equals(isNotDefined(CITY5_FOLLOWUP,""),true),and(equals(isNotDefined(ST5,""),true),and(equals(isNotDefined(ST5_FOLLOWUP,""),true),and(equals(isNotDefined(ZIP5,""),true),and(equals(isNotDefined(ZIP5_FOLLOWUP,""),true),and(equals(isNotDefined(COUNTRY5,""),true),equals(isNotDefined(COUNTRY5_FOLLOWUP,""),true))))))))))),and(and(and(or(equals(isNotDefined(STNUM,""),false),or(equals(isNotDefined(FULLST,""),false),or(equals(isNotDefined(APT,""),false),or(equals(isNotDefined(CITY,""),false),or(equals(isNotDefined(CITY_FOLLOWUP,""),false),or(equals(isNotDefined(ST,""),false),or(equals(isNotDefined(ST_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP,""),false),or(equals(isNotDefined(ZIP_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY,""),false),equals(isNotDefined(COUNTRY_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM1,""),false),or(equals(isNotDefined(FULLST1,""),false),or(equals(isNotDefined(APT1,""),false),or(equals(isNotDefined(CITY1,""),false),or(equals(isNotDefined(CITY1_FOLLOWUP,""),false),or(equals(isNotDefined(ST1,""),false),or(equals(isNotDefined(ST1_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP1,""),false),or(equals(isNotDefined(ZIP1_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY1,""),false),equals(isNotDefined(COUNTRY1_FOLLOWUP,""),false)))))))))))),and(or(equals(isNotDefined(STNUM2,""),false),or(equals(isNotDefined(FULLST2,""),false),or(equals(isNotDefined(APT2,""),false),or(equals(isNotDefined(CITY2,""),false),or(equals(isNotDefined(CITY2_FOLLOWUP,""),false),or(equals(isNotDefined(ST2,""),false),or(equals(isNotDefined(ST2_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP2,""),false),or(equals(isNotDefined(ZIP2_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY2,""),false),equals(isNotDefined(COUNTRY2_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM3,""),false),or(equals(isNotDefined(FULLST3,""),false),or(equals(isNotDefined(APT3,""),false),or(equals(isNotDefined(CITY3,""),false),or(equals(isNotDefined(CITY3_FOLLOWUP,""),false),or(equals(isNotDefined(ST3,""),false),or(equals(isNotDefined(ST3_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP3,""),false),or(equals(isNotDefined(ZIP3_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY3,""),false),equals(isNotDefined(COUNTRY3_FOLLOWUP,""),false))))))))))))),or(equals(isNotDefined(STNUM4,""),false),or(equals(isNotDefined(FULLST4,""),false),or(equals(isNotDefined(APT4,""),false),or(equals(isNotDefined(CITY4,""),false),or(equals(isNotDefined(CITY4_FOLLOWUP,""),false),or(equals(isNotDefined(ST4,""),false),or(equals(isNotDefined(ST4_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP4,""),false),or(equals(isNotDefined(ZIP4_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY4,""),false),equals(isNotDefined(COUNTRY4_FOLLOWUP,""),false)))))))))))))) No, I want to add another address  -> HOMEADD1_6
+/* not address 7 & has address 1 & 2 & 3 & 4 & 5 & 6 */(7,displayif=and(and(equals(isNotDefined(STNUM6,""),true),and(equals(isNotDefined(FULLST6,""),true),and(equals(isNotDefined(APT6,""),true),and(equals(isNotDefined(CITY6,""),true),and(equals(isNotDefined(CITY6_FOLLOWUP,""),true),and(equals(isNotDefined(ST6,""),true),and(equals(isNotDefined(ST6_FOLLOWUP,""),true),and(equals(isNotDefined(ZIP6,""),true),and(equals(isNotDefined(ZIP6_FOLLOWUP,""),true),and(equals(isNotDefined(COUNTRY6,""),true),equals(isNotDefined(COUNTRY6_FOLLOWUP,""),true))))))))))),and(and(and(or(equals(isNotDefined(STNUM,""),false),or(equals(isNotDefined(FULLST,""),false),or(equals(isNotDefined(APT,""),false),or(equals(isNotDefined(CITY,""),false),or(equals(isNotDefined(CITY_FOLLOWUP,""),false),or(equals(isNotDefined(ST,""),false),or(equals(isNotDefined(ST_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP,""),false),or(equals(isNotDefined(ZIP_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY,""),false),equals(isNotDefined(COUNTRY_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM1,""),false),or(equals(isNotDefined(FULLST1,""),false),or(equals(isNotDefined(APT1,""),false),or(equals(isNotDefined(CITY1,""),false),or(equals(isNotDefined(CITY1_FOLLOWUP,""),false),or(equals(isNotDefined(ST1,""),false),or(equals(isNotDefined(ST1_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP1,""),false),or(equals(isNotDefined(ZIP1_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY1,""),false),equals(isNotDefined(COUNTRY1_FOLLOWUP,""),false)))))))))))),and(or(equals(isNotDefined(STNUM2,""),false),or(equals(isNotDefined(FULLST2,""),false),or(equals(isNotDefined(APT2,""),false),or(equals(isNotDefined(CITY2,""),false),or(equals(isNotDefined(CITY2_FOLLOWUP,""),false),or(equals(isNotDefined(ST2,""),false),or(equals(isNotDefined(ST2_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP2,""),false),or(equals(isNotDefined(ZIP2_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY2,""),false),equals(isNotDefined(COUNTRY2_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM3,""),false),or(equals(isNotDefined(FULLST3,""),false),or(equals(isNotDefined(APT3,""),false),or(equals(isNotDefined(CITY3,""),false),or(equals(isNotDefined(CITY3_FOLLOWUP,""),false),or(equals(isNotDefined(ST3,""),false),or(equals(isNotDefined(ST3_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP3,""),false),or(equals(isNotDefined(ZIP3_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY3,""),false),equals(isNotDefined(COUNTRY3_FOLLOWUP,""),false))))))))))))),and(or(equals(isNotDefined(STNUM4,""),false),or(equals(isNotDefined(FULLST4,""),false),or(equals(isNotDefined(APT4,""),false),or(equals(isNotDefined(CITY4,""),false),or(equals(isNotDefined(CITY4_FOLLOWUP,""),false),or(equals(isNotDefined(ST4,""),false),or(equals(isNotDefined(ST4_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP4,""),false),or(equals(isNotDefined(ZIP4_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY4,""),false),equals(isNotDefined(COUNTRY4_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM5,""),false),or(equals(isNotDefined(FULLST5,""),false),or(equals(isNotDefined(APT5,""),false),or(equals(isNotDefined(CITY5,""),false),or(equals(isNotDefined(CITY5_FOLLOWUP,""),false),or(equals(isNotDefined(ST5,""),false),or(equals(isNotDefined(ST5_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP5,""),false),or(equals(isNotDefined(ZIP5_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY5,""),false),equals(isNotDefined(COUNTRY5_FOLLOWUP,""),false))))))))))))))) No, I want to add another address  -> HOMEADD1_7
+/* not address 8 & has address 1 & 2 & 3 & 4 & 5 & 6 & 7 */(8,displayif=and(and(equals(isNotDefined(STNUM7,""),true),and(equals(isNotDefined(FULLST7,""),true),and(equals(isNotDefined(APT7,""),true),and(equals(isNotDefined(CITY7,""),true),and(equals(isNotDefined(CITY7_FOLLOWUP,""),true),and(equals(isNotDefined(ST7,""),true),and(equals(isNotDefined(ST7_FOLLOWUP,""),true),and(equals(isNotDefined(ZIP7,""),true),and(equals(isNotDefined(ZIP7_FOLLOWUP,""),true),and(equals(isNotDefined(COUNTRY7,""),true),equals(isNotDefined(COUNTRY7_FOLLOWUP,""),true))))))))))),and(and(and(and(or(equals(isNotDefined(STNUM,""),false),or(equals(isNotDefined(FULLST,""),false),or(equals(isNotDefined(APT,""),false),or(equals(isNotDefined(CITY,""),false),or(equals(isNotDefined(CITY_FOLLOWUP,""),false),or(equals(isNotDefined(ST,""),false),or(equals(isNotDefined(ST_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP,""),false),or(equals(isNotDefined(ZIP_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY,""),false),equals(isNotDefined(COUNTRY_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM1,""),false),or(equals(isNotDefined(FULLST1,""),false),or(equals(isNotDefined(APT1,""),false),or(equals(isNotDefined(CITY1,""),false),or(equals(isNotDefined(CITY1_FOLLOWUP,""),false),or(equals(isNotDefined(ST1,""),false),or(equals(isNotDefined(ST1_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP1,""),false),or(equals(isNotDefined(ZIP1_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY1,""),false),equals(isNotDefined(COUNTRY1_FOLLOWUP,""),false)))))))))))),and(or(equals(isNotDefined(STNUM2,""),false),or(equals(isNotDefined(FULLST2,""),false),or(equals(isNotDefined(APT2,""),false),or(equals(isNotDefined(CITY2,""),false),or(equals(isNotDefined(CITY2_FOLLOWUP,""),false),or(equals(isNotDefined(ST2,""),false),or(equals(isNotDefined(ST2_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP2,""),false),or(equals(isNotDefined(ZIP2_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY2,""),false),equals(isNotDefined(COUNTRY2_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM3,""),false),or(equals(isNotDefined(FULLST3,""),false),or(equals(isNotDefined(APT3,""),false),or(equals(isNotDefined(CITY3,""),false),or(equals(isNotDefined(CITY3_FOLLOWUP,""),false),or(equals(isNotDefined(ST3,""),false),or(equals(isNotDefined(ST3_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP3,""),false),or(equals(isNotDefined(ZIP3_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY3,""),false),equals(isNotDefined(COUNTRY3_FOLLOWUP,""),false))))))))))))),and(or(equals(isNotDefined(STNUM4,""),false),or(equals(isNotDefined(FULLST4,""),false),or(equals(isNotDefined(APT4,""),false),or(equals(isNotDefined(CITY4,""),false),or(equals(isNotDefined(CITY4_FOLLOWUP,""),false),or(equals(isNotDefined(ST4,""),false),or(equals(isNotDefined(ST4_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP4,""),false),or(equals(isNotDefined(ZIP4_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY4,""),false),equals(isNotDefined(COUNTRY4_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM5,""),false),or(equals(isNotDefined(FULLST5,""),false),or(equals(isNotDefined(APT5,""),false),or(equals(isNotDefined(CITY5,""),false),or(equals(isNotDefined(CITY5_FOLLOWUP,""),false),or(equals(isNotDefined(ST5,""),false),or(equals(isNotDefined(ST5_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP5,""),false),or(equals(isNotDefined(ZIP5_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY5,""),false),equals(isNotDefined(COUNTRY5_FOLLOWUP,""),false))))))))))))),or(equals(isNotDefined(STNUM6,""),false),or(equals(isNotDefined(FULLST6,""),false),or(equals(isNotDefined(APT6,""),false),or(equals(isNotDefined(CITY6,""),false),or(equals(isNotDefined(CITY6_FOLLOWUP,""),false),or(equals(isNotDefined(ST6,""),false),or(equals(isNotDefined(ST6_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP6,""),false),or(equals(isNotDefined(ZIP6_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY6,""),false),equals(isNotDefined(COUNTRY6_FOLLOWUP,""),false)))))))))))))) No, I want to add another address  -> HOMEADD1_8
+/* not address 9 & has address 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 */(9,displayif=and(and(equals(isNotDefined(STNUM8,""),true),and(equals(isNotDefined(FULLST8,""),true),and(equals(isNotDefined(APT8,""),true),and(equals(isNotDefined(CITY8,""),true),and(equals(isNotDefined(CITY8_FOLLOWUP,""),true),and(equals(isNotDefined(ST8,""),true),and(equals(isNotDefined(ST8_FOLLOWUP,""),true),and(equals(isNotDefined(ZIP8,""),true),and(equals(isNotDefined(ZIP8_FOLLOWUP,""),true),and(equals(isNotDefined(COUNTRY8,""),true),equals(isNotDefined(COUNTRY8_FOLLOWUP,""),true))))))))))),and(and(and(and(or(equals(isNotDefined(STNUM,""),false),or(equals(isNotDefined(FULLST,""),false),or(equals(isNotDefined(APT,""),false),or(equals(isNotDefined(CITY,""),false),or(equals(isNotDefined(CITY_FOLLOWUP,""),false),or(equals(isNotDefined(ST,""),false),or(equals(isNotDefined(ST_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP,""),false),or(equals(isNotDefined(ZIP_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY,""),false),equals(isNotDefined(COUNTRY_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM1,""),false),or(equals(isNotDefined(FULLST1,""),false),or(equals(isNotDefined(APT1,""),false),or(equals(isNotDefined(CITY1,""),false),or(equals(isNotDefined(CITY1_FOLLOWUP,""),false),or(equals(isNotDefined(ST1,""),false),or(equals(isNotDefined(ST1_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP1,""),false),or(equals(isNotDefined(ZIP1_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY1,""),false),equals(isNotDefined(COUNTRY1_FOLLOWUP,""),false)))))))))))),and(or(equals(isNotDefined(STNUM2,""),false),or(equals(isNotDefined(FULLST2,""),false),or(equals(isNotDefined(APT2,""),false),or(equals(isNotDefined(CITY2,""),false),or(equals(isNotDefined(CITY2_FOLLOWUP,""),false),or(equals(isNotDefined(ST2,""),false),or(equals(isNotDefined(ST2_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP2,""),false),or(equals(isNotDefined(ZIP2_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY2,""),false),equals(isNotDefined(COUNTRY2_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM3,""),false),or(equals(isNotDefined(FULLST3,""),false),or(equals(isNotDefined(APT3,""),false),or(equals(isNotDefined(CITY3,""),false),or(equals(isNotDefined(CITY3_FOLLOWUP,""),false),or(equals(isNotDefined(ST3,""),false),or(equals(isNotDefined(ST3_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP3,""),false),or(equals(isNotDefined(ZIP3_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY3,""),false),equals(isNotDefined(COUNTRY3_FOLLOWUP,""),false))))))))))))),and(or(equals(isNotDefined(STNUM4,""),false),or(equals(isNotDefined(FULLST4,""),false),or(equals(isNotDefined(APT4,""),false),or(equals(isNotDefined(CITY4,""),false),or(equals(isNotDefined(CITY4_FOLLOWUP,""),false),or(equals(isNotDefined(ST4,""),false),or(equals(isNotDefined(ST4_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP4,""),false),or(equals(isNotDefined(ZIP4_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY4,""),false),equals(isNotDefined(COUNTRY4_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM5,""),false),or(equals(isNotDefined(FULLST5,""),false),or(equals(isNotDefined(APT5,""),false),or(equals(isNotDefined(CITY5,""),false),or(equals(isNotDefined(CITY5_FOLLOWUP,""),false),or(equals(isNotDefined(ST5,""),false),or(equals(isNotDefined(ST5_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP5,""),false),or(equals(isNotDefined(ZIP5_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY5,""),false),equals(isNotDefined(COUNTRY5_FOLLOWUP,""),false))))))))))))),and(or(equals(isNotDefined(STNUM6,""),false),or(equals(isNotDefined(FULLST6,""),false),or(equals(isNotDefined(APT6,""),false),or(equals(isNotDefined(CITY6,""),false),or(equals(isNotDefined(CITY6_FOLLOWUP,""),false),or(equals(isNotDefined(ST6,""),false),or(equals(isNotDefined(ST6_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP6,""),false),or(equals(isNotDefined(ZIP6_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY6,""),false),equals(isNotDefined(COUNTRY6_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM7,""),false),or(equals(isNotDefined(FULLST7,""),false),or(equals(isNotDefined(APT7,""),false),or(equals(isNotDefined(CITY7,""),false),or(equals(isNotDefined(CITY7_FOLLOWUP,""),false),or(equals(isNotDefined(ST7,""),false),or(equals(isNotDefined(ST7_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP7,""),false),or(equals(isNotDefined(ZIP7_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY7,""),false),equals(isNotDefined(COUNTRY7_FOLLOWUP,""),false))))))))))))))) No, I want to add another address  -> HOMEADD1_9
+/* not address 10 & has address 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 */(10,displayif=and(and(equals(isNotDefined(STNUM9,""),true),and(equals(isNotDefined(FULLST9,""),true),and(equals(isNotDefined(APT9,""),true),and(equals(isNotDefined(CITY9,""),true),and(equals(isNotDefined(CITY9_FOLLOWUP,""),true),and(equals(isNotDefined(ST9,""),true),and(equals(isNotDefined(ST9_FOLLOWUP,""),true),and(equals(isNotDefined(ZIP9,""),true),and(equals(isNotDefined(ZIP9_FOLLOWUP,""),true),and(equals(isNotDefined(COUNTRY9,""),true),equals(isNotDefined(COUNTRY9_FOLLOWUP,""),true))))))))))),and(and(and(and(and(or(equals(isNotDefined(STNUM,""),false),or(equals(isNotDefined(FULLST,""),false),or(equals(isNotDefined(APT,""),false),or(equals(isNotDefined(CITY,""),false),or(equals(isNotDefined(CITY_FOLLOWUP,""),false),or(equals(isNotDefined(ST,""),false),or(equals(isNotDefined(ST_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP,""),false),or(equals(isNotDefined(ZIP_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY,""),false),equals(isNotDefined(COUNTRY_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM1,""),false),or(equals(isNotDefined(FULLST1,""),false),or(equals(isNotDefined(APT1,""),false),or(equals(isNotDefined(CITY1,""),false),or(equals(isNotDefined(CITY1_FOLLOWUP,""),false),or(equals(isNotDefined(ST1,""),false),or(equals(isNotDefined(ST1_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP1,""),false),or(equals(isNotDefined(ZIP1_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY1,""),false),equals(isNotDefined(COUNTRY1_FOLLOWUP,""),false)))))))))))),and(or(equals(isNotDefined(STNUM2,""),false),or(equals(isNotDefined(FULLST2,""),false),or(equals(isNotDefined(APT2,""),false),or(equals(isNotDefined(CITY2,""),false),or(equals(isNotDefined(CITY2_FOLLOWUP,""),false),or(equals(isNotDefined(ST2,""),false),or(equals(isNotDefined(ST2_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP2,""),false),or(equals(isNotDefined(ZIP2_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY2,""),false),equals(isNotDefined(COUNTRY2_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM3,""),false),or(equals(isNotDefined(FULLST3,""),false),or(equals(isNotDefined(APT3,""),false),or(equals(isNotDefined(CITY3,""),false),or(equals(isNotDefined(CITY3_FOLLOWUP,""),false),or(equals(isNotDefined(ST3,""),false),or(equals(isNotDefined(ST3_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP3,""),false),or(equals(isNotDefined(ZIP3_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY3,""),false),equals(isNotDefined(COUNTRY3_FOLLOWUP,""),false))))))))))))),and(or(equals(isNotDefined(STNUM4,""),false),or(equals(isNotDefined(FULLST4,""),false),or(equals(isNotDefined(APT4,""),false),or(equals(isNotDefined(CITY4,""),false),or(equals(isNotDefined(CITY4_FOLLOWUP,""),false),or(equals(isNotDefined(ST4,""),false),or(equals(isNotDefined(ST4_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP4,""),false),or(equals(isNotDefined(ZIP4_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY4,""),false),equals(isNotDefined(COUNTRY4_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM5,""),false),or(equals(isNotDefined(FULLST5,""),false),or(equals(isNotDefined(APT5,""),false),or(equals(isNotDefined(CITY5,""),false),or(equals(isNotDefined(CITY5_FOLLOWUP,""),false),or(equals(isNotDefined(ST5,""),false),or(equals(isNotDefined(ST5_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP5,""),false),or(equals(isNotDefined(ZIP5_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY5,""),false),equals(isNotDefined(COUNTRY5_FOLLOWUP,""),false))))))))))))),and(or(equals(isNotDefined(STNUM6,""),false),or(equals(isNotDefined(FULLST6,""),false),or(equals(isNotDefined(APT6,""),false),or(equals(isNotDefined(CITY6,""),false),or(equals(isNotDefined(CITY6_FOLLOWUP,""),false),or(equals(isNotDefined(ST6,""),false),or(equals(isNotDefined(ST6_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP6,""),false),or(equals(isNotDefined(ZIP6_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY6,""),false),equals(isNotDefined(COUNTRY6_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM7,""),false),or(equals(isNotDefined(FULLST7,""),false),or(equals(isNotDefined(APT7,""),false),or(equals(isNotDefined(CITY7,""),false),or(equals(isNotDefined(CITY7_FOLLOWUP,""),false),or(equals(isNotDefined(ST7,""),false),or(equals(isNotDefined(ST7_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP7,""),false),or(equals(isNotDefined(ZIP7_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY7,""),false),equals(isNotDefined(COUNTRY7_FOLLOWUP,""),false))))))))))))),or(equals(isNotDefined(STNUM8,""),false),or(equals(isNotDefined(FULLST8,""),false),or(equals(isNotDefined(APT8,""),false),or(equals(isNotDefined(CITY8,""),false),or(equals(isNotDefined(CITY8_FOLLOWUP,""),false),or(equals(isNotDefined(ST8,""),false),or(equals(isNotDefined(ST8_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP8,""),false),or(equals(isNotDefined(ZIP8_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY8,""),false),equals(isNotDefined(COUNTRY8_FOLLOWUP,""),false)))))))))))))) No, I want to add another address  -> HOMEADD1_10
+/* not address 11 & has address 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 */(11,displayif=and(and(equals(isNotDefined(STNUM10,""),true),and(equals(isNotDefined(FULLST10,""),true),and(equals(isNotDefined(APT10,""),true),and(equals(isNotDefined(CITY10,""),true),and(equals(isNotDefined(CITY10_FOLLOWUP,""),true),and(equals(isNotDefined(ST10,""),true),and(equals(isNotDefined(ST10_FOLLOWUP,""),true),and(equals(isNotDefined(ZIP10,""),true),and(equals(isNotDefined(ZIP10_FOLLOWUP,""),true),and(equals(isNotDefined(COUNTRY10,""),true),equals(isNotDefined(COUNTRY10_FOLLOWUP,""),true))))))))))),and(and(and(and(and(or(equals(isNotDefined(STNUM,""),false),or(equals(isNotDefined(FULLST,""),false),or(equals(isNotDefined(APT,""),false),or(equals(isNotDefined(CITY,""),false),or(equals(isNotDefined(CITY_FOLLOWUP,""),false),or(equals(isNotDefined(ST,""),false),or(equals(isNotDefined(ST_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP,""),false),or(equals(isNotDefined(ZIP_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY,""),false),equals(isNotDefined(COUNTRY_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM1,""),false),or(equals(isNotDefined(FULLST1,""),false),or(equals(isNotDefined(APT1,""),false),or(equals(isNotDefined(CITY1,""),false),or(equals(isNotDefined(CITY1_FOLLOWUP,""),false),or(equals(isNotDefined(ST1,""),false),or(equals(isNotDefined(ST1_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP1,""),false),or(equals(isNotDefined(ZIP1_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY1,""),false),equals(isNotDefined(COUNTRY1_FOLLOWUP,""),false)))))))))))),and(or(equals(isNotDefined(STNUM2,""),false),or(equals(isNotDefined(FULLST2,""),false),or(equals(isNotDefined(APT2,""),false),or(equals(isNotDefined(CITY2,""),false),or(equals(isNotDefined(CITY2_FOLLOWUP,""),false),or(equals(isNotDefined(ST2,""),false),or(equals(isNotDefined(ST2_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP2,""),false),or(equals(isNotDefined(ZIP2_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY2,""),false),equals(isNotDefined(COUNTRY2_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM3,""),false),or(equals(isNotDefined(FULLST3,""),false),or(equals(isNotDefined(APT3,""),false),or(equals(isNotDefined(CITY3,""),false),or(equals(isNotDefined(CITY3_FOLLOWUP,""),false),or(equals(isNotDefined(ST3,""),false),or(equals(isNotDefined(ST3_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP3,""),false),or(equals(isNotDefined(ZIP3_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY3,""),false),equals(isNotDefined(COUNTRY3_FOLLOWUP,""),false))))))))))))),and(or(equals(isNotDefined(STNUM4,""),false),or(equals(isNotDefined(FULLST4,""),false),or(equals(isNotDefined(APT4,""),false),or(equals(isNotDefined(CITY4,""),false),or(equals(isNotDefined(CITY4_FOLLOWUP,""),false),or(equals(isNotDefined(ST4,""),false),or(equals(isNotDefined(ST4_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP4,""),false),or(equals(isNotDefined(ZIP4_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY4,""),false),equals(isNotDefined(COUNTRY4_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM5,""),false),or(equals(isNotDefined(FULLST5,""),false),or(equals(isNotDefined(APT5,""),false),or(equals(isNotDefined(CITY5,""),false),or(equals(isNotDefined(CITY5_FOLLOWUP,""),false),or(equals(isNotDefined(ST5,""),false),or(equals(isNotDefined(ST5_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP5,""),false),or(equals(isNotDefined(ZIP5_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY5,""),false),equals(isNotDefined(COUNTRY5_FOLLOWUP,""),false))))))))))))),and(or(equals(isNotDefined(STNUM6,""),false),or(equals(isNotDefined(FULLST6,""),false),or(equals(isNotDefined(APT6,""),false),or(equals(isNotDefined(CITY6,""),false),or(equals(isNotDefined(CITY6_FOLLOWUP,""),false),or(equals(isNotDefined(ST6,""),false),or(equals(isNotDefined(ST6_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP6,""),false),or(equals(isNotDefined(ZIP6_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY6,""),false),equals(isNotDefined(COUNTRY6_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM7,""),false),or(equals(isNotDefined(FULLST7,""),false),or(equals(isNotDefined(APT7,""),false),or(equals(isNotDefined(CITY7,""),false),or(equals(isNotDefined(CITY7_FOLLOWUP,""),false),or(equals(isNotDefined(ST7,""),false),or(equals(isNotDefined(ST7_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP7,""),false),or(equals(isNotDefined(ZIP7_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY7,""),false),equals(isNotDefined(COUNTRY7_FOLLOWUP,""),false))))))))))))),and(or(equals(isNotDefined(STNUM8,""),false),or(equals(isNotDefined(FULLST8,""),false),or(equals(isNotDefined(APT8,""),false),or(equals(isNotDefined(CITY8,""),false),or(equals(isNotDefined(CITY8_FOLLOWUP,""),false),or(equals(isNotDefined(ST8,""),false),or(equals(isNotDefined(ST8_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP8,""),false),or(equals(isNotDefined(ZIP8_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY8,""),false),equals(isNotDefined(COUNTRY8_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM9,""),false),or(equals(isNotDefined(FULLST9,""),false),or(equals(isNotDefined(APT9,""),false),or(equals(isNotDefined(CITY9,""),false),or(equals(isNotDefined(CITY9_FOLLOWUP,""),false),or(equals(isNotDefined(ST9,""),false),or(equals(isNotDefined(ST9_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP9,""),false),or(equals(isNotDefined(ZIP9_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY9,""),false),equals(isNotDefined(COUNTRY9_FOLLOWUP,""),false))))))))))))))) No, I want to add another address  -> HOMEADD1_11
+/* has all addresses */(12,displayif=and(and(and(and(and(and(or(equals(isNotDefined(STNUM,""),false),or(equals(isNotDefined(FULLST,""),false),or(equals(isNotDefined(APT,""),false),or(equals(isNotDefined(CITY,""),false),or(equals(isNotDefined(CITY_FOLLOWUP,""),false),or(equals(isNotDefined(ST,""),false),or(equals(isNotDefined(ST_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP,""),false),or(equals(isNotDefined(ZIP_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY,""),false),equals(isNotDefined(COUNTRY_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM1,""),false),or(equals(isNotDefined(FULLST1,""),false),or(equals(isNotDefined(APT1,""),false),or(equals(isNotDefined(CITY1,""),false),or(equals(isNotDefined(CITY1_FOLLOWUP,""),false),or(equals(isNotDefined(ST1,""),false),or(equals(isNotDefined(ST1_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP1,""),false),or(equals(isNotDefined(ZIP1_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY1,""),false),equals(isNotDefined(COUNTRY1_FOLLOWUP,""),false)))))))))))),and(or(equals(isNotDefined(STNUM2,""),false),or(equals(isNotDefined(FULLST2,""),false),or(equals(isNotDefined(APT2,""),false),or(equals(isNotDefined(CITY2,""),false),or(equals(isNotDefined(CITY2_FOLLOWUP,""),false),or(equals(isNotDefined(ST2,""),false),or(equals(isNotDefined(ST2_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP2,""),false),or(equals(isNotDefined(ZIP2_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY2,""),false),equals(isNotDefined(COUNTRY2_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM3,""),false),or(equals(isNotDefined(FULLST3,""),false),or(equals(isNotDefined(APT3,""),false),or(equals(isNotDefined(CITY3,""),false),or(equals(isNotDefined(CITY3_FOLLOWUP,""),false),or(equals(isNotDefined(ST3,""),false),or(equals(isNotDefined(ST3_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP3,""),false),or(equals(isNotDefined(ZIP3_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY3,""),false),equals(isNotDefined(COUNTRY3_FOLLOWUP,""),false))))))))))))),and(or(equals(isNotDefined(STNUM4,""),false),or(equals(isNotDefined(FULLST4,""),false),or(equals(isNotDefined(APT4,""),false),or(equals(isNotDefined(CITY4,""),false),or(equals(isNotDefined(CITY4_FOLLOWUP,""),false),or(equals(isNotDefined(ST4,""),false),or(equals(isNotDefined(ST4_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP4,""),false),or(equals(isNotDefined(ZIP4_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY4,""),false),equals(isNotDefined(COUNTRY4_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM5,""),false),or(equals(isNotDefined(FULLST5,""),false),or(equals(isNotDefined(APT5,""),false),or(equals(isNotDefined(CITY5,""),false),or(equals(isNotDefined(CITY5_FOLLOWUP,""),false),or(equals(isNotDefined(ST5,""),false),or(equals(isNotDefined(ST5_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP5,""),false),or(equals(isNotDefined(ZIP5_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY5,""),false),equals(isNotDefined(COUNTRY5_FOLLOWUP,""),false))))))))))))),and(or(equals(isNotDefined(STNUM6,""),false),or(equals(isNotDefined(FULLST6,""),false),or(equals(isNotDefined(APT6,""),false),or(equals(isNotDefined(CITY6,""),false),or(equals(isNotDefined(CITY6_FOLLOWUP,""),false),or(equals(isNotDefined(ST6,""),false),or(equals(isNotDefined(ST6_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP6,""),false),or(equals(isNotDefined(ZIP6_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY6,""),false),equals(isNotDefined(COUNTRY6_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM7,""),false),or(equals(isNotDefined(FULLST7,""),false),or(equals(isNotDefined(APT7,""),false),or(equals(isNotDefined(CITY7,""),false),or(equals(isNotDefined(CITY7_FOLLOWUP,""),false),or(equals(isNotDefined(ST7,""),false),or(equals(isNotDefined(ST7_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP7,""),false),or(equals(isNotDefined(ZIP7_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY7,""),false),equals(isNotDefined(COUNTRY7_FOLLOWUP,""),false))))))))))))),and(or(equals(isNotDefined(STNUM8,""),false),or(equals(isNotDefined(FULLST8,""),false),or(equals(isNotDefined(APT8,""),false),or(equals(isNotDefined(CITY8,""),false),or(equals(isNotDefined(CITY8_FOLLOWUP,""),false),or(equals(isNotDefined(ST8,""),false),or(equals(isNotDefined(ST8_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP8,""),false),or(equals(isNotDefined(ZIP8_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY8,""),false),equals(isNotDefined(COUNTRY8_FOLLOWUP,""),false))))))))))),or(equals(isNotDefined(STNUM9,""),false),or(equals(isNotDefined(FULLST9,""),false),or(equals(isNotDefined(APT9,""),false),or(equals(isNotDefined(CITY9,""),false),or(equals(isNotDefined(CITY9_FOLLOWUP,""),false),or(equals(isNotDefined(ST9,""),false),or(equals(isNotDefined(ST9_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP9,""),false),or(equals(isNotDefined(ZIP9_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY9,""),false),equals(isNotDefined(COUNTRY9_FOLLOWUP,""),false))))))))))))),or(equals(isNotDefined(STNUM10,""),false),or(equals(isNotDefined(FULLST10,""),false),or(equals(isNotDefined(APT10,""),false),or(equals(isNotDefined(CITY10,""),false),or(equals(isNotDefined(CITY10_FOLLOWUP,""),false),or(equals(isNotDefined(ST10,""),false),or(equals(isNotDefined(ST10_FOLLOWUP,""),false),or(equals(isNotDefined(ZIP10,""),false),or(equals(isNotDefined(ZIP10_FOLLOWUP,""),false),or(equals(isNotDefined(COUNTRY10,""),false),equals(isNotDefined(COUNTRY10_FOLLOWUP,""),false))))))))))))) You have entered the maximum number of addresses. You will proceed to the next questions. -> HOMEMOVEIN1
+< #NR -> HOMEMOVEIN1>
+
+[HOMEMOVEIN1] finished
+
+[END] all done.
