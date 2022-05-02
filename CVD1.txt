@@ -1,0 +1,99 @@
+[MHGROUP1?]
+<b>Cardiovascular disease</b>
+
+Has a doctor or other health professional ever told you that you have or had any of these conditions? Select all that apply.
+
+[0] B-12 Deficiency (Pernicious Anemia) -> ANEMIA
+[1] Coronary Artery/Coronary Heart Disease -> CVD
+[2] Congestive Heart Failure -> CHF
+[3] High Cholesterol -> CHOL
+[4] Heart Attack (Myocardial Infarction) -> HEARTATT
+[5] Abnormal Heart Rhythm (Arrhythmia) -> ARRHYT
+[6] Chest Pain (Angina) -> CHESTPAIN
+[7] Heart Valve Problems -> HEARTVALV
+[8] High Blood Pressure (Hypertension) |displayif=or(equals(SEX,0),equals(SEX,2))|Please do not include hypertension during pregnancy.| -> HTN
+[9] Blood Clots (Deep Vein Thrombosis, Pulmonary Embolism) -> BLOODCLOT
+[10] Stroke -> STROKE
+[88*] I have <b>not</b> had any of these conditions -> MHGROUP2
+< #NR -> MHGROUP2 >
+
+[ANEMIA?,displayif=equals(MHGROUP1,0)] How old were you when a doctor or other health professional <b>first</b> told you that you have or had <b>vitamin B-12 deficiency (pernicious anemia)</b>?
+|__|__|xor=ANEMIA id=ANEMIA_AGE min=0 max=isDefined(AGE,age)| Age at diagnosis
+
+Or, if it is easier to remember the year, enter that here:
+|__|__|__|__|xor=ANEMIA id=ANEMIA_YEAR minval=difference(difference(#currentYear,isDefined(AGE,age)),1) max=#currentYear| Year of diagnosis
+< #NR -> CVD >
+
+[CVD?,displayif=equals(MHGROUP1,1)] How old were you when a doctor or other health professional <b>first</b> told you that you have or had <b>coronary artery/coronary heart disease</b>?
+|__|__|xor=CVD id=CVD_AGE min=0 max=isDefined(AGE,age)| Age at diagnosis
+
+Or, if it is easier to remember the year, enter that here:
+|__|__|__|__|xor=CVD id=CVD_YEAR minval=difference(difference(#currentYear,isDefined(AGE,age)),1) max=#currentYear| Year of diagnosis
+< #NR -> CHF >
+
+[CHF?,displayif=equals(MHGROUP1,2)] How old were you when a doctor or other health professional <b>first</b> told you that you have or had <b>congestive heart failure</b>?
+|__|__|xor=CHF id=CHF_AGE min=0 max=isDefined(AGE,age)| Age at diagnosis
+
+Or, if it is easier to remember the year, enter that here:
+|__|__|__|__|xor=CHF id=CHF_YEAR minval=difference(difference(#currentYear,isDefined(AGE,age)),1) max=#currentYear| Year of diagnosis
+< #NR -> CHOL >
+
+[CHOL?,displayif=equals(MHGROUP1,3)] How old were you when a doctor or other health professional <b>first</b> told you that you have or had high <b>cholesterol</b>?
+|__|__|xor=CHOL id=CHOL_AGE min=0 max=isDefined(AGE,age)| Age at diagnosis
+
+Or, if it is easier to remember the year, enter that here:
+|__|__|__|__|xor=CHOL id=CHOL_YEAR minval=difference(difference(#currentYear,isDefined(AGE,age)),1) max=#currentYear| Year of diagnosis
+< #NR -> HEARTATT >
+
+[HEARTATT?,displayif=equals(MHGROUP1,4)] How old were you when a doctor or other health professional <b>first</b> told you that you have had a <b>heart attack (myocardial infarction)</b>?
+|__|__|xor=HEARTATT id=HEARTATT_AGE min=0 max=isDefined(AGE,age)| Age at diagnosis
+
+Or, if it is easier to remember the year, enter that here:
+|__|__|__|__|xor=HEARTATT id=HEARTATT_YEAR minval=difference(difference(#currentYear,isDefined(AGE,age)),1) max=#currentYear| Year of diagnosis
+< #NR -> ARRHYT >
+
+[ARRHYT?,displayif=equals(MHGROUP1,5)] How old were you when a doctor or other health professional <b>first</b> told you that you have or had <b>abnormal heart rhythm (arrhythmia)</b>?
+|__|__|xor=ARRHYT id=ARRHYT_AGE min=0 max=isDefined(AGE,age)| Age at diagnosis
+
+Or, if it is easier to remember the year, enter that here:
+|__|__|__|__|xor=ARRHYT id=ARRHYT_YEAR minval=difference(difference(#currentYear,isDefined(AGE,age)),1) max=#currentYear| Year of diagnosis
+< #NR -> CHESTPAIN >
+
+[CHESTPAIN?,displayif=equals(MHGROUP1,6)] How old were you when a doctor or other health professional <b>first</b> told you that you have or had <b>chest pain (angina)</b>?
+|__|__|xor=CHESTPAIN id=CHESTPAIN_AGE min=0 max=isDefined(AGE,age)| Age at diagnosis
+
+Or, if it is easier to remember the year, enter that here:
+|__|__|__|__|xor=CHESTPAIN id=CHESTPAIN_YEAR minval=difference(difference(#currentYear,isDefined(AGE,age)),1) max=#currentYear| Year of diagnosis
+< #NR -> HEARTVALV >
+
+[HEARTVALV?,displayif=equals(MHGROUP1,7)] How old were you when a doctor or other health professional <b>first</b> told you that you have or had <b>heart valve problems</b>?
+|__|__|xor=HEARTVALV id=HEARTVALV_AGE min=0 max=isDefined(AGE,age)| Age at diagnosis
+
+Or, if it is easier to remember the year, enter that here:
+|__|__|__|__|xor=HEARTVALV id=HEARTVALV_YEAR minval=difference(difference(#currentYear,isDefined(AGE,age)),1) max=#currentYear| Year of diagnosis
+< #NR -> HTN >
+
+[HTN?,displayif=equals(MHGROUP1,8)] How old were you when a doctor or other health professional <b>first</b> told you that you have or had <b>high blood pressure (hypertension)</b>?
+|__|__|xor=HTN id=HTN_AGE min=0 max=isDefined(AGE,age)| Age at diagnosis
+
+Or, if it is easier to remember the year, enter that here:
+|__|__|__|__|xor=HTN id=HTN_YEAR minval=difference(difference(#currentYear,isDefined(AGE,age)),1) max=#currentYear| Year of diagnosis
+< #NR -> BLOODCLOT >
+
+[BLOODCLOT?,displayif=equals(MHGROUP1,9)] How old were you when a doctor or other health professional <b>first</b> told you that you have or had <b>blood clots (deep vein thrombosis, pulmonary embolism)</b>?
+|__|__|xor=BLOODCLOT id=BLOODCLOT_AGE min=0 max=isDefined(AGE,age)| Age at diagnosis
+
+Or, if it is easier to remember the year, enter that here:
+|__|__|__|__|xor=BLOODCLOT id=BLOODCLOT_YEAR minval=difference(difference(#currentYear,isDefined(AGE,age)),1) max=#currentYear| Year of diagnosis
+< #NR -> STROKE >
+
+[STROKE?,displayif=equals(MHGROUP1,10)] How old were you when a doctor or other health professional <b>first</b> told you that you have had a <b>stroke</b>?
+|__|__|xor=STROKE id=STROKE_AGE min=0 max=isDefined(AGE,age)| Age at diagnosis
+
+Or, if it is easier to remember the year, enter that here:
+|__|__|__|__|xor=STROKE id=STROKE_YEAR minval=difference(difference(#currentYear,isDefined(AGE,age)),1) max=#currentYear| Year of diagnosis
+< #NR -> MHGROUP2 >
+
+[MHGROUP2?]
+<b>Respiratory problems</b>
+

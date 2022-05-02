@@ -1,0 +1,25 @@
+[Q1] |date|min=1900-1-1 max=2020-12-12|
+
+[Q2]
+lala
+
+
+[Q3] 
+pick a number: |__|__|min=5 max=10|
+
+[Q4]
+Email |@|id="homeemail"|
+
+[Q5]
+|tel|
+
+[Q6]
+|SSN|id=myssn|
+
+
+
+[A1]
+  ID: |__|required|
+  name: |__|required|
+[END]
+  Good Bye

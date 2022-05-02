@@ -1,0 +1,30 @@
+[HOUSE1]<b>Household Chores, Caring for Others, and Shopping</b>
+
+During the <b>past 12 months</b>, about how often did you do each of these household or shopping activities |displayif=equals(D_613744428,353358909)|outside of work|?
+
+//displayif for "outside of work" from HOUSE1 can't be added into "grid_HOUSE1" so I can't incorporate the HOUSE1 question into the grid
+|grid?|id="D_733547268"| |[ [D_996306786] Light household chores (such as cooking, tidying up, laundry, or dusting); [D_888371386] Moderate to vigorous household chores (such as vacuuming, or sweeping); [D_389580388] Caring for pets (walking dogs, feeding, playing, grooming); [D_755939106] Caring for children or adults (pushing stroller or wheelchair, lifting, bathing); [D_124318181] Walking while shopping or doing errands (do not count walking for exercise);]|(832414773:Never) (239152340:Once a month or less) (528027282:2 to 3 days a month) (760594500: 1 to 2 days a week) (100766511: 3 to 4 days a week) (858300449: 5 to 6 days a week) (408121350: Every day)|
+
+|grid?|id="D_128705365" displayif='valueIsOneOf("D_996306786",239152340,528027282,760594500,100766511,858300449,408121350) or valueIsOneOf("D_888371386",239152340,528027282,760594500,100766511,858300449,408121350) or valueIsOneOf("D_389580388",239152340,528027282,760594500,100766511,858300449,408121350) or valueIsOneOf("D_755939106",239152340,528027282,760594500,100766511,858300449,408121350) or valueIsOneOf("D_124318181",239152340,528027282,760594500,100766511,858300449,408121350)' |On the days that you did these household or shopping activities, about how much time per day did you spend doing each activity? |[
+
+[D_922160425 displayif='valueIsOneOf("D_996306786",239152340,528027282,760594500,100766511,858300449,408121350)'
+] Light household chores (cooking, cleaning up, laundry, dusting, etc.);
+    
+[D_925690772] Moderate to vigorous household chores (vacuuming, sweeping, etc.);
+    
+[D_886570975] Caring for pets (walking dogs, feeding, playing, grooming);
+    
+[D_386244007] Caring for children or adults (pushing stroller or wheelchair, lifting, bathing);
+    
+[D_493938955] Walking while shopping or doing errands (Do not count walking for exercise);
+]|
+    (428999623: 15 minutes or less)
+    (689446222: 16 to 30 minutes)
+    (620336176: 31 to 44 minutes)
+    (921317860: 45 to 59 minutes)
+    (339365288: 1 to 2 hours)
+    (401292837: 2 to 3 hours)
+    (805918496: 3 hours or more)
+|
+
+[LAWN]<b>Lawn, Garden, and Home Repair</b>

@@ -1,0 +1,37 @@
+[HOUSE1]<b>Household Chores, Caring for Others, and Shopping</b>
+
+During the <b>past 12 months</b>, about how often did you do each of these household or shopping activities |displayif=equals(WORK,1)|outside of work|?
+
+//displayif for "outside of work" from HOUSE1 can't be added into "grid_HOUSE1" so I can't incorporate the HOUSE1 question into the grid
+|grid?|id="GRID_HOUSE"| |[ [HOUSE1A] Light household chores (such as cooking, tidying up, laundry, or dusting); [HOUSE1B] Moderate to vigorous household chores (such as vacuuming, or sweeping); [HOUSE1C] Caring for pets (walking dogs, feeding, playing, grooming); [HOUSE1D] Caring for children or adults (pushing stroller or wheelchair, lifting, bathing); [HOUSE1E] Walking while shopping or doing errands (do not count walking for exercise);]|(44:Never) (1:Once a month or less) (2:2 to 3 days a month) (3: 1 to 2 days a week) (4: 3 to 4 days a week) (5: 5 to 6 days a week) (6: Every day)|
+
+|grid?|id="GRID_HOUSE2" displayif=or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(equals(HOUSE1A_1,1),equals(HOUSE1A_2,1)),equals(HOUSE1A_3,1)),equals(HOUSE1A_4,1)),equals(HOUSE1A_5,1)),equals(HOUSE1A_6,1)),equals(HOUSE1B_1,1)),equals(HOUSE1B_2,1)),equals(HOUSE1B_3,1)),equals(HOUSE1B_4,1)),equals(HOUSE1B_5,1)),equals(HOUSE1B_6,1)),equals(HOUSE1C_1,1)),equals(HOUSE1C_2,1)),equals(HOUSE1C_3,1)),equals(HOUSE1C_4,1)),equals(HOUSE1C_5,1)),equals(HOUSE1C_6,1)),equals(HOUSE1D_1,1)),equals(HOUSE1D_2,1)),equals(HOUSE1D_3,1)),equals(HOUSE1D_4,1)),equals(HOUSE1D_5,1)),equals(HOUSE1D_6,1)),equals(HOUSE1E_1,1)),equals(HOUSE1E_2,1)),equals(HOUSE1E_3,1)),equals(HOUSE1E_4,1)),equals(HOUSE1E_5,1)),equals(HOUSE1E_6,1)) |On the days that you did these household or shopping activities, about how much time per day did you spend doing each activity? |[
+
+    [HOUSE2A,displayif=or(or(or(or(or(equals(HOUSE1A_1,1),equals(HOUSE1A_2,1)),equals(HOUSE1A_3,1)),equals(HOUSE1A_4,1)),equals(HOUSE1A_5,1)),equals(HOUSE1A_6,1))] Light household chores (cooking, cleaning up, laundry, dusting, etc.);
+
+    [HOUSE2B,displayif=or(or(or(or(or(equals(HOUSE1B_1,1),equals(HOUSE1B_2,1)),equals(HOUSE1B_3,1)),equals(HOUSE1B_4,1)),equals(HOUSE1B_5,1)),equals(HOUSE1B_6,1))] Moderate to vigorous household chores (vacuuming, sweeping, etc.);
+
+    [HOUSE2C,displayif=or(or(or(or(or(equals(HOUSE1C_1,1),equals(HOUSE1C_2,1)),equals(HOUSE1C_3,1)),equals(HOUSE1C_4,1)),equals(HOUSE1C_5,1)),equals(HOUSE1C_6,1))] Caring for pets (walking dogs, feeding, playing, grooming);
+
+    [HOUSE2D,displayif=or(or(or(or(or(equals(HOUSE1D_1,1),equals(HOUSE1D_2,1)),equals(HOUSE1D_3,1)),equals(HOUSE1D_4,1)),equals(HOUSE1D_5,1)),equals(HOUSE1D_6,1))] Caring for children or adults (pushing stroller or wheelchair, lifting, bathing);
+
+    [HOUSE2E,displayif=or(or(or(or(or(equals(HOUSE1E_1,1),equals(HOUSE1E_2,1)),equals(HOUSE1E_3,1)),equals(HOUSE1E_4,1)),equals(HOUSE1E_5,1)),equals(HOUSE1E_6,1))] Walking while shopping or doing errands (Do not count walking for exercise);
+]|
+    (0: 15 minutes or less)
+    (1: 16 to 30 minutes)
+    (2: 31 to 44 minutes)
+    (3: 45 to 59 minutes)
+    (4: 1 hour)
+    (5: 2 hours)
+    (6: 3 hours or more)
+|
+
+[LAWN]<b>Lawn, Garden, and Home Repair</b>
+
+
+
+2627189593
+
+869588347 (email)
+
+7964746920 (ConnectID)
