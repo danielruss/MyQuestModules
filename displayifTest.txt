@@ -1,0 +1,22 @@
+[Q1]  Show the next question?
+(1) Yes
+(0) No
+
+[Q2,displayif='valueOrDefault("Q1",0) == 1']  Hi there!!  I am the next question
+
+[Q3]
+The next question is a grid with 3 rows.
+[1] show row 1
+[2] show row 2
+[3] show row 3
+[0] just skip the grid -> END
+
+|grid|id=G1| Welcome to the grid question
+
+| [[G1R1,displayif=valueIsOneOf("Q3",1)] This is row 1; 
+   [G1R2,displayif=valueIsOneOf("Q3",2)] This is row 2; 
+   [G1R3,displayif=valueIsOneOf("Q3",3)] This is row 3;] |
+(1:response 1) (2:response 2) (3:respose 3)|
+
+[END] All finished
+
