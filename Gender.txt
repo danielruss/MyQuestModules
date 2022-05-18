@@ -1,0 +1,28 @@
+[INTRO] For this iteration, the values of SEX, GEN and SEX2 are:
+
+SEX = {$u:SEX}
+GEN = {$u:GEN}
+SEX2 = {$u:SEX2}
+
+[INTRONONCISWOM, displayif=valueIsOneOf("SEX",1,23) and valueIsOneOf("GEN",2,34,45,5506)] The next questions item will asks you about your use of hormones.
+
+
+[HORNONCISWOM, displayif=valueIsOneOf("SEX",1,23) and valueIsOneOf("GEN",2,34,45,5506)] Have you ever used hormones or other medications to make your body look more feminine to make your body better reflect your gender (for example, estrogen or testosterone-blockers)?
+
+[1] No, never 
+[2] Yes, I used hormones or other medications to make my body look more feminine in the past 
+[3] Yes, I am currently using hormones or other medications to make my body look more feminine 
+
+
+[INTROWH,displayif=valueIsOneOf("SEX",2) or (valueIsOneOf("SEX",23) and valueIsOneOf("SEX2",56,67))] This section asks about your menstrual history, past or currentany pregnancies that you have had, and your use of hormone medications.
+
+When you are asked we ask you to give an exact date, age, or number, please it is okay to make your best guess if you are not sure.
+
+
+[END] Thank you.
+
+
+{
+  "SEX":2,
+  "GEN":2
+}

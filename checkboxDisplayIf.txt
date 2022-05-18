@@ -1,0 +1,12 @@
+[AGE] 
+age: |__|__|
+[A1,displayif= valueEquals('AGE',33)] Hi there
+
+[12] Lala
+
+[13,displayif= valueEquals('AGE',33)] lele
+
+
+[14] lili
+
+[END]

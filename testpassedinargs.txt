@@ -1,0 +1,31 @@
+[A1] Hi please make sure 
+
+{
+  "age":10
+}
+
+is in the previous results box.
+
+Currently age is set to: {$u:age}
+
+[A2, displayif=valueOrDefault("age",-100) == 10 ]
+If you see this question, displayif=valueOrDefault("age",-100) == 10) works
+
+< -> Q2>
+
+[A2_1, displayif=valueOrDefault("age",-100) != 10]
+If you see this question, I'm quessing you did NOT set age to 10!
+< -> Q2>
+
+[A2_2] Houston, we have a problem w/the new functions.
+
+[Q2, displayif=equals(age,10)  ] 
+
+If you see this question, displayif=equals(age,10) works
+< -> END >
+
+[Q2_1, displayif=doesNotEqual(age,10)  ] 
+If you see this question, I'm quessing you did NOT set age to 10!
+< -> END >
+[Q2_2] Houston, we have a problem with the old functions.
+[END] all done. {$u:age}

@@ -1,0 +1,23 @@
+[AGE!] How old are you today?
+Age: |__|__|min=40 max=70|
+
+|grid?|id="GRID_SECSMLF2"|Thinking about your usual adult life, about how often were you around the tobacco smoke of others, for example in your home, work, or school?|[ 
+
+[SECSMLF2A] Age 0 to age {$e:min(17,valueOrDefault("AGE","age",100)) };
+[SECSMLF2B,displayif=valueOrDefault("AGE","age",100) - 18 >2 ] Age 18 to age {$e:min(24,valueOrDefault("AGE","age",100)) };
+[SECSMLF2C,displayif=valueOrDefault("AGE","age",100) - 25 >2 ] Age 25 to age {$e:min(29,valueOrDefault("AGE","age",100)) };
+[SECSMLF2D,displayif=valueOrDefault("AGE","age",100) - 30 >2 ] Age 30 to age {$e:min(39,valueOrDefault("AGE","age",100)) };
+[SECSMLF2E,displayif=valueOrDefault("AGE","age",100) - 40 >2] Age 40 to age {$e:min(49,valueOrDefault("AGE","age",100)) };
+[SECSMLF2F,displayif=valueOrDefault("AGE","age",100) - 50 >2] Age 50 to age {$e:min(59,valueOrDefault("AGE","age",100)) };
+[SECSMLF2G,displayif=valueOrDefault("AGE","age",100) - 60 >2] Age 60 to age {$e:min(69,valueOrDefault("AGE","age",100)) };
+[SECSMLF2H,displayif=valueOrDefault("AGE","age",100) - 70 >2] Age 70 and older;]|
+
+(0:Every day, at least 2 hours each day)
+(1:Every day, less than 2 hours each day)
+(2:Most days of the week)
+(3:A few days per week)
+(4:One day per week)
+(5: A few days per month)
+(6: One day per month)
+(7: few days per year)
+(44: Never)|
