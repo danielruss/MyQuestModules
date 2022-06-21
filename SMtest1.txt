@@ -1,0 +1,130 @@
+[INTROSMO] First, we will ask you about your use of tobacco and nicotine products. Many questions will ask you to share the age you were when you started or stopped using a product. Please make your best guess if you are not sure about the age you were when you started or stopped using a product.
+
+Please remember that we protect your privacy. We remove information that can identify you from your survey answers before we share them with researchers.
+
+[TOBACCO?] Have you ever used any of these <b>tobacco</b> products, even once? Select all that apply.
+[0] Cigarettes (manufactured or hand-rolled) -> CIG1
+[1] Electronic delivery devices that can be vaped, such as e-cigarettes, Juul, blu, and NJOY. These electronic delivery devices are battery-powered and create vapor.
+[2] Cigars, cigarillos, or little filtered cigars; some of the most popular brands include Macanudo, Romeo y Julieta, Black and Mild, Swisher Sweets, Prime Time, and Cheyenne. Please do not include blunts as we will be asking about marijuana use in a later section.
+[3] Chewing tobacco, snus, snuff, or dip; some of the most popular brands are Red Man, Levi Garrett, BEECH-NUT, Skoal, and Copenhagen.
+[4] Hookah or water pipe
+[5] Tobacco pipe
+[88*] I have <b>not</b> used any of these tobacco products
+< -> CURRSM >
+
+
+/// ================ CIGARETTE SECTION ================
+[CIG1?]<b>Cigarettes</b>
+
+How many <b>cigarettes</b> have you smoked in your life?
+(0) 10 or less
+(1) 11 to 49
+(2) 50 to 99 -> CIG2
+(3) 100 or more -> CIG2
+
+[CIG2?] How old were you when you first smoked a cigarette?
+
+Age first smoked a cigarette |__|__|min=0 max=sum(isDefined(AGE,age),1)|
+< -> CIG3>
+
+[CIG3?]
+How old were you when you started smoking cigarettes on a |popup|regular basis|Informational Text|We understand that the meaning of 'regular basis' might be different for different people. When you answer this question, please think about what 'regular basis' means to you.|?
+
+Age started smoking cigarettes on a regular basis |__|__|id=CIG3_AGE min=valueOrDefault("CIG2",0) max=sum(isDefined(AGE,age),1)|
+
+[44*] Never smoked on a regular basis
+< -> CIG4 >
+
+[CIG4?] Do you smoke cigarettes now?
+(0) No -> CIG5
+(1) Yes, but rarely -> CIG5
+(2) Yes, some days ->  CIG5
+(3) Yes, every day -> CIG9A
+< #NR -> CIG5>
+
+[CIG5?] When was the <b>last</b> time you smoked cigarettes?
+(0) In the past month -> CIG6
+(1) More than a month ago, but in the past year -> CIG7A
+(2) More than 1 year ago ->  CIG8
+< #NR -> CIG9A>
+
+[CIG6?] <b>On how many of the past 30 days </b>have you smoked cigarettes?
+#Days smoked in past 30 days |__|__|min=1 max=30|
+< -> CIG9A>
+
+[CIG7A?] How many months ago did you <b>last</b> smoke cigarettes?
+#Months ago last smoked cigarettes |__|__|min=1 max=11|
+< -> CIG7B>
+
+[CIG7B?] During that time, did you ever smoke cigarettes <b>every day</b>?
+(0) No ->  CIG7C
+(1) Yes ->  CIG9A
+< #NR -> CIG7C>
+
+[CIG7C?] During that time, how many days (1 to 30) did you smoke cigarettes in a usual month?
+
+#Days smoked in usual month |__|__|min=1 max=30|< -> CIG9A>
+
+[CIG8?] How old were you when you <b>last</b> smoked cigarettes?
+
+Age when last smoked cigarettes |__|__|min=valueOrDefault("CIG3_AGE","CIG2",0) max=sum(isDefined(AGE,age),1)|
+
+< #NR -> CIG8C>
+
+[CIG8C?] During that time, did you ever smoke cigarettes <b>every day</b>?
+(0) No -> CIG8D
+(1) Yes -> CIG9A
+< #NR -> CIG8D>
+
+[CIG8D?] During that time, how many days (1 to 30) did you smoke cigarettes in a usual month?
+#Days smoked in a usual month |__|__|min=1 max=30|
+< -> CIG9A>
+
+[CIG9A?]
+On days that you |displayif=and(doesNotEqual(CIG5,1),doesNotEqual(CIG5,2))|smoke||displayif=or(equals(CIG5,1),equals(CIG5,2))|smoked|, how many cigarettes |displayif=equals(isDefined(CIG5,0),0)|do||displayif=or(equals(CIG5,1),equals(CIG5,2))|did| you smoke <b>per day</b>? Please provide the number of cigarettes, <b>not</b> the number of packs.
+#Cigarettes smoked per day |__|__|min=1 max=99| 
+< -> CIG9B>
+
+[CIG9B?,displayif=and(doesNotEqual(or(or(equals(CIG4,3),and(or(or(equals(CIG4,2),equals(CIG4,1)),equals(CIG4,0)),and(equals(CIG5,1),equals(CIG7B,0)))),and(or(or(equals(CIG4,2),equals(CIG4,1)),equals(CIG4,0)),and(equals(CIG5,2),equals(CIG8C,0)))),1),equals(TOBACCO,0))] Did you ever smoke cigarettes <b>every day</b>?
+(0) No 
+(1) Yes -> CIG9D
+
+
+[CIG9D?,displayif=and(doesNotEqual(or(or(equals(CIG4,3),and(or(or(equals(CIG4,2),equals(CIG4,1)),equals(CIG4,0)),and(equals(CIG5,1),equals(CIG7B,0)))),and(or(or(equals(CIG4,2),equals(CIG4,1)),equals(CIG4,0)),and(equals(CIG5,2),equals(CIG8C,0)))),1),equals(TOBACCO,0))] How old were you when you stopped smoking cigarettes <b>every day</b>?
+Age stopped smoking every day |__|__|min=1 max=sum(isDefined(AGE,age),1)|
+< -> CIG9C >
+
+[CIG9C?,displayif=and(doesNotEqual(or(or(equals(CIG4,3),and(or(or(equals(CIG4,2),equals(CIG4,1)),equals(CIG4,0)),and(equals(CIG5,1),equals(CIG7B,0)))),and(or(or(equals(CIG4,2),equals(CIG4,1)),equals(CIG4,0)),and(equals(CIG5,2),equals(CIG8C,0)))),1),equals(TOBACCO,0))] When you were a daily smoker, how many cigarettes did you smoke <b>per day</b>?
+#Cigarettes smoked per day |__|__|__|min=1 max=999|
+
+< -> CIG10>
+
+[CIG10?] On a usual day that you |displayif=and(doesNotEqual(CIG5,1),doesNotEqual(CIG5,2))| smoke||displayif=or(equals(CIG5,1),equals(CIG5,2))|smoked|, how soon after you |displayif=and(doesNotEqual(CIG5,1),doesNotEqual(CIG5,2))|wake up||displayif=or(equals(CIG5,1),equals(CIG5,2))|woke up| |displayif=equals(isDefined(CIG5,0),0)|do||displayif=or(equals(CIG5,1),equals(CIG5,2))|did| you smoke your first cigarette of the day?
+(0) 5 minutes or less
+(1) 6 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+< -> CIGLIFEA >
+
+// Age ranges are shown if (CIG1 == 4 && (CIG4 == 1 || CIG7B == 1 || CIG8C == 1))
+// A range is also only shown if CIG3_AGE <= the top of the range and (AGE-2) > the bottom of the range, if CIG8C==1 then also require CIG8 >= the bottom of the range
+// When displaying the bottom of the range it should be replaced by CIG3_AGE if that is larger
+// When display the top of the range, if CIG8C=1 then show the smaller of CIG8, AGE, and the top of the range; otherwise show the smaller of AGE and the top of the range.
+// The final range has no upper bound so just ignore the top of the range requirements
+// see Squish #4
+// 0 -17
+//[CIGLIFEA?,displayif=and(and(and(equals(CIG1,3),or(equals(CIG4,3),or(equals(CIG7B,0),equals(CIG8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),0),or(doesN//otEqual(CIG8C,0),greaterThanOrEqual(isDefined(CIG8,0),0)))),lessThanOrEqual(CIG3_AGE,17))]
+
+[CIGLIFEA?,displayif=(valueOrDefault("CIG1",-1)==3) and (valueOrDefault("CIG4",-1)==3 or valueOrDefault("CIG7B",-1)==1 or valueOrDefault("CIG8C",-1)==0) and  (valueOrDefault("AGE","age",100)-2 > 0) and (valueOrDefault("CIG3_AGE","CIG2",18) <= 17)]
+
+On days that you smoked when you were age|displayif=valueOrDefault("CIG3_AGE",1)>valueOrDefault("CIG2",1)|{$CIG3_AGE}||displayif=valueOrDefault("CIG3_AGE",1)<valueOrDefault("CIG2",1)|{$CIG2}||displayif=noneExist("CIG3_AGE","CIG2")|0|to |displayif=and(and(equals(CIG8C,0),doesNotEqual(isDefined(CIG8,-1),-1)),lessThan(isDefined(CIG8,17),17))|{$CIG8}||displayif=and(and(equals(CIG8C,0),doesNotEqual(isDefined(CIG8,-1),-1)),greaterThanOrEqual(isDefined(CIG8,17),17))|17||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIG8C,0),equals(isDefined(CIG8,-1),-1)),lessThanOrEqual(AGE,17)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIG8C,0),equals(isDefined(CIG8,-1),-1)),lessThanOrEqual(age,17)))|{$u:age}||displayif=and(or(doesNotEqual(CIG8C,0),equals(isDefined(CIG8,-1),-1)),greaterThan(isDefined(AGE,age),17))|17|, about how many cigarettes did you smoke <b>per day</b>?
+#CIGARETTES PER DAY |__|__|min=1 max=99|
+
+// ================ END OF CIGARETTES ================
+
+
+[CURRSM] lalala...
+
+[END] All done

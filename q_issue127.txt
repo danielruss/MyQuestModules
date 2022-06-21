@@ -1,0 +1,20 @@
+[Q1]
+Pick a positive number: |__|__|min=0|
+
+[Q1A,displayif=doesNotExist("Q1")]
+You chose not to give a number.  Lets try this again..
+
+Please pick a positive number: |__|__|min=0|
+
+[Q2]
+Pick another positive number: |__|__|min=0|
+
+[Q3]
+
+Lets see this work:
+
+|displayif=valueOrDefault("Q1","Q1A",-1) > valueOrDefault("Q2",-1)|Q1 is greater than Q2|
+|displayif=valueOrDefault("Q1","Q1A",-1) < valueOrDefault("Q2",-1)|Q1 is less than Q2|
+|displayif=valueOrDefault("Q1","Q1A",-1) == valueOrDefault("Q2",-1) and valueOrDefault("Q2",-1)>=0|Q1 is equal to Q2|
+
+[END] Thank you for playing

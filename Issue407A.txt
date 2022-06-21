@@ -1,0 +1,34 @@
+[INTRO] Hi Folks...
+
+ |grid|id="grid_test1"|This is the text on the top like... During the past year, how many times do you the following activities|[ [TG1] Tie your shoes; [TG2] Chew Gum; [TG3] Hop on one foot;]|(1:Never) (2:less than Once per week) (3:less than once per day) (4: more than once per day)|
+
+[END] good bye...
+|displayif=gridQuestionsValueIsOneOf("grid_test1",1)|Really? you've never done ANY of these things???|
+
+
+
+[Q1] Pick one
+
+[1] One
+[2] Two
+[3] Three
+[4] Four
+
+<# exists("Q1") -> END; >
+
+
+[Q1] Pick one
+
+[1] one
+[2] two
+
+[Q2] Hi there.
+(1) one
+(2) two
+< |if=exists(Q1)|->Q4 >
+
+[Q3] If you selected anything in Q1, you should not see this...
+
+[Q4] you should see this.
+
+[END] good bye....

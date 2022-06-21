@@ -1,0 +1,24 @@
+[SECTION2]<b>Commuting</b>
+
+[COMINTRO] In this section, we will ask about your usual commute between your home and places like work and school. The ways we commute, and the amount of time we spend commuting, can affect our health. The COVID-19 pandemic changed many people’s work and commute. We want to know about your commute before the pandemic started.
+
+[WORK2019?] Did you work for pay in 2019 (before the start of the COVID-19 Pandemic)?
+(0) No -> PREWORK
+(1) Yes -> DAYSWORK
+< #NR -> PREWORK >
+
+[DAYSWORK?] As you worked on that job, about how many days per week did you usually work for pay? If you cannot remember, please make your best guess.
+(0) 1 day per week
+(1) 2 days per week
+(2) 3 days per week
+(3) 4 days per week
+(4) 5 days per week
+(5) 6 days per week
+(6) 7 days per week
+
+[WORKRES?] Did your daily tasks include driving (such as a sales representative, courier, bus driver, or truck driver)?
+(1) Yes -> PREWORK
+(0) No -> INTROCURWORK
+< #NR -> INTROCURWORK>
+
+[INTROCURWORK] The next questions ask about the place where you worked and your commute between work and home.

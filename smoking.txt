@@ -1,0 +1,1944 @@
+[INTROSMO] First, we will ask you about your use of tobacco and nicotine products. Many questions will ask you to share the age you were when you started or stopped using a product. Please make your best guess if you are not sure about the age you were when you started or stopped using a product.
+
+Please remember that we protect your privacy. We remove information that can identify you from your survey answers before we share them with researchers.
+
+[TOBACCO?] Have you ever used any of these <b>tobacco</b> products, even once? Select all that apply.
+[0] Cigarettes (manufactured or hand-rolled)
+[1] Electronic delivery devices that can be vaped, such as e-cigarettes, Juul, blu, and NJOY. These electronic delivery devices are battery-powered and create vapor.
+[2] Cigars, cigarillos, or little filtered cigars; some of the most popular brands include Macanudo, Romeo y Julieta, Black and Mild, Swisher Sweets, Prime Time, and Cheyenne. Please do not include blunts as we will be asking about marijuana use in a later section.
+[3] Chewing tobacco, snus, snuff, or dip; some of the most popular brands are Red Man, Levi Garrett, BEECH-NUT, Skoal, and Copenhagen.
+[4] Hookah or water pipe
+[5] Tobacco pipe
+[88*] I have <b>not</b> used any of these tobacco products
+< #NR-> CURRSM >
+
+[CIG1?,displayif=equals(TOBACCO,0)]<b>Cigarettes</b>
+
+How many <b>cigarettes</b> have you smoked in your life?
+(0) 10 or less -> ECIG1
+(1) 11 to 49 -> ECIG1
+(2) 50 to 99 -> CIG2
+(3) 100 or more -> CIG2
+< #NR -> ECIG1>
+
+[CIG2?,displayif=equals(TOBACCO,0)] How old were you when you first smoked a cigarette?
+
+Age first smoked a cigarette |__|__|min=0 max=sum(isDefined(AGE,age),1)|
+
+[CIG3?,displayif=equals(TOBACCO,0)]
+How old were you when you started smoking cigarettes on a |popup|regular basis|Informational Text|We understand that the meaning of 'regular basis' might be different for different people. When you answer this question, please think about what 'regular basis' means to you.|?
+
+Age started smoking cigarettes on a regular basis |__|__|id=CIG3_AGE min=valueOrDefault("CIG2",0) max=sum(isDefined(AGE,age),1)|
+
+[44*] Never smoked on a regular basis
+
+
+[CIG4?,displayif=equals(TOBACCO,0)] Do you smoke cigarettes now?
+(0) No -> CIG5
+(1) Yes, but rarely -> CIG5
+(2) Yes, some days ->  CIG5
+(3) Yes, every day -> CIG9A
+< #NR -> CIG5>
+
+[CIG5?,displayif=equals(TOBACCO,0)] When was the <b>last</b> time you smoked cigarettes?
+(0) In the past month -> CIG6
+(1) More than a month ago, but in the past year -> CIG7A
+(2) More than 1 year ago ->  CIG8
+< #NR -> CIG9A>
+
+[CIG6?,displayif=equals(TOBACCO,0)] <b>On how many of the past 30 days </b>have you smoked cigarettes?
+#Days smoked in past 30 days |__|__|min=1 max=30|< -> CIG9A>
+
+[CIG7A?,displayif=equals(TOBACCO,0)] How many months ago did you <b>last</b> smoke cigarettes?
+#Months ago last smoked cigarettes |__|__|min=1 max=11|< -> CIG7B>
+
+[CIG7B?,displayif=equals(TOBACCO,0)] During that time, did you ever smoke cigarettes <b>every day</b>?
+(0) No ->  CIG7C
+(1) Yes ->  CIG9A
+< #NR -> CIG7C>
+
+[CIG7C?,displayif=equals(TOBACCO,0)] During that time, how many days (1 to 30) did you smoke cigarettes in a usual month?
+
+#Days smoked in usual month |__|__|min=1 max=30|< -> CIG9A>
+
+[CIG8?,displayif=equals(TOBACCO,0)] How old were you when you <b>last</b> smoked cigarettes?
+
+Age when last smoked cigarettes |__|__|min=valueOrDefault("CIG3_AGE","CIG2",0) max=sum(isDefined(AGE,age),1)|
+
+< #NR -> CIG8C>
+
+[CIG8C?,displayif=equals(TOBACCO,0)] During that time, did you ever smoke cigarettes <b>every day</b>?
+(0) No -> CIG8D
+(1) Yes -> CIG9A
+< #NR -> CIG8D>
+
+[CIG8D?,displayif=equals(TOBACCO,0)] During that time, how many days (1 to 30) did you smoke cigarettes in a usual month?
+#Days smoked in a usual month |__|__|min=1 max=30|< -> CIG9A>
+
+[CIG9A?,displayif=equals(TOBACCO,0)]
+On days that you |displayif=and(doesNotEqual(CIG5,1),doesNotEqual(CIG5,2))|smoke||displayif=or(equals(CIG5,1),equals(CIG5,2))|smoked|, how many cigarettes |displayif=equals(isDefined(CIG5,0),0)|do||displayif=or(equals(CIG5,1),equals(CIG5,2))|did| you smoke <b>per day</b>? Please provide the number of cigarettes, <b>not</b> the number of packs.
+#Cigarettes smoked per day |__|__|min=1 max=99| < -> CIG9B>
+
+[CIG9B?,displayif=and(doesNotEqual(or(or(equals(CIG4,3),and(or(or(equals(CIG4,2),equals(CIG4,1)),equals(CIG4,0)),and(equals(CIG5,1),equals(CIG7B,0)))),and(or(or(equals(CIG4,2),equals(CIG4,1)),equals(CIG4,0)),and(equals(CIG5,2),equals(CIG8C,0)))),1),equals(TOBACCO,0))] Did you ever smoke cigarettes <b>every day</b>?
+(0) No -> ECIG1
+(1) Yes -> CIG9D
+< #NR -> ECIG1 >
+
+[CIG9D?,displayif=and(doesNotEqual(or(or(equals(CIG4,3),and(or(or(equals(CIG4,2),equals(CIG4,1)),equals(CIG4,0)),and(equals(CIG5,1),equals(CIG7B,0)))),and(or(or(equals(CIG4,2),equals(CIG4,1)),equals(CIG4,0)),and(equals(CIG5,2),equals(CIG8C,0)))),1),equals(TOBACCO,0))] How old were you when you stopped smoking cigarettes <b>every day</b>?
+Age stopped smoking every day |__|__|min=1 max=sum(isDefined(AGE,age),1)|
+
+[CIG9C?,displayif=and(doesNotEqual(or(or(equals(CIG4,3),and(or(or(equals(CIG4,2),equals(CIG4,1)),equals(CIG4,0)),and(equals(CIG5,1),equals(CIG7B,0)))),and(or(or(equals(CIG4,2),equals(CIG4,1)),equals(CIG4,0)),and(equals(CIG5,2),equals(CIG8C,0)))),1),equals(TOBACCO,0))] When you were a daily smoker, how many cigarettes did you smoke <b>per day</b>?
+#Cigarettes smoked per day |__|__|__|min=1 max=999|
+
+<#NR -> ECIG1>
+
+[CIG10?,displayif=equals(TOBACCO,0)] On a usual day that you |displayif=and(doesNotEqual(CIG5,1),doesNotEqual(CIG5,2))| smoke||displayif=or(equals(CIG5,1),equals(CIG5,2))|smoked|, how soon after you |displayif=and(doesNotEqual(CIG5,1),doesNotEqual(CIG5,2))|wake up||displayif=or(equals(CIG5,1),equals(CIG5,2))|woke up| |displayif=equals(isDefined(CIG5,0),0)|do||displayif=or(equals(CIG5,1),equals(CIG5,2))|did| you smoke your first cigarette of the day?
+(0) 5 minutes or less
+(1) 6 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+[CIG11?,displayif=equals(TOBACCO,0)] On a usual day that you |displayif=and(doesNotEqual(CIG5,1),doesNotEqual(CIG5,2))| smoke||displayif=or(equals(CIG5,1),equals(CIG5,2))|smoked||displayif=equals(isDefined(CIG5,0),0)| do||displayif=or(equals(CIG5,1),equals(CIG5,2))| did| you smoke a cigarette before your first meal of the day?
+(0) Almost all the time
+(1) Most of the time
+(2) About half of the time
+(3) Some of the time
+(4) Almost never
+
+// Age ranges are shown if (CIG1 == 4 && (CIG4 == 1 || CIG7B == 1 || CIG8C == 1))
+// A range is also only shown if CIG3_AGE <= the top of the range and (AGE-2) > the bottom of the range, if CIG8C==1 then also require CIG8 >= the bottom of the range
+// When displaying the bottom of the range it should be replaced by CIG3_AGE if that is larger
+// When display the top of the range, if CIG8C=1 then show the smaller of CIG8, AGE, and the top of the range; otherwise show the smaller of AGE and the top of the range.
+// The final range has no upper bound so just ignore the top of the range requirements
+// see Squish #4
+// 0 -17
+//[CIGLIFEA?,displayif=and(and(and(equals(CIG1,3),or(equals(CIG4,3),or(equals(CIG7B,0),equals(CIG8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),0),or(doesN//otEqual(CIG8C,0),greaterThanOrEqual(isDefined(CIG8,0),0)))),lessThanOrEqual(CIG3_AGE,17))]
+
+[CIGLIFEA?,displayif=(_value("CIG1")==3) and (_value("CIG4")==3 or _value("CIG7B")==1 or _value("CIG8C")==1) and  (valueOrDefault("AGE","age",100)-2 > 0) and (valueOrDefault("CIG3_AGE","CIG2",18) <= 17)]
+
+On days that you smoked when you were age|displayif=valueOrDefault("CIG3_AGE",1)>valueOrDefault("CIG2",1)|{$CIG3_AGE}||displayif=valueOrDefault("CIG3_AGE",1)<valueOrDefault("CIG2",1)|{$CIG2}||displayif=noneExist("CIG3_AGE","CIG2")|0|to |displayif=and(and(equals(CIG8C,0),doesNotEqual(isDefined(CIG8,-1),-1)),lessThan(isDefined(CIG8,17),17))|{$CIG8}||displayif=and(and(equals(CIG8C,0),doesNotEqual(isDefined(CIG8,-1),-1)),greaterThanOrEqual(isDefined(CIG8,17),17))|17||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIG8C,0),equals(isDefined(CIG8,-1),-1)),lessThanOrEqual(AGE,17)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIG8C,0),equals(isDefined(CIG8,-1),-1)),lessThanOrEqual(age,17)))|{$u:age}||displayif=and(or(doesNotEqual(CIG8C,0),equals(isDefined(CIG8,-1),-1)),greaterThan(isDefined(AGE,age),17))|17|, about how many cigarettes did you smoke <b>per day</b>?
+#CIGARETTES PER DAY |__|__|min=1 max=99|
+
+// 18-24
+[CIGLIFEB?,displayif=(_value("CIG1")==3) and (_value("CIG4")==3 or _value("CIG7B")==1 or _value("CIG8C")==1) and  (valueOrDefault("AGE","age",100)-2 > 18) and (valueOrDefault("CIG3_AGE","CIG2",18) <= 24)]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(CIG3_AGE,-1),18)|{$CIG3_AGE}||displayif=lessThan(isDefined(CIG3_AGE,-1),18)|18| to |displayif=and(and(equals(CIG8C,0),doesNotEqual(isDefined(CIG8,-1),-1)),lessThan(isDefined(CIG8,24),24))|{$CIG8}||displayif=and(and(equals(CIG8C,0),doesNotEqual(isDefined(CIG8,-1),-1)),greaterThanOrEqual(isDefined(CIG8,24),24))|24||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIG8C,0),equals(isDefined(CIG8,-1),-1)),lessThanOrEqual(AGE,24)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIG8C,0),equals(isDefined(CIG8,-1),-1)),lessThanOrEqual(age,24)))|{$u:age}||displayif=and(or(doesNotEqual(CIG8C,0),equals(isDefined(CIG8,-1),-1)),greaterThan(isDefined(AGE,age),24))|24|, about how many cigarettes did you smoke <b>per day</b>?
+#CIGARETTES PER DAY |__|__|min=1 max=99|
+
+// 25-29
+[CIGLIFEC?,displayif=(_value("CIG1")==3) and (_value("CIG4")==3 or _value("CIG7B")==1 or _value("CIG8C")==1) and  (valueOrDefault("AGE","age",100)-2 > 25) and (valueOrDefault("CIG3_AGE","CIG2",18) <= 29)]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(CIG3_AGE,-1),25)|{$CIG3_AGE}||displayif=lessThan(isDefined(CIG3_AGE,-1),25)|25| to |displayif=and(and(equals(CIG8C,0),doesNotEqual(isDefined(CIG8,-1),-1)),lessThan(isDefined(CIG8,29),29))|{$CIG8}||displayif=and(and(equals(CIG8C,0),doesNotEqual(isDefined(CIG8,-1),-1)),greaterThanOrEqual(isDefined(CIG8,29),29))|29||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIG8C,0),equals(isDefined(CIG8,-1),-1)),lessThanOrEqual(AGE,29)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIG8C,0),equals(isDefined(CIG8,-1),-1)),lessThanOrEqual(age,29)))|{$u:age}||displayif=and(or(doesNotEqual(CIG8C,0),equals(isDefined(CIG8,-1),-1)),greaterThan(isDefined(AGE,age),29))|29|, about how many cigarettes did you smoke <b>per day</b>?
+#CIGARETTES PER DAY |__|__|min=1 max=99|
+
+// 30-39
+[CIGLIFED?,displayif=(_value("CIG1")==3) and (_value("CIG4")==3 or _value("CIG7B")==1 or _value("CIG8C")==1) and  (valueOrDefault("AGE","age",100)-2 > 30) and (valueOrDefault("CIG3_AGE","CIG2",18) <= 39)]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(CIG3_AGE,-1),30)|{$CIG3_AGE}||displayif=lessThan(isDefined(CIG3_AGE,-1),30)|30| to |displayif=and(and(equals(CIG8C,0),doesNotEqual(isDefined(CIG8,-1),-1)),lessThan(isDefined(CIG8,39),39))|{$CIG8}||displayif=and(and(equals(CIG8C,0),doesNotEqual(isDefined(CIG8,-1),-1)),greaterThanOrEqual(isDefined(CIG8,39),39))|39||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIG8C,0),equals(isDefined(CIG8,-1),-1)),lessThanOrEqual(AGE,39)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIG8C,0),equals(isDefined(CIG8,-1),-1)),lessThanOrEqual(age,39)))|{$u:age}||displayif=and(or(doesNotEqual(CIG8C,0),equals(isDefined(CIG8,-1),-1)),greaterThan(isDefined(AGE,age),39))|39|, about how many cigarettes did you smoke <b>per day</b>?
+#CIGARETTES PER DAY |__|__|min=1 max=99|
+
+// 40-49
+[CIGLIFEE?,displayif=(_value("CIG1")==3) and (_value("CIG4")==3 or _value("CIG7B")==1 or _value("CIG8C")==1) and  (valueOrDefault("AGE","age",100)-2 > 40) and (valueOrDefault("CIG3_AGE","CIG2",18) <= 49)]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(CIG3_AGE,-1),40)|{$CIG3_AGE}||displayif=lessThan(isDefined(CIG3_AGE,-1),40)|40| to |displayif=and(and(equals(CIG8C,0),doesNotEqual(isDefined(CIG8,-1),-1)),lessThan(isDefined(CIG8,49),49))|{$CIG8}||displayif=and(and(equals(CIG8C,0),doesNotEqual(isDefined(CIG8,-1),-1)),greaterThanOrEqual(isDefined(CIG8,49),49))|49||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIG8C,0),equals(isDefined(CIG8,-1),-1)),lessThanOrEqual(AGE,49)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIG8C,0),equals(isDefined(CIG8,-1),-1)),lessThanOrEqual(age,49)))|{$u:age}||displayif=and(or(doesNotEqual(CIG8C,0),equals(isDefined(CIG8,-1),-1)),greaterThan(isDefined(AGE,age),49))|49|, about how many cigarettes did you smoke <b>per day</b>?
+#CIGARETTES PER DAY |__|__|min=1 max=99|
+
+// 50-59
+[CIGLIFEF?,displayif=(_value("CIG1")==3) and (_value("CIG4")==3 or _value("CIG7B")==1 or _value("CIG8C")==1) and  (valueOrDefault("AGE","age",100)-2 > 50) and (valueOrDefault("CIG3_AGE","CIG2",18) <= 59)]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(CIG3_AGE,-1),50)|{$CIG3_AGE}||displayif=lessThan(isDefined(CIG3_AGE,-1),50)|50| to |displayif=and(and(equals(CIG8C,0),doesNotEqual(isDefined(CIG8,-1),-1)),lessThan(isDefined(CIG8,59),59))|{$CIG8}||displayif=and(and(equals(CIG8C,0),doesNotEqual(isDefined(CIG8,-1),-1)),greaterThanOrEqual(isDefined(CIG8,59),59))|59||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIG8C,0),equals(isDefined(CIG8,-1),-1)),lessThanOrEqual(AGE,59)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIG8C,0),equals(isDefined(CIG8,-1),-1)),lessThanOrEqual(age,59)))|{$u:age}||displayif=and(or(doesNotEqual(CIG8C,0),equals(isDefined(CIG8,-1),-1)),greaterThan(isDefined(AGE,age),59))|59|, about how many cigarettes did you smoke <b>per day</b>?
+#CIGARETTES PER DAY |__|__|min=1 max=99|
+
+// 60-69
+[CIGLIFEG?,displayif=(_value("CIG1")==3) and (_value("CIG4")==3 or _value("CIG7B")==1 or _value("CIG8C")==1) and  (valueOrDefault("AGE","age",100)-2 > 60) and (valueOrDefault("CIG3_AGE","CIG2",18) <= 69)]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(CIG3_AGE,-1),60)|{$CIG3_AGE}||displayif=lessThan(isDefined(CIG3_AGE,-1),60)|60| to |displayif=and(and(equals(CIG8C,0),doesNotEqual(isDefined(CIG8,-1),-1)),lessThan(isDefined(CIG8,69),69))|{$CIG8}||displayif=and(and(equals(CIG8C,0),doesNotEqual(isDefined(CIG8,-1),-1)),greaterThanOrEqual(isDefined(CIG8,69),69))|69||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIG8C,0),equals(isDefined(CIG8,-1),-1)),lessThanOrEqual(AGE,69)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIG8C,0),equals(isDefined(CIG8,-1),-1)),lessThanOrEqual(age,69)))|{$u:age}||displayif=and(or(doesNotEqual(CIG8C,0),equals(isDefined(CIG8,-1),-1)),greaterThan(isDefined(AGE,age),69))|69|, about how many cigarettes did you smoke <b>per day</b>?
+#CIGARETTES PER DAY |__|__|min=1 max=99|
+
+// 70+
+[CIGLIFEH?,displayif=(_value("CIG1")==3) and (_value("CIG4")==3 or _value("CIG7B")==1 or _value("CIG8C")==1) and  (valueOrDefault("AGE","age",100)-2 > 70) ]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(CIG3_AGE,-1),70)|{$CIG3_AGE}||displayif=lessThan(isDefined(CIG3_AGE,-1),70)|70| or older, about how many cigarettes did you smoke <b>per day</b>?
+#CIGARETTES PER DAY |__|__|min=1 max=99|
+
+[ECIG1?,displayif=equals(TOBACCO,1)]<b>Electronic Nicotine Delivery Devices</b>
+
+The next questions are about electronic nicotine delivery devices, such as e-cigarettes, Juul, blu, and NJOY. These devices are also called "vapes" and using these devices is called "vaping".
+
+How many days have you used <b>e-cigarettes or other vaping devices for nicotine or tobacco</b> in your life?
+(0) 10 or less -> CIGAR1
+(1) 11 to 49 -> CIGAR1
+(2) 50 to 99 -> ECIG2
+(3) 100 or more -> ECIG2
+< #NR -> CIGAR1>
+
+[ECIG2?,displayif=equals(TOBACCO,1)] How old were you when you <b>first</b> used e-cigarettes or other vaping devices for nicotine or tobacco?
+Age first vaped |__|__|min=0 max=sum(isDefined(AGE,age),1)|< -> ECIG3>
+
+[ECIG3?,displayif=equals(TOBACCO,1)]
+How old were you when you started using e-cigarettes or other vaping devices for nicotine or tobacco on a |popup|regular basis|Informational Text|We understand that the meaning of 'regular basis' might be different for different people. When you answer this question, please think about what "regular basis" means to you.|?
+ Age started vaping on a regular basis |__|__|id=REGVAPE_AGE min=isDefined(ECIG2,0) max=sum(isDefined(AGE,age),1)|
+
+[44*] Never used them on a regular basis
+
+
+[ECIG4?,displayif=equals(TOBACCO,1)] Do you use e-cigarettes or other vaping devices for nicotine or tobacco now?
+(0) No ->  ECIG5
+(1) Yes, but rarely ->  ECIG5
+(2) Yes, some days -> ECIG5
+(3) Yes, every day ->  ECIG9A
+< #NR -> ECIG5>
+
+[ECIG5?,displayif=equals(TOBACCO,1)] When was the <b>last</b> time you used e-cigarettes or other vaping devices for nicotine or tobacco?
+(0) In the past month ->  ECIG6
+(1) More than a month ago, but in the past year -> ECIG7A
+(2) More than 1 year ago -> ECIG8
+< #NR -> ECIG9A>
+
+[ECIG6?,displayif=equals(TOBACCO,1)] <b>On how many of the past 30 days</b> have you used e-cigarettes or other vaping devices for nicotine or tobacco?
+#Days used e-cigarettes or other vaping devices in past 30 days |__|__|min=1 max=30|< -> ECIG9A>
+
+
+[ECIG7A?,displayif=equals(TOBACCO,1)] How many months ago did you <b>last</b> use e-cigarettes or other vaping devices for nicotine or tobacco?
+#Months ago last used e-cigarettes or other vaping devices |__|__|min=1 max=11|<->  ECIG7B>
+
+
+[ECIG7B?,displayif=equals(TOBACCO,1)] During that time, did you ever use e-cigarettes or other vaping devices for nicotine or tobacco <b>every day</b>?
+(0) No -> ECIG7C
+(1) Yes ->  ECIG9A
+< #NR -> ECIG7C>
+
+[ECIG7C?,displayif=equals(TOBACCO,1)] During that time, how many days (1 to 30) did you use e-cigarettes or other vaping devices for nicotine or tobacco in a usual month?
+#Days used e-cigarettes or other vaping devices for nicotine or tobacco in usual month |__|__|min=0 max=30|< -> ECIG9A>
+
+
+[ECIG8?,displayif=equals(TOBACCO,1)] How old were you when you <b>last</b> used e-cigarettes or other vaping devices for nicotine or tobacco?
+Age when last used e-cigarettes or other vaping devices |__|__|min=isDefined(isDefined(REGVAPE_AGE,ECIG2),0) max=sum(isDefined(AGE,age),1)|
+< #NR -> ECIG8C>
+
+[ECIG8C?,displayif=equals(TOBACCO,1)] During that time, did you ever use e-cigarettes or other vaping devices for nicotine or tobacco <b>every day</b>?
+(0) No ->  ECIG8D
+(1) Yes -> ECIG9A
+< #NR -> ECIG8D>
+
+[ECIG8D?,displayif=equals(TOBACCO,1)] During that time, how many days (1 to 30) did you use e-cigarettes or other vaping devices for nicotine or tobacco in a usual month?
+# Days used e-cigarettes or other vaping devices for nicotine or tobacco in usual month |__|__|min=1 max=30|< ->  ECIG9A>
+
+[ECIG9A?,displayif=equals(TOBACCO,1)]
+On days that you |displayif=and(doesNotEqual(ECIG5,1),doesNotEqual(ECIG5,2))|use||displayif=or(equals(ECIG5,1),equals(ECIG5,2))|used| e-cigarettes or other vaping devices, what is the total amount of time you |displayif=and(doesNotEqual(ECIG5,1),doesNotEqual(ECIG5,2))|use||displayif=or(equals(ECIG5,1),equals(ECIG5,2))|used| them <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+[ECIG9B?,displayif=and(doesNotEqual(or(or(equals(ECIG4,3),and(or(or(equals(ECIG4,2),equals(ECIG4,1)),equals(ECIG4,0)),and(equals(ECIG5,1),equals(ECIG7B,0)))),and(or(or(equals(ECIG4,2),equals(ECIG4,1)),equals(ECIG4,0)),and(equals(ECIG5,2),equals(ECIG8C,0)))),1),equals(TOBACCO,1))] Did you ever use e-cigarettes or other vaping devices for nicotine or tobacco <b>every day</b>?
+(0) No -> CIGAR1
+(1) Yes ->  ECIG9D
+< #NR -> CIGAR1>
+
+[ECIG9D?,displayif=and(doesNotEqual(or(or(equals(ECIG4,3),and(or(or(equals(ECIG4,2),equals(ECIG4,1)),equals(ECIG4,0)),and(equals(ECIG5,1),equals(ECIG7B,0)))),and(or(or(equals(ECIG4,2),equals(ECIG4,1)),equals(ECIG4,0)),and(equals(ECIG5,2),equals(ECIG8C,0)))),1),equals(TOBACCO,1))] How old were you when you stopped using e-cigarettes or other vaping devices for nicotine or tobacco <b>every day</b>?
+Age stopped using e-cigarettes or other vaping devices every day |__|__|min=0 max=sum(isDefined(AGE,age),1)|
+
+[ECIG9C?,displayif=and(doesNotEqual(or(or(equals(ECIG4,3),and(or(or(equals(ECIG4,2),equals(ECIG4,1)),equals(ECIG4,0)),and(equals(ECIG5,1),equals(ECIG7B,0)))),and(or(or(equals(ECIG4,2),equals(ECIG4,1)),equals(ECIG4,0)),and(equals(ECIG5,2),equals(ECIG8C,0)))),1),equals(TOBACCO,1))] When you were a daily user of e-cigarettes or other vaping devices for nicotine or tobacco, what is the total amount of time you used them <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+[ECIG10?,displayif=equals(TOBACCO,1)] What brand and model of device |displayif=and(doesNotEqual(ECIG5,1),doesNotEqual(ECIG5,2))|do||displayif=or(equals(ECIG5,1),equals(ECIG5,2))|did| you use most often?
+Device Brand/Model |__|
+< -> ECIGLIFEA>
+
+// Same logic as CIGLIFEA-CIGLIFEH just with different variable names
+// 0 -17
+[ECIGLIFEA?,displayif=and(and(and(equals(ECIG1,3),or(equals(ECIG4,3),or(equals(ECIG7B,0),equals(ECIG8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),0),or(doesNotEqual(ECIG8C,0),greaterThanOrEqual(isDefined(ECIG8,0),0)))),lessThanOrEqual(REGVAPE_AGE,17))] On days that you used e-cigarettes or other vaping devices for nicotine or tobacco when you were age |displayif=greaterThanOrEqual(isDefined(REGVAPE_AGE,-1),0)|{$REGVAPE_AGE}||displayif=lessThan(isDefined(REGVAPE_AGE,-1),0)|0| to |displayif=and(and(equals(ECIG8C,0),doesNotEqual(isDefined(ECIG8,-1),-1)),lessThan(isDefined(ECIG8,17),17))|{$ECIG8}||displayif=and(and(equals(ECIG8C,0),doesNotEqual(isDefined(ECIG8,-1),-1)),greaterThanOrEqual(isDefined(ECIG8,17),17))|17||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(ECIG8C,0),equals(isDefined(ECIG8,-1),-1)),lessThanOrEqual(AGE,17)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(ECIG8C,0),equals(isDefined(ECIG8,-1),-1)),lessThanOrEqual(age,17)))|{$u:age}||displayif=and(or(doesNotEqual(ECIG8C,0),equals(isDefined(ECIG8,-1),-1)),greaterThan(isDefined(AGE,age),17))|17|, what is the total amount of time you used them <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 18-24
+[ECIGLIFEB?,displayif=and(and(and(equals(ECIG1,3),or(equals(ECIG4,3),or(equals(ECIG7B,0),equals(ECIG8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),18),or(doesNotEqual(ECIG8C,0),greaterThanOrEqual(isDefined(ECIG8,18),18)))),lessThanOrEqual(REGVAPE_AGE,24))] On days that you used e-cigarettes or other vaping devices for nicotine or tobacco when you were age |displayif=greaterThanOrEqual(isDefined(REGVAPE_AGE,-1),18)|{$REGVAPE_AGE}||displayif=lessThan(isDefined(REGVAPE_AGE,-1),18)|18| to |displayif=and(and(equals(ECIG8C,0),doesNotEqual(isDefined(ECIG8,-1),-1)),lessThan(isDefined(ECIG8,24),24))|{$ECIG8}||displayif=and(and(equals(ECIG8C,0),doesNotEqual(isDefined(ECIG8,-1),-1)),greaterThanOrEqual(isDefined(ECIG8,24),24))|24||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(ECIG8C,0),equals(isDefined(ECIG8,-1),-1)),lessThanOrEqual(AGE,24)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(ECIG8C,0),equals(isDefined(ECIG8,-1),-1)),lessThanOrEqual(age,24)))|{$u:age}||displayif=and(or(doesNotEqual(ECIG8C,0),equals(isDefined(ECIG8,-1),-1)),greaterThan(isDefined(AGE,age),24))|24|, what is the total amount of time you used them <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 25-29
+[ECIGLIFEC?,displayif=and(and(and(equals(ECIG1,3),or(equals(ECIG4,3),or(equals(ECIG7B,0),equals(ECIG8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),25),or(doesNotEqual(ECIG8C,0),greaterThanOrEqual(isDefined(ECIG8,25),25)))),lessThanOrEqual(REGVAPE_AGE,29))] On days that you used e-cigarettes or other vaping devices for nicotine or tobacco when you were age |displayif=greaterThanOrEqual(isDefined(REGVAPE_AGE,-1),25)|{$REGVAPE_AGE}||displayif=lessThan(isDefined(REGVAPE_AGE,-1),25)|25| to |displayif=and(and(equals(ECIG8C,0),doesNotEqual(isDefined(ECIG8,-1),-1)),lessThan(isDefined(ECIG8,29),29))|{$ECIG8}||displayif=and(and(equals(ECIG8C,0),doesNotEqual(isDefined(ECIG8,-1),-1)),greaterThanOrEqual(isDefined(ECIG8,29),29))|29||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(ECIG8C,0),equals(isDefined(ECIG8,-1),-1)),lessThanOrEqual(AGE,29)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(ECIG8C,0),equals(isDefined(ECIG8,-1),-1)),lessThanOrEqual(age,29)))|{$u:age}||displayif=and(or(doesNotEqual(ECIG8C,0),equals(isDefined(ECIG8,-1),-1)),greaterThan(isDefined(AGE,age),29))|29|, what is the total amount of time you used them <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 30-39
+[ECIGLIFED?,displayif=and(and(and(equals(ECIG1,3),or(equals(ECIG4,3),or(equals(ECIG7B,0),equals(ECIG8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),30),or(doesNotEqual(ECIG8C,0),greaterThanOrEqual(isDefined(ECIG8,30),30)))),lessThanOrEqual(REGVAPE_AGE,39))] On days that you used e-cigarettes or other vaping devices for nicotine or tobacco when you were age |displayif=greaterThanOrEqual(isDefined(REGVAPE_AGE,-1),30)|{$REGVAPE_AGE}||displayif=lessThan(isDefined(REGVAPE_AGE,-1),30)|30| to |displayif=and(and(equals(ECIG8C,0),doesNotEqual(isDefined(ECIG8,-1),-1)),lessThan(isDefined(ECIG8,39),39))|{$ECIG8}||displayif=and(and(equals(ECIG8C,0),doesNotEqual(isDefined(ECIG8,-1),-1)),greaterThanOrEqual(isDefined(ECIG8,39),39))|39||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(ECIG8C,0),equals(isDefined(ECIG8,-1),-1)),lessThanOrEqual(AGE,39)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(ECIG8C,0),equals(isDefined(ECIG8,-1),-1)),lessThanOrEqual(age,39)))|{$u:age}||displayif=and(or(doesNotEqual(ECIG8C,0),equals(isDefined(ECIG8,-1),-1)),greaterThan(isDefined(AGE,age),39))|39|, what is the total amount of time you used them <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 40-49
+[ECIGLIFEE?,displayif=and(and(and(equals(ECIG1,3),or(equals(ECIG4,3),or(equals(ECIG7B,0),equals(ECIG8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),40),or(doesNotEqual(ECIG8C,0),greaterThanOrEqual(isDefined(ECIG8,40),40)))),lessThanOrEqual(REGVAPE_AGE,49))] On days that you used e-cigarettes or other vaping devices for nicotine or tobacco when you were age |displayif=greaterThanOrEqual(isDefined(REGVAPE_AGE,-1),40)|{$REGVAPE_AGE}||displayif=lessThan(isDefined(REGVAPE_AGE,-1),40)|40| to |displayif=and(and(equals(ECIG8C,0),doesNotEqual(isDefined(ECIG8,-1),-1)),lessThan(isDefined(ECIG8,49),49))|{$ECIG8}||displayif=and(and(equals(ECIG8C,0),doesNotEqual(isDefined(ECIG8,-1),-1)),greaterThanOrEqual(isDefined(ECIG8,49),49))|49||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(ECIG8C,0),equals(isDefined(ECIG8,-1),-1)),lessThanOrEqual(AGE,49)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(ECIG8C,0),equals(isDefined(ECIG8,-1),-1)),lessThanOrEqual(age,49)))|{$u:age}||displayif=and(or(doesNotEqual(ECIG8C,0),equals(isDefined(ECIG8,-1),-1)),greaterThan(isDefined(AGE,age),49))|49|, what is the total amount of time you used them <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 50-59
+[ECIGLIFEF?,displayif=and(and(and(equals(ECIG1,3),or(equals(ECIG4,3),or(equals(ECIG7B,0),equals(ECIG8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),50),or(doesNotEqual(ECIG8C,0),greaterThanOrEqual(isDefined(ECIG8,50),50)))),lessThanOrEqual(REGVAPE_AGE,59))] On days that you used e-cigarettes or other vaping devices for nicotine or tobacco when you were age |displayif=greaterThanOrEqual(isDefined(REGVAPE_AGE,-1),50)|{$REGVAPE_AGE}||displayif=lessThan(isDefined(REGVAPE_AGE,-1),50)|50| to |displayif=and(and(equals(ECIG8C,0),doesNotEqual(isDefined(ECIG8,-1),-1)),lessThan(isDefined(ECIG8,59),59))|{$ECIG8}||displayif=and(and(equals(ECIG8C,0),doesNotEqual(isDefined(ECIG8,-1),-1)),greaterThanOrEqual(isDefined(ECIG8,59),59))|59||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(ECIG8C,0),equals(isDefined(ECIG8,-1),-1)),lessThanOrEqual(AGE,59)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(ECIG8C,0),equals(isDefined(ECIG8,-1),-1)),lessThanOrEqual(age,59)))|{$u:age}||displayif=and(or(doesNotEqual(ECIG8C,0),equals(isDefined(ECIG8,-1),-1)),greaterThan(isDefined(AGE,age),59))|59|, what is the total amount of time you used them <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 60-69
+[ECIGLIFEG?,displayif=and(and(and(equals(ECIG1,3),or(equals(ECIG4,3),or(equals(ECIG7B,0),equals(ECIG8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),60),or(doesNotEqual(ECIG8C,0),greaterThanOrEqual(isDefined(ECIG8,60),60)))),lessThanOrEqual(REGVAPE_AGE,69))] On days that you used e-cigarettes or other vaping devices for nicotine or tobacco when you were age |displayif=greaterThanOrEqual(isDefined(REGVAPE_AGE,-1),60)|{$REGVAPE_AGE}||displayif=lessThan(isDefined(REGVAPE_AGE,-1),60)|60| to |displayif=and(and(equals(ECIG8C,0),doesNotEqual(isDefined(ECIG8,-1),-1)),lessThan(isDefined(ECIG8,69),69))|{$ECIG8}||displayif=and(and(equals(ECIG8C,0),doesNotEqual(isDefined(ECIG8,-1),-1)),greaterThanOrEqual(isDefined(ECIG8,69),69))|69||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(ECIG8C,0),equals(isDefined(ECIG8,-1),-1)),lessThanOrEqual(AGE,69)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(ECIG8C,0),equals(isDefined(ECIG8,-1),-1)),lessThanOrEqual(age,69)))|{$u:age}||displayif=and(or(doesNotEqual(ECIG8C,0),equals(isDefined(ECIG8,-1),-1)),greaterThan(isDefined(AGE,age),69))|69|, what is the total amount of time you used them <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 70+
+[ECIGLIFEH?,displayif=and(and(equals(ECIG1,3),or(equals(ECIG4,3),or(equals(ECIG7B,0),equals(ECIG8C,0)))),and(greaterThanOrEqual(isDefined(AGE,age),70),or(doesNotEqual(ECIG8C,0),greaterThanOrEqual(isDefined(ECIG8,70),70))))] On days that you used e-cigarettes or other vaping devices for nicotine or tobacco when you were age |displayif=greaterThanOrEqual(isDefined(REGVAPE_AGE,-1),70)|{$REGVAPE_AGE}||displayif=lessThan(isDefined(REGVAPE_AGE,-1),70)|70| or older, what is the total amount of time you used them <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+[CIGAR1?,displayif=equals(TOBACCO,2)]<b>Cigars and Cigarillos</b>
+
+The next questions are about your use of cigars, cigarillos, or little filtered cigars. Some of the most popular brands include Macanudo, Romeo y Julieta, Black and Mild, Swisher Sweets, Prime Time, and Cheyenne.
+
+How many <b>cigars, cigarillos, or little filtered cigars</b> have you smoked in your life?
+(0) 10 or less -> CHEW1
+(1) 11 to 49 -> CHEW1
+(2) 50 to 99 -> CIGAR2
+(3) 100 or more -> CIGAR2
+<#NR -> CHEW1>
+
+[CIGAR2?,displayif=equals(TOBACCO,2)] How old were you when you <b>first</b> smoked cigars, cigarillos, or little filtered cigars?
+
+Age first smoked cigars, cigarillos, or little filtered cigars |__|__|min=0 max=sum(isDefined(AGE,age),1)|< -> CIGAR3>
+
+[CIGAR3?,displayif=equals(TOBACCO,2)]
+How old were you when you started smoking cigars, cigarillos, or little filtered cigars on a |popup|regular basis|Informational Text|We understand that the meaning of 'regular basis' might be different for different people. When you answer this question, please think about what "regular basis" means to you.|?
+
+Age started smoking cigars, cigarillos, or little filtered cigars on a regular basis |__|__|id=REGCIGAR_AGE min=isDefined(CIGAR2,0) max=sum(isDefined(AGE,age),1)|
+
+[44*] Never smoked on a regular basis
+
+
+[CIGAR4?,displayif=equals(TOBACCO,2)] Do you smoke cigars, cigarillos, or little filtered cigars now?
+(0) No -> CIGAR5
+(1) Yes, but rarely ->  CIGAR5
+(2) Yes, some days ->  CIGAR5
+(3) Yes, every day -> CIGAR9A
+< #NR -> CIGAR5>
+
+[CIGAR5?,displayif=equals(TOBACCO,2)] When was the <b>last</b> time you smoked cigars, cigarillos, or little filtered cigars?
+(0) In the past month -> CIGAR6
+(1) More than a month ago, but in the past year ->  CIGAR7
+(2) More than 1 year ago -> CIGAR8
+< #NR -> CIGAR9A>
+
+[CIGAR6?,displayif=equals(TOBACCO,2)] <b>On how many of the past 30 days </b> have you smoked cigars, cigarillos, or little filtered cigars?
+
+ #Days smoked cigars, cigarillos, or little filtered cigars in past 30 days |__|__|min=1 max=30|< -> CIGAR9A>
+
+
+[CIGAR7?,displayif=equals(TOBACCO,2)] How many months ago did you <b>last</b> smoke cigars, cigarillos, or little filtered cigars?
+
+#Months ago last smoked cigars, cigarillos, or little filtered cigars |__|__|min=1 max=11|
+
+
+[CIGAR7B?,displayif=equals(TOBACCO,2)] During that time, did you ever smoke cigars, cigarillos, or little filtered cigars every day?
+(0) No ->  CIGAR7C
+(1) Yes ->  CIGAR9A
+<#NR -> CIGAR7C>
+
+[CIGAR7C?,displayif=equals(TOBACCO,2)] During that time, how many days (1 to 30) did you smoke cigars, cigarillos, or little filtered cigars in a usual month?
+
+#Days smoked in usual month |__|__|min=1 max=30|<->  CIGAR9A>
+
+
+[CIGAR8?,displayif=equals(TOBACCO,2)] How old were you when you <b>last</b> smoked cigars, cigarillos, or little filtered cigars?
+
+Age when last smoked cigars, cigarillos, or little filtered cigars |__|__|min=isDefined(isDefined(REGCIGAR_AGE,CIGAR2),0) max=sum(isDefined(AGE,age),1)|
+
+< #NR -> CIGAR8C>
+
+[CIGAR8C?,displayif=equals(TOBACCO,2)] During that time, did you ever smoke cigars, cigarillos, or little filtered cigars <b>every day</b>?
+(0) No -> CIGAR8D
+(1) Yes -> CIGAR9A
+< #NR -> CIGAR8D>
+
+[CIGAR8D?,displayif=equals(TOBACCO,2)] During that time, how many days (1 to 30) did you smoke cigars, cigarillos, or little filtered cigars in a usual month?
+
+#Days smoked in a month |__|__|min=1 max=30|< -> CIGAR9A>
+
+
+[CIGAR9A?,displayif=equals(TOBACCO,2)]
+On days that you |displayif=and(doesNotEqual(CIGAR5,1),doesNotEqual(CIGAR5,2))|smoke||displayif=or(equals(CIGAR5,1),equals(CIGAR5,2))|smoked|, how many cigars, cigarillos, or little filtered cigars |displayif=and(doesNotEqual(CIGAR5,1),doesNotEqual(CIGAR5,2))|do||displayif=or(equals(CIGAR5,1),equals(CIGAR5,2))|did| you smoke <b>per day</b>?
+#cigars, cigarillos, or little filtered cigars smoked per day |__|__|min=1 max=99| < -> CIGAR9B>
+
+[CIGAR9B?,displayif=and(doesNotEqual(or(or(equals(CIGAR4,3),and(or(or(equals(CIGAR4,2),equals(CIGAR4,1)),equals(CIGAR4,0)),and(equals(CIGAR5,1),equals(CIGAR7B,0)))),and(or(or(equals(CIGAR4,2),equals(CIGAR4,1)),equals(CIGAR4,0)),and(equals(CIGAR5,2),equals(CIGAR8C,0)))),1),equals(TOBACCO,2))] Did you ever smoke cigars, cigarillos, or little filtered cigars <b>every day</b>?
+(0) No -> CHEW1
+(1) Yes -> CIGAR9D
+< #NR -> CHEW1>
+
+[CIGAR9D?,displayif=and(doesNotEqual(or(or(equals(CIGAR4,3),and(or(or(equals(CIGAR4,2),equals(CIGAR4,1)),equals(CIGAR4,0)),and(equals(CIGAR5,1),equals(CIGAR7B,0)))),and(or(or(equals(CIGAR4,2),equals(CIGAR4,1)),equals(CIGAR4,0)),and(equals(CIGAR5,2),equals(CIGAR8C,0)))),1),equals(TOBACCO,2))] How old were you when you stopped smoking cigars, cigarillos, or little filtered cigars <b>every day</b>?
+
+Age stopped smoking every day |__|__|min=0 max=sum(isDefined(AGE,age),1)|
+
+< #NR -> CIGAR9C>
+
+[CIGAR9C?,displayif=and(doesNotEqual(or(or(equals(CIGAR4,3),and(or(or(equals(CIGAR4,2),equals(CIGAR4,1)),equals(CIGAR4,0)),and(equals(CIGAR5,1),equals(CIGAR7B,0)))),and(or(or(equals(CIGAR4,2),equals(CIGAR4,1)),equals(CIGAR4,0)),and(equals(CIGAR5,2),equals(CIGAR8C,0)))),1),equals(TOBACCO,2))] When you were a daily smoker, how many cigars, cigarillos, or little filtered cigars did you smoke <b>per day</b>?
+# cigars, cigarillos, or little filtered cigars smoked per day |__|__|__|min=1 max=999|
+< -> CIGAR10>
+
+[CIGAR10?,displayif=equals(TOBACCO,2)] What kind of cigar, cigarillo or little filtered cigar |displayif=and(doesNotEqual(CIGAR5,1),doesNotEqual(CIGAR5,2))|do||displayif=or(equals(CIGAR5,1),equals(CIGAR5,2))|did| you usually use? Select all that apply.
+[0] Cigar
+[1] Cigarillo
+[2] Little filtered cigar
+[55] Other: Please describe |__|id=CIGAR10OTH|
+< -> CIGARLIFEA>
+
+// Same logic as CIGLIFEA-CIGLIFEH just with different variable names
+// 0 -17
+[CIGARLIFEA?,displayif=(_value("CIG1")==3) and (_value("CIG4")==3 or _value("CIG7B")==1 or _value("CIG8C")==1) and  (valueOrDefault("AGE","age",100)-2 > 0) and (valueOrDefault("CIG3_AGE","CIG2",18) <= 17)]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(REGCIGAR_AGE,-1),0)|{$REGCIGAR_AGE}||displayif=lessThan(isDefined(REGCIGAR_AGE,-1),0)|0| to |displayif=and(and(equals(CIGAR8C,0),doesNotEqual(isDefined(CIGAR8,-1),-1)),lessThan(isDefined(CIGAR8,17),17))|{$CIGAR8}||displayif=and(and(equals(CIGAR8C,0),doesNotEqual(isDefined(CIGAR8,-1),-1)),greaterThanOrEqual(isDefined(CIGAR8,17),17))|17||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIGAR8C,0),equals(isDefined(CIGAR8,-1),-1)),lessThanOrEqual(AGE,17)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIGAR8C,0),equals(isDefined(CIGAR8,-1),-1)),lessThanOrEqual(age,17)))|{$u:age}||displayif=and(or(doesNotEqual(CIGAR8C,0),equals(isDefined(CIGAR8,-1),-1)),greaterThan(isDefined(AGE,age),17))|17|, about how many cigars, cigarillos, or little filtered cigars did you smoke <b>per day</b>?
+#CIGARS, CIGARILLOS, OR LITTLE FILTERED CIGARS PER DAY |__|__|min=1 max=99|
+
+// 18-24
+[CIGARLIFEB?,displayif=(_value("CIG1")==3) and (_value("CIG4")==3 or _value("CIG7B")==1 or _value("CIG8C")==1) and  (valueOrDefault("AGE","age",100)-2 > 18) and (valueOrDefault("CIG3_AGE","CIG2",18) <= 24)]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(REGCIGAR_AGE,-1),18)|{$REGCIGAR_AGE}||displayif=lessThan(isDefined(REGCIGAR_AGE,-1),18)|18| to |displayif=and(and(equals(CIGAR8C,0),doesNotEqual(isDefined(CIGAR8,-1),-1)),lessThan(isDefined(CIGAR8,24),24))|{$CIGAR8}||displayif=and(and(equals(CIGAR8C,0),doesNotEqual(isDefined(CIGAR8,-1),-1)),greaterThanOrEqual(isDefined(CIGAR8,24),24))|24||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIGAR8C,0),equals(isDefined(CIGAR8,-1),-1)),lessThanOrEqual(AGE,24)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIGAR8C,0),equals(isDefined(CIGAR8,-1),-1)),lessThanOrEqual(age,24)))|{$u:age}||displayif=and(or(doesNotEqual(CIGAR8C,0),equals(isDefined(CIGAR8,-1),-1)),greaterThan(isDefined(AGE,age),24))|24|, about how many cigars, cigarillos, or little filtered cigars did you smoke <b>per day</b>?
+#CIGARS, CIGARILLOS, OR LITTLE FILTERED CIGARS PER DAY |__|__|min=1 max=99|
+
+// 25-29
+[CIGARLIFEC?,displayif=a(_value("CIG1")==3) and (_value("CIG4")==3 or _value("CIG7B")==1 or _value("CIG8C")==1) and  (valueOrDefault("AGE","age",100)-2 > 25) and (valueOrDefault("CIG3_AGE","CIG2",18) <= 29)]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(REGCIGAR_AGE,-1),25)|{$REGCIGAR_AGE}||displayif=lessThan(isDefined(REGCIGAR_AGE,-1),25)|25| to |displayif=and(and(equals(CIGAR8C,0),doesNotEqual(isDefined(CIGAR8,-1),-1)),lessThan(isDefined(CIGAR8,29),29))|{$CIGAR8}||displayif=and(and(equals(CIGAR8C,0),doesNotEqual(isDefined(CIGAR8,-1),-1)),greaterThanOrEqual(isDefined(CIGAR8,29),29))|29||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIGAR8C,0),equals(isDefined(CIGAR8,-1),-1)),lessThanOrEqual(AGE,29)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIGAR8C,0),equals(isDefined(CIGAR8,-1),-1)),lessThanOrEqual(age,29)))|{$u:age}||displayif=and(or(doesNotEqual(CIGAR8C,0),equals(isDefined(CIGAR8,-1),-1)),greaterThan(isDefined(AGE,age),29))|29|, about how many cigars, cigarillos, or little filtered cigars did you smoke <b>per day</b>?
+#CIGARS, CIGARILLOS, OR LITTLE FILTERED CIGARS PER DAY |__|__|min=1 max=99|
+
+// 30-39
+[CIGARLIFED?,displayif=(_value("CIG1")==3) and (_value("CIG4")==3 or _value("CIG7B")==1 or _value("CIG8C")==1) and  (valueOrDefault("AGE","age",100)-2 > 30) and (valueOrDefault("CIG3_AGE","CIG2",18) <= 39)]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(REGCIGAR_AGE,-1),30)|{$REGCIGAR_AGE}||displayif=lessThan(isDefined(REGCIGAR_AGE,-1),30)|30| to |displayif=and(and(equals(CIGAR8C,0),doesNotEqual(isDefined(CIGAR8,-1),-1)),lessThan(isDefined(CIGAR8,39),39))|{$CIGAR8}||displayif=and(and(equals(CIGAR8C,0),doesNotEqual(isDefined(CIGAR8,-1),-1)),greaterThanOrEqual(isDefined(CIGAR8,39),39))|39||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIGAR8C,0),equals(isDefined(CIGAR8,-1),-1)),lessThanOrEqual(AGE,39)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIGAR8C,0),equals(isDefined(CIGAR8,-1),-1)),lessThanOrEqual(age,39)))|{$u:age}||displayif=and(or(doesNotEqual(CIGAR8C,0),equals(isDefined(CIGAR8,-1),-1)),greaterThan(isDefined(AGE,age),39))|39|, about how many cigars, cigarillos, or little filtered cigars did you smoke <b>per day</b>?
+#CIGARS, CIGARILLOS, OR LITTLE FILTERED CIGARS PER DAY |__|__|min=1 max=99|
+
+// 40-49
+[CIGARLIFEE?,displayif=(_value("CIG1")==3) and (_value("CIG4")==3 or _value("CIG7B")==1 or _value("CIG8C")==1) and  (valueOrDefault("AGE","age",100)-2 > 40) and (valueOrDefault("CIG3_AGE","CIG2",18) <= 49)]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(REGCIGAR_AGE,-1),40)|{$REGCIGAR_AGE}||displayif=lessThan(isDefined(REGCIGAR_AGE,-1),40)|40| to |displayif=and(and(equals(CIGAR8C,0),doesNotEqual(isDefined(CIGAR8,-1),-1)),lessThan(isDefined(CIGAR8,49),49))|{$CIGAR8}||displayif=and(and(equals(CIGAR8C,0),doesNotEqual(isDefined(CIGAR8,-1),-1)),greaterThanOrEqual(isDefined(CIGAR8,49),49))|49||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIGAR8C,0),equals(isDefined(CIGAR8,-1),-1)),lessThanOrEqual(AGE,49)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIGAR8C,0),equals(isDefined(CIGAR8,-1),-1)),lessThanOrEqual(age,49)))|{$u:age}||displayif=and(or(doesNotEqual(CIGAR8C,0),equals(isDefined(CIGAR8,-1),-1)),greaterThan(isDefined(AGE,age),49))|49|, about how many cigars, cigarillos, or little filtered cigars did you smoke <b>per day</b>?
+#CIGARS, CIGARILLOS, OR LITTLE FILTERED CIGARS PER DAY |__|__|min=1 max=99|
+
+// 50-59
+[CIGARLIFEF?,displayif=(_value("CIG1")==3) and (_value("CIG4")==3 or _value("CIG7B")==1 or _value("CIG8C")==1) and  (valueOrDefault("AGE","age",100)-2 > 50) and (valueOrDefault("CIG3_AGE","CIG2",18) <= 59)]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(REGCIGAR_AGE,-1),50)|{$REGCIGAR_AGE}||displayif=lessThan(isDefined(REGCIGAR_AGE,-1),50)|50| to |displayif=and(and(equals(CIGAR8C,0),doesNotEqual(isDefined(CIGAR8,-1),-1)),lessThan(isDefined(CIGAR8,59),59))|{$CIGAR8}||displayif=and(and(equals(CIGAR8C,0),doesNotEqual(isDefined(CIGAR8,-1),-1)),greaterThanOrEqual(isDefined(CIGAR8,59),59))|59||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIGAR8C,0),equals(isDefined(CIGAR8,-1),-1)),lessThanOrEqual(AGE,59)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIGAR8C,0),equals(isDefined(CIGAR8,-1),-1)),lessThanOrEqual(age,59)))|{$u:age}||displayif=and(or(doesNotEqual(CIGAR8C,0),equals(isDefined(CIGAR8,-1),-1)),greaterThan(isDefined(AGE,age),59))|59|, about how many cigars, cigarillos, or little filtered cigars did you smoke <b>per day</b>?
+#CIGARS, CIGARILLOS, OR LITTLE FILTERED CIGARS PER DAY |__|__|min=1 max=99|
+
+// 60-69
+[CIGARLIFEG?,displayif=(_value("CIG1")==3) and (_value("CIG4")==3 or _value("CIG7B")==1 or _value("CIG8C")==1) and  (valueOrDefault("AGE","age",100)-2 > 60) and (valueOrDefault("CIG3_AGE","CIG2",18) <= 79)]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(REGCIGAR_AGE,-1),60)|{$REGCIGAR_AGE}||displayif=lessThan(isDefined(REGCIGAR_AGE,-1),60)|60| to |displayif=and(and(equals(CIGAR8C,0),doesNotEqual(isDefined(CIGAR8,-1),-1)),lessThan(isDefined(CIGAR8,69),69))|{$CIGAR8}||displayif=and(and(equals(CIGAR8C,0),doesNotEqual(isDefined(CIGAR8,-1),-1)),greaterThanOrEqual(isDefined(CIGAR8,69),69))|69||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIGAR8C,0),equals(isDefined(CIGAR8,-1),-1)),lessThanOrEqual(AGE,69)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(CIGAR8C,0),equals(isDefined(CIGAR8,-1),-1)),lessThanOrEqual(age,69)))|{$u:age}||displayif=and(or(doesNotEqual(CIGAR8C,0),equals(isDefined(CIGAR8,-1),-1)),greaterThan(isDefined(AGE,age),69))|69|, about how many cigars, cigarillos, or little filtered cigars did you smoke <b>per day</b>?
+#CIGARS, CIGARILLOS, OR LITTLE FILTERED CIGARS PER DAY |__|__|min=1 max=99|
+
+// 70+
+[CIGARLIFEH?,displayif=]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(REGCIGAR_AGE,-1),70)|{$REGCIGAR_AGE}||displayif=lessThan(isDefined(REGCIGAR_AGE,-1),70)|70| or older, about how many cigars, cigarillos, or little filtered cigars did you smoke <b>per day</b>?
+#CIGARS, CIGARILLOS, OR LITTLE FILTERED CIGARS PER DAY |__|__|min=1 max=99|
+
+[CHEW1?,displayif=equals(TOBACCO,3)]<b>Smokeless Tobacco</b>
+
+The next questions are about your use of chewing tobacco, snus, snuff, or dip. Some of the most popular brands are Red Man, Levi Garrett, BEECH-NUT, Skoal, and Copenhagen.
+
+How many days have you used <b>chewing tobacco, snus, snuff, or dip</b> in your life?
+(0) 10 or less -> HOOKAH1
+(1) 11 to 49 -> HOOKAH1
+(2) 50 to 99 -> CHEW2
+(3) 100 or more -> CHEW2
+< #NR -> HOOKAH1>
+
+[CHEW2?,displayif=equals(TOBACCO,3)] How old were you when you <b>first</b> used chewing tobacco, snus, snuff, or dip?
+
+Age first used chewing tobacco, snus, snuff, or dip |__|__|min=0 max=sum(isDefined(AGE,age),1)|< -> CHEW3>
+
+[CHEW3?,displayif=equals(TOBACCO,3)]
+How old were you when you started using chewing tobacco, snus, snuff, or dip on a |popup|regular basis|Informational Text|We understand that the meaning of 'regular basis' might be different for different people. When you answer this question, please think about what "regular basis" means to you.|?
+
+Age started using chewing tobacco, snus, snuff, or dip on a regular basis |__|__|id=REGCHEW_AGE min=isDefined(CHEW2,0) max=sum(isDefined(AGE,age),1)|
+
+[44*] Never used them on a regular basis
+< -> CHEW4>
+
+[CHEW4?,displayif=equals(TOBACCO,3)] Do you use chewing tobacco, snus, snuff, or dip now?
+(0) No -> CHEW5
+(1) Yes, but rarely -> CHEW5
+(2) Yes, some days -> CHEW5
+(3) Yes, every day -> CHEW9A
+< #NR -> CHEW5>
+
+[CHEW5?,displayif=equals(TOBACCO,3)] When was the <b>last</b> time you used chewing tobacco, snus, snuff, or dip?
+(0) In the past month ->  CHEW6
+(1) More than a month ago, but in the past year -> CHEW7A
+(2) More than 1 year ago -> CHEW8
+< #NR -> CHEW9A>
+
+[CHEW6?,displayif=equals(TOBACCO,3)] <b>On how many of the past 30 days </b> have you used chewing tobacco, snus, snuff, or dip?
+#Days used chewing tobacco, snus, snuff, or dip in past 30 days |__|__|min=1 max=30|< -> CHEW9A>
+
+
+[CHEW7A?,displayif=equals(TOBACCO,3)] How many months ago did you <b>last</b> use chewing tobacco, snus, snuff, or dip?
+#Months ago last used chewing tobacco, snus, snuff, or dip |__|__|min=1 max=11|< ->  CHEW7B>
+
+[CHEW7B?,displayif=equals(TOBACCO,3)] During that time, did you ever use chewing tobacco, snus, snuff, or dip <b>every day</b>?
+(0) No -> CHEW7C
+(1) Yes -> CHEW9A
+< #NR ->  CHEW7C>
+
+[CHEW7C?,displayif=equals(TOBACCO,3)] During that time, how many days (1 to 30) did you use chewing tobacco, snus, snuff, or dip in a usual month?
+#Days used chewing tobacco, snus, snuff, or dip in usual month |__|__|min=1 max=30|<  -> CHEW9A>
+
+[CHEW8?,displayif=equals(TOBACCO,3)] How old were you when you <b>last</b> used chewing tobacco, snus, snuff, or dip?
+
+Age when last used chewing tobacco, snus, snuff, or dip |__|__|min=isDefined(isDefined(REGCHEW_AGE,CHEW2),0) max=sum(isDefined(AGE,age),1)| < ->  CHEW8C>
+
+[CHEW8C?,displayif=equals(TOBACCO,3)] During that time, did you ever use chewing tobacco, snus, snuff, or dip <b>every day</b>?
+(0) No ->  CHEW8D
+(1) Yes -> CHEW9A
+< #NR -> CHEW8D>
+
+[CHEW8D?,displayif=equals(TOBACCO,3)] During that time, how many days (1 to 30) did you use chewing tobacco, snus, snuff, or dip in a usual month?
+#Days used chewing tobacco, snus, snuff, or dip in usual month|__|__|min=1 max=30|<  -> CHEW9A>
+
+[CHEW9A?,displayif=equals(TOBACCO,3)]
+On days that you |displayif=and(doesNotEqual(CHEW5,1),doesNotEqual(CHEW5,2))|use||displayif=or(equals(CHEW5,1),equals(CHEW5,2))|used| them, what is the total amount of time you |displayif=and(doesNotEqual(CHEW5,1),doesNotEqual(CHEW5,2))|use||displayif=or(equals(CHEW5,1),equals(CHEW5,2))|used| chewing tobacco, snus, snuff, or dip <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+[CHEW9B?,displayif=and(doesNotEqual(or(or(equals(CHEW4,3),and(or(or(equals(CHEW4,2),equals(CHEW4,1)),equals(CHEW4,0)),and(equals(CHEW5,1),equals(CHEW7B,0)))),and(or(or(equals(CHEW4,2),equals(CHEW4,1)),equals(CHEW4,0)),and(equals(CHEW5,2),equals(CHEW8C,0)))),1),equals(TOBACCO,3))] Did you ever use chewing tobacco, snus, snuff, or dip <b>every day</b>?
+(0) No ->  HOOKAH1
+(1) Yes ->  CHEW9D
+< #NR ->  HOOKAH1>
+
+[CHEW9D?,displayif=and(doesNotEqual(or(or(equals(CHEW4,3),and(or(or(equals(CHEW4,2),equals(CHEW4,1)),equals(CHEW4,0)),and(equals(CHEW5,1),equals(CHEW7B,0)))),and(or(or(equals(CHEW4,2),equals(CHEW4,1)),equals(CHEW4,0)),and(equals(CHEW5,2),equals(CHEW8C,0)))),1),equals(TOBACCO,3))] How old were you when you stopped using chewing tobacco, snus, snuff, or dip <b>every day</b>?
+
+Age stopped using chewing tobacco, snus, snuff, or dip every day |__|__|min=0 max=sum(isDefined(AGE,age),1)|< -> CHEW9C>
+
+[CHEW9C?,displayif=and(doesNotEqual(or(or(equals(CHEW4,3),and(or(or(equals(CHEW4,2),equals(CHEW4,1)),equals(CHEW4,0)),and(equals(CHEW5,1),equals(CHEW7B,0)))),and(or(or(equals(CHEW4,2),equals(CHEW4,1)),equals(CHEW4,0)),and(equals(CHEW5,2),equals(CHEW8C,0)))),1),equals(TOBACCO,3))] When you were a daily user of chewing tobacco, snus, snuff, or dip, what is the total amount of time you used them <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+< -> CHEW10>
+
+[CHEW10?,displayif=equals(TOBACCO,3)]What brand of chewing tobacco, snus, snuff, or dip |displayif=and(doesNotEqual(CHEW5,1),doesNotEqual(CHEW5,2))|do||displayif=or(equals(CHEW5,1),equals(CHEW5,2))|did| you use most often?
+Brand of chewing tobacco, snus, snuff, or dip |__|
+< -> CHEWLIFEA>
+
+// Same logic as CIGLIFEA-CIGLIFEH just with different variable names
+// 0 -17
+[CHEWLIFEA?,displayif=and(and(and(equals(CHEW1,3),or(equals(CHEW4,3),or(equals(CHEW7B,0),equals(CHEW8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),0),or(doesNotEqual(CHEW8C,0),greaterThanOrEqual(isDefined(CHEW8,0),0)))),lessThanOrEqual(REGCHEW_AGE,17))]
+On days that you used chewing tobacco, snus, snuff, or dip when you were age |displayif=greaterThanOrEqual(isDefined(REGCHEW_AGE,-1),0)|{$REGCHEW_AGE}||displayif=lessThan(isDefined(REGCHEW_AGE,-1),0)|0| to |displayif=and(and(equals(CHEW8C,0),doesNotEqual(isDefined(CHEW8,-1),-1)),lessThan(isDefined(CHEW8,17),17))|{$CHEW8}||displayif=and(and(equals(CHEW8C,0),doesNotEqual(isDefined(CHEW8,-1),-1)),greaterThanOrEqual(isDefined(CHEW8,17),17))|17||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(CHEW8C,0),equals(isDefined(CHEW8,-1),-1)),lessThanOrEqual(AGE,17)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(CHEW8C,0),equals(isDefined(CHEW8,-1),-1)),lessThanOrEqual(age,17)))|{$u:age}||displayif=and(or(doesNotEqual(CHEW8C,0),equals(isDefined(CHEW8,-1),-1)),greaterThan(isDefined(AGE,age),17))|17|, what is the total amount of time you used them <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 18-24
+[CHEWLIFEB?,displayif=and(and(and(equals(CHEW1,3),or(equals(CHEW4,3),or(equals(CHEW7B,0),equals(CHEW8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),18),or(doesNotEqual(CHEW8C,0),greaterThanOrEqual(isDefined(CHEW8,18),18)))),lessThanOrEqual(REGCHEW_AGE,24))] On days that you used chewing tobacco, snus, snuff, or dip when you were age |displayif=greaterThanOrEqual(isDefined(REGCHEW_AGE,-1),18)|{$REGCHEW_AGE}||displayif=lessThan(isDefined(REGCHEW_AGE,-1),18)|18| to |displayif=and(and(equals(CHEW8C,0),doesNotEqual(isDefined(CHEW8,-1),-1)),lessThan(isDefined(CHEW8,24),24))|{$CHEW8}||displayif=and(and(equals(CHEW8C,0),doesNotEqual(isDefined(CHEW8,-1),-1)),greaterThanOrEqual(isDefined(CHEW8,24),24))|24||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(CHEW8C,0),equals(isDefined(CHEW8,-1),-1)),lessThanOrEqual(AGE,24)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(CHEW8C,0),equals(isDefined(CHEW8,-1),-1)),lessThanOrEqual(age,24)))|{$u:age}||displayif=and(or(doesNotEqual(CHEW8C,0),equals(isDefined(CHEW8,-1),-1)),greaterThan(isDefined(AGE,age),24))|24|, what is the total amount of time you used them <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 25-29
+[CHEWLIFEC?,displayif=and(and(and(equals(CHEW1,3),or(equals(CHEW4,3),or(equals(CHEW7B,0),equals(CHEW8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),25),or(doesNotEqual(CHEW8C,0),greaterThanOrEqual(isDefined(CHEW8,25),25)))),lessThanOrEqual(REGCHEW_AGE,29))]
+On days that you used chewing tobacco, snus, snuff, or dip when you were age |displayif=greaterThanOrEqual(isDefined(REGCHEW_AGE,-1),25)|{$REGCHEW_AGE}||displayif=lessThan(isDefined(REGCHEW_AGE,-1),25)|25| to |displayif=and(and(equals(CHEW8C,0),doesNotEqual(isDefined(CHEW8,-1),-1)),lessThan(isDefined(CHEW8,29),29))|{$CHEW8}||displayif=and(and(equals(CHEW8C,0),doesNotEqual(isDefined(CHEW8,-1),-1)),greaterThanOrEqual(isDefined(CHEW8,29),29))|29||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(CHEW8C,0),equals(isDefined(CHEW8,-1),-1)),lessThanOrEqual(AGE,29)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(CHEW8C,0),equals(isDefined(CHEW8,-1),-1)),lessThanOrEqual(age,29)))|{$u:age}||displayif=and(or(doesNotEqual(CHEW8C,0),equals(isDefined(CHEW8,-1),-1)),greaterThan(isDefined(AGE,age),29))|29|, what is the total amount of time you used them <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 30-39
+[CHEWLIFED?,displayif=and(and(and(equals(CHEW1,3),or(equals(CHEW4,3),or(equals(CHEW7B,0),equals(CHEW8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),30),or(doesNotEqual(CHEW8C,0),greaterThanOrEqual(isDefined(CHEW8,30),30)))),lessThanOrEqual(REGCHEW_AGE,39))]
+On days that you used chewing tobacco, snus, snuff, or dip when you were age |displayif=greaterThanOrEqual(isDefined(REGCHEW_AGE,-1),30)|{$REGCHEW_AGE}||displayif=lessThan(isDefined(REGCHEW_AGE,-1),30)|30| to |displayif=and(and(equals(CHEW8C,0),doesNotEqual(isDefined(CHEW8,-1),-1)),lessThan(isDefined(CHEW8,39),39))|{$CHEW8}||displayif=and(and(equals(CHEW8C,0),doesNotEqual(isDefined(CHEW8,-1),-1)),greaterThanOrEqual(isDefined(CHEW8,39),39))|39||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(CHEW8C,0),equals(isDefined(CHEW8,-1),-1)),lessThanOrEqual(AGE,39)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(CHEW8C,0),equals(isDefined(CHEW8,-1),-1)),lessThanOrEqual(age,39)))|{$u:age}||displayif=and(or(doesNotEqual(CHEW8C,0),equals(isDefined(CHEW8,-1),-1)),greaterThan(isDefined(AGE,age),39))|39|, what is the total amount of time you used them <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 40-49
+[CHEWLIFEE?,displayif=and(and(and(equals(CHEW1,3),or(equals(CHEW4,3),or(equals(CHEW7B,0),equals(CHEW8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),40),or(doesNotEqual(CHEW8C,0),greaterThanOrEqual(isDefined(CHEW8,40),40)))),lessThanOrEqual(REGCHEW_AGE,49))]
+On days that you used chewing tobacco, snus, snuff, or dip when you were age |displayif=greaterThanOrEqual(isDefined(REGCHEW_AGE,-1),40)|{$REGCHEW_AGE}||displayif=lessThan(isDefined(REGCHEW_AGE,-1),40)|40| to |displayif=and(and(equals(CHEW8C,0),doesNotEqual(isDefined(CHEW8,-1),-1)),lessThan(isDefined(CHEW8,49),49))|{$CHEW8}||displayif=and(and(equals(CHEW8C,0),doesNotEqual(isDefined(CHEW8,-1),-1)),greaterThanOrEqual(isDefined(CHEW8,49),49))|49||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(CHEW8C,0),equals(isDefined(CHEW8,-1),-1)),lessThanOrEqual(AGE,49)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(CHEW8C,0),equals(isDefined(CHEW8,-1),-1)),lessThanOrEqual(age,49)))|{$u:age}||displayif=and(or(doesNotEqual(CHEW8C,0),equals(isDefined(CHEW8,-1),-1)),greaterThan(isDefined(AGE,age),49))|49|, what is the total amount of time you used them <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 50-59
+[CHEWLIFEF?,displayif=and(and(and(equals(CHEW1,3),or(equals(CHEW4,3),or(equals(CHEW7B,0),equals(CHEW8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),50),or(doesNotEqual(CHEW8C,0),greaterThanOrEqual(isDefined(CHEW8,50),50)))),lessThanOrEqual(REGCHEW_AGE,59))] On days that you used chewing tobacco, snus, snuff, or dip when you were age |displayif=greaterThanOrEqual(isDefined(REGCHEW_AGE,-1),50)|{$REGCHEW_AGE}||displayif=lessThan(isDefined(REGCHEW_AGE,-1),50)|50| to |displayif=and(and(equals(CHEW8C,0),doesNotEqual(isDefined(CHEW8,-1),-1)),lessThan(isDefined(CHEW8,59),59))|{$CHEW8}||displayif=and(and(equals(CHEW8C,0),doesNotEqual(isDefined(CHEW8,-1),-1)),greaterThanOrEqual(isDefined(CHEW8,59),59))|59||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(CHEW8C,0),equals(isDefined(CHEW8,-1),-1)),lessThanOrEqual(AGE,59)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(CHEW8C,0),equals(isDefined(CHEW8,-1),-1)),lessThanOrEqual(age,59)))|{$u:age}||displayif=and(or(doesNotEqual(CHEW8C,0),equals(isDefined(CHEW8,-1),-1)),greaterThan(isDefined(AGE,age),59))|59|, what is the total amount of time you used them <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 60-69
+[CHEWLIFEG?,displayif=and(and(and(equals(CHEW1,3),or(equals(CHEW4,3),or(equals(CHEW7B,0),equals(CHEW8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),60),or(doesNotEqual(CHEW8C,0),greaterThanOrEqual(isDefined(CHEW8,60),60)))),lessThanOrEqual(REGCHEW_AGE,69))]
+On days that you used chewing tobacco, snus, snuff, or dip when you were age |displayif=greaterThanOrEqual(isDefined(REGCHEW_AGE,-1),60)|{$REGCHEW_AGE}||displayif=lessThan(isDefined(REGCHEW_AGE,-1),60)|60| to |displayif=and(and(equals(CHEW8C,0),doesNotEqual(isDefined(CHEW8,-1),-1)),lessThan(isDefined(CHEW8,69),69))|{$CHEW8}||displayif=and(and(equals(CHEW8C,0),doesNotEqual(isDefined(CHEW8,-1),-1)),greaterThanOrEqual(isDefined(CHEW8,69),69))|69||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(CHEW8C,0),equals(isDefined(CHEW8,-1),-1)),lessThanOrEqual(AGE,69)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(CHEW8C,0),equals(isDefined(CHEW8,-1),-1)),lessThanOrEqual(age,69)))|{$u:age}||displayif=and(or(doesNotEqual(CHEW8C,0),equals(isDefined(CHEW8,-1),-1)),greaterThan(isDefined(AGE,age),69))|69|, what is the total amount of time you used them <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 70+
+[CHEWLIFEH?,displayif=and(and(equals(CHEW1,3),or(equals(CHEW4,3),or(equals(CHEW7B,0),equals(CHEW8C,0)))),and(greaterThanOrEqual(isDefined(AGE,age),70),or(doesNotEqual(CHEW8C,0),greaterThanOrEqual(isDefined(CHEW8,70),70))))]
+On days that you used chewing tobacco, snus, snuff, or dip when you were age |displayif=greaterThanOrEqual(isDefined(REGCHEW_AGE,-1),70)|{$REGCHEW_AGE}||displayif=lessThan(isDefined(REGCHEW_AGE,-1),70)|70| or older, what is the total amount of time you used them <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+[HOOKAH1?,displayif=equals(TOBACCO,4)]<b>Hookah and Water Pipes</b>
+
+The next questions are about your use of hookahs or water pipes for smoking tobacco.
+
+How many days have you smoked tobacco using a <b>hookah or water pipe</b> in your life?
+(0) 10 or less ->  PIPE1
+(1) 11 to 49 -> PIPE1
+(2) 50 to 99 -> HOOKAH2
+(3) 100 or more -> HOOKAH2
+< #NR ->  PIPE1>
+
+[HOOKAH2?,displayif=equals(TOBACCO,4)] How old were you when you <b>first</b> smoked tobacco using a hookah or water pipe?
+
+Age first smoked tobacco using a hookah or water pipe |__|__|min=0 max=sum(isDefined(AGE,age),1)|
+
+[HOOKAH3?,displayif=equals(TOBACCO,4)]
+How old were you when you started smoking a hookah or water pipe on a |popup|regular basis|Informational Text|We understand that the meaning of 'regular basis' might be different for different people. When you answer this question, please think about what "regular basis" means to you.|?
+
+Age started smoking a hookah or water pipe on a regular basis |__|__|id=HOOKAH3_AGE min=isDefined(HOOKAH2,0) max=sum(isDefined(AGE,age),1)|
+
+[44*] Never smoked on a regular basis
+
+
+[HOOKAH4?,displayif=equals(TOBACCO,4)] Do you smoke a hookah or water pipe now?
+(0) No -> HOOKAH5
+(1) Yes, but rarely -> HOOKAH5
+(2) Yes, some days -> HOOKAH5
+(3) Yes, every day -> HOOKAH9A
+< #NR -> HOOKAH5>
+
+[HOOKAH5?,displayif=equals(TOBACCO,4)] When was the <b>last</b> time you smoked a hookah or water pipe?
+(0) In the past month -> HOOKAH6
+(1) More than a month ago, but in the past year -> HOOKAH7A
+(2) More than 1 year ago -> HOOKAH8
+< #NR -> HOOKAH9A>
+
+[HOOKAH6?,displayif=equals(TOBACCO,4)] <b>On how many of the past 30 days </b> have you smoked a hookah or water pipe?
+
+#Days smoked in past 30 days |__|__|min=1 max=30|<-> HOOKAH9A>
+
+[HOOKAH7A?,displayif=equals(TOBACCO,4)] How many months ago did you <b>last</b> smoke a hookah or water pipe?
+
+#Months ago last smoked a hookah or water pipe |__|__|min=1 max=11|<-> HOOKAH7B>
+
+[HOOKAH7B?,displayif=equals(TOBACCO,4)] During that time, did you ever smoke a hookah or water pipe <b>every day</b>?
+(0) No -> HOOKAH7C
+(1) Yes -> HOOKAH9A
+< #NR -> HOOKAH7C>
+
+[HOOKAH7C?,displayif=equals(TOBACCO,4)] During that time, how many days (1 to 30) did you smoke a hookah or water pipe in a usual month?
+
+#Days smoked in usual month |__|__|min=1 max=30|< -> HOOKAH9A>
+
+[HOOKAH8?,displayif=equals(TOBACCO,4)] How old were you when you <b>last</b> smoked a hookah or water pipe?
+
+Age when last smoked a hookah or water pipe |__|__|min=isDefined(isDefined(HOOKAH3_AGE,HOOKAH2),0) max=sum(isDefined(AGE,age),1)|< #NR -> HOOKAH8C>
+
+[HOOKAH8C?,displayif=equals(TOBACCO,4)] During that time, did you ever smoke a hookah or water pipe <b>every day</b>?
+(0) No -> HOOKAH8D
+(1) Yes -> HOOKAH9A
+< #NR -> HOOKAH8D>
+
+[HOOKAH8D?,displayif=equals(TOBACCO,4)] During that time, how many days (1 to 30) did you smoke a hookah or water pipe in a usual month?
+
+#Days smoked in usual month |__|__|min=1 max=30|< -> HOOKAH9A>
+
+[HOOKAH9A?,displayif=equals(TOBACCO,4)]
+On days that you |displayif=and(doesNotEqual(HOOKAH5,1),doesNotEqual(HOOKAH5,2))|smoke||displayif=or(equals(HOOKAH5,1),equals(HOOKAH5,2))|smoked|, what is the total amount of time you |displayif=and(doesNotEqual(HOOKAH5,1),doesNotEqual(HOOKAH5,2))|smoke||displayif=or(equals(HOOKAH5,1),equals(HOOKAH5,2))|smoked| a hookah or water pipe <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+< -> HOOKAH9B>
+
+[HOOKAH9B?,displayif=and(doesNotEqual(or(or(equals(HOOKAH4,3),and(or(or(equals(HOOKAH4,2),equals(HOOKAH4,1)),equals(HOOKAH4,0)),and(equals(HOOKAH5,1),equals(HOOKAH7B,0)))),and(or(or(equals(HOOKAH4,2),equals(HOOKAH4,1)),equals(HOOKAH4,0)),and(equals(HOOKAH5,2),equals(HOOKAH8C,0)))),1),equals(TOBACCO,4))] Did you ever smoke a hookah or water pipe <b>every day</b>?
+(0) No -> PIPE1
+(1) Yes -> HOOKAH9D
+< #NR -> PIPE1>
+
+[HOOKAH9D?,displayif=and(doesNotEqual(or(or(equals(HOOKAH4,3),and(or(or(equals(HOOKAH4,2),equals(HOOKAH4,1)),equals(HOOKAH4,0)),and(equals(HOOKAH5,1),equals(HOOKAH7B,0)))),and(or(or(equals(HOOKAH4,2),equals(HOOKAH4,1)),equals(HOOKAH4,0)),and(equals(HOOKAH5,2),equals(HOOKAH8C,0)))),1),equals(TOBACCO,4))] How old were you when you stopped smoking a hookah or water pipe <b>every day</b>?
+
+Age stopped smoking a hookah or water pipe every day |__|__|min=0 max=sum(isDefined(AGE,age),1)|
+
+[HOOKAH9C?,displayif=and(doesNotEqual(or(or(equals(HOOKAH4,3),and(or(or(equals(HOOKAH4,2),equals(HOOKAH4,1)),equals(HOOKAH4,0)),and(equals(HOOKAH5,1),equals(HOOKAH7B,0)))),and(or(or(equals(HOOKAH4,2),equals(HOOKAH4,1)),equals(HOOKAH4,0)),and(equals(HOOKAH5,2),equals(HOOKAH8C,0)))),1),equals(TOBACCO,4))] When you were a daily smoker, what is the total amount of time you smoked a hookah or water pipe <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+< #NR -> HOOKAHLIFEA>
+
+// Same logic as CIGLIFEA-CIGLIFEH just with different variable names
+// 0-17
+[HOOKAHLIFEA?,displayif=and(and(and(equals(HOOKAH1,3),or(equals(HOOKAH4,3),or(equals(HOOKAH7B,0),equals(HOOKAH8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),0),or(doesNotEqual(HOOKAH8C,0),greaterThanOrEqual(isDefined(HOOKAH8,0),0)))),lessThanOrEqual(HOOKAH3_AGE,17))]
+On days that you smoked a hookah or water pipe when you were age |displayif=greaterThanOrEqual(isDefined(HOOKAH3_AGE,-1),0)|{$HOOKAH3_AGE}||displayif=lessThan(isDefined(HOOKAH3_AGE,-1),0)|0| to |displayif=and(and(equals(HOOKAH8C,0),doesNotEqual(isDefined(HOOKAH8,-1),-1)),lessThan(isDefined(HOOKAH8,17),17))|{$HOOKAH8}||displayif=and(and(equals(HOOKAH8C,0),doesNotEqual(isDefined(HOOKAH8,-1),-1)),greaterThanOrEqual(isDefined(HOOKAH8,17),17))|17||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(HOOKAH8C,0),equals(isDefined(HOOKAH8,-1),-1)),lessThanOrEqual(AGE,17)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(HOOKAH8C,0),equals(isDefined(HOOKAH8,-1),-1)),lessThanOrEqual(age,17)))|{$u:age}||displayif=and(or(doesNotEqual(HOOKAH8C,0),equals(isDefined(HOOKAH8,-1),-1)),greaterThan(isDefined(AGE,age),17))|17|, what is the total amount of time you smoked <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 18-24
+[HOOKAHLIFEB?,displayif=and(and(and(equals(HOOKAH1,3),or(equals(HOOKAH4,3),or(equals(HOOKAH7B,0),equals(HOOKAH8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),18),or(doesNotEqual(HOOKAH8C,0),greaterThanOrEqual(isDefined(HOOKAH8,18),18)))),lessThanOrEqual(HOOKAH3_AGE,24))]
+On days that you smoked a hookah or water pipe when you were age |displayif=greaterThanOrEqual(isDefined(HOOKAH3_AGE,-1),18)|{$HOOKAH3_AGE}||displayif=lessThan(isDefined(HOOKAH3_AGE,-1),18)|18| to |displayif=and(and(equals(HOOKAH8C,0),doesNotEqual(isDefined(HOOKAH8,-1),-1)),lessThan(isDefined(HOOKAH8,24),24))|{$HOOKAH8}||displayif=and(and(equals(HOOKAH8C,0),doesNotEqual(isDefined(HOOKAH8,-1),-1)),greaterThanOrEqual(isDefined(HOOKAH8,24),24))|24||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(HOOKAH8C,0),equals(isDefined(HOOKAH8,-1),-1)),lessThanOrEqual(AGE,24)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(HOOKAH8C,0),equals(isDefined(HOOKAH8,-1),-1)),lessThanOrEqual(age,24)))|{$u:age}||displayif=and(or(doesNotEqual(HOOKAH8C,0),equals(isDefined(HOOKAH8,-1),-1)),greaterThan(isDefined(AGE,age),24))|24|, what is the total amount of time you smoked <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 25-29
+[HOOKAHLIFEC?,displayif=and(and(and(equals(HOOKAH1,3),or(equals(HOOKAH4,3),or(equals(HOOKAH7B,0),equals(HOOKAH8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),25),or(doesNotEqual(HOOKAH8C,0),greaterThanOrEqual(isDefined(HOOKAH8,25),25)))),lessThanOrEqual(HOOKAH3_AGE,29))]
+On days that you smoked a hookah or water pipe when you were age |displayif=greaterThanOrEqual(isDefined(HOOKAH3_AGE,-1),25)|{$HOOKAH3_AGE}||displayif=lessThan(isDefined(HOOKAH3_AGE,-1),25)|25| to |displayif=and(and(equals(HOOKAH8C,0),doesNotEqual(isDefined(HOOKAH8,-1),-1)),lessThan(isDefined(HOOKAH8,29),29))|{$HOOKAH8}||displayif=and(and(equals(HOOKAH8C,0),doesNotEqual(isDefined(HOOKAH8,-1),-1)),greaterThanOrEqual(isDefined(HOOKAH8,29),29))|29||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(HOOKAH8C,0),equals(isDefined(HOOKAH8,-1),-1)),lessThanOrEqual(AGE,29)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(HOOKAH8C,0),equals(isDefined(HOOKAH8,-1),-1)),lessThanOrEqual(age,29)))|{$u:age}||displayif=and(or(doesNotEqual(HOOKAH8C,0),equals(isDefined(HOOKAH8,-1),-1)),greaterThan(isDefined(AGE,age),29))|29|, what is the total amount of time you smoked <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 30-39
+[HOOKAHLIFED?,displayif=and(and(and(equals(HOOKAH1,3),or(equals(HOOKAH4,3),or(equals(HOOKAH7B,0),equals(HOOKAH8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),30),or(doesNotEqual(HOOKAH8C,0),greaterThanOrEqual(isDefined(HOOKAH8,30),30)))),lessThanOrEqual(HOOKAH3_AGE,39))]
+On days that you smoked a hookah or water pipe when you were age |displayif=greaterThanOrEqual(isDefined(HOOKAH3_AGE,-1),30)|{$HOOKAH3_AGE}||displayif=lessThan(isDefined(HOOKAH3_AGE,-1),30)|30| to |displayif=and(and(equals(HOOKAH8C,0),doesNotEqual(isDefined(HOOKAH8,-1),-1)),lessThan(isDefined(HOOKAH8,39),39))|{$HOOKAH8}||displayif=and(and(equals(HOOKAH8C,0),doesNotEqual(isDefined(HOOKAH8,-1),-1)),greaterThanOrEqual(isDefined(HOOKAH8,39),39))|39||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(HOOKAH8C,0),equals(isDefined(HOOKAH8,-1),-1)),lessThanOrEqual(AGE,39)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(HOOKAH8C,0),equals(isDefined(HOOKAH8,-1),-1)),lessThanOrEqual(age,39)))|{$u:age}||displayif=and(or(doesNotEqual(HOOKAH8C,0),equals(isDefined(HOOKAH8,-1),-1)),greaterThan(isDefined(AGE,age),39))|39|, what is the total amount of time you smoked <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 40-49
+[HOOKAHLIFEE?,displayif=and(and(and(equals(HOOKAH1,3),or(equals(HOOKAH4,3),or(equals(HOOKAH7B,0),equals(HOOKAH8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),40),or(doesNotEqual(HOOKAH8C,0),greaterThanOrEqual(isDefined(HOOKAH8,40),40)))),lessThanOrEqual(HOOKAH3_AGE,49))]
+On days that you smoked a hookah or water pipe when you were age |displayif=greaterThanOrEqual(isDefined(HOOKAH3_AGE,-1),40)|{$HOOKAH3_AGE}||displayif=lessThan(isDefined(HOOKAH3_AGE,-1),40)|40| to |displayif=and(and(equals(HOOKAH8C,0),doesNotEqual(isDefined(HOOKAH8,-1),-1)),lessThan(isDefined(HOOKAH8,49),49))|{$HOOKAH8}||displayif=and(and(equals(HOOKAH8C,0),doesNotEqual(isDefined(HOOKAH8,-1),-1)),greaterThanOrEqual(isDefined(HOOKAH8,49),49))|49||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(HOOKAH8C,0),equals(isDefined(HOOKAH8,-1),-1)),lessThanOrEqual(AGE,49)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(HOOKAH8C,0),equals(isDefined(HOOKAH8,-1),-1)),lessThanOrEqual(age,49)))|{$u:age}||displayif=and(or(doesNotEqual(HOOKAH8C,0),equals(isDefined(HOOKAH8,-1),-1)),greaterThan(isDefined(AGE,age),49))|49|, what is the total amount of time you smoked <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 50-59
+[HOOKAHLIFEF?,displayif=and(and(and(equals(HOOKAH1,3),or(equals(HOOKAH4,3),or(equals(HOOKAH7B,0),equals(HOOKAH8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),50),or(doesNotEqual(HOOKAH8C,0),greaterThanOrEqual(isDefined(HOOKAH8,50),50)))),lessThanOrEqual(HOOKAH3_AGE,59))] On days that you smoked a hookah or water pipe when you were age |displayif=greaterThanOrEqual(isDefined(HOOKAH3_AGE,-1),50)|{$HOOKAH3_AGE}||displayif=lessThan(isDefined(HOOKAH3_AGE,-1),50)|50| to |displayif=and(and(equals(HOOKAH8C,0),doesNotEqual(isDefined(HOOKAH8,-1),-1)),lessThan(isDefined(HOOKAH8,59),59))|{$HOOKAH8}||displayif=and(and(equals(HOOKAH8C,0),doesNotEqual(isDefined(HOOKAH8,-1),-1)),greaterThanOrEqual(isDefined(HOOKAH8,59),59))|59||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(HOOKAH8C,0),equals(isDefined(HOOKAH8,-1),-1)),lessThanOrEqual(AGE,59)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(HOOKAH8C,0),equals(isDefined(HOOKAH8,-1),-1)),lessThanOrEqual(age,59)))|{$u:age}||displayif=and(or(doesNotEqual(HOOKAH8C,0),equals(isDefined(HOOKAH8,-1),-1)),greaterThan(isDefined(AGE,age),59))|59|, what is the total amount of time you smoked <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 60-69
+[HOOKAHLIFEG?,displayif=and(and(and(equals(HOOKAH1,3),or(equals(HOOKAH4,3),or(equals(HOOKAH7B,0),equals(HOOKAH8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),60),or(doesNotEqual(HOOKAH8C,0),greaterThanOrEqual(isDefined(HOOKAH8,60),60)))),lessThanOrEqual(HOOKAH3_AGE,69))]
+On days that you smoked a hookah or water pipe when you were age |displayif=greaterThanOrEqual(isDefined(HOOKAH3_AGE,-1),60)|{$HOOKAH3_AGE}||displayif=lessThan(isDefined(HOOKAH3_AGE,-1),60)|60| to |displayif=and(and(equals(HOOKAH8C,0),doesNotEqual(isDefined(HOOKAH8,-1),-1)),lessThan(isDefined(HOOKAH8,69),69))|{$HOOKAH8}||displayif=and(and(equals(HOOKAH8C,0),doesNotEqual(isDefined(HOOKAH8,-1),-1)),greaterThanOrEqual(isDefined(HOOKAH8,69),69))|69||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(HOOKAH8C,0),equals(isDefined(HOOKAH8,-1),-1)),lessThanOrEqual(AGE,69)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(HOOKAH8C,0),equals(isDefined(HOOKAH8,-1),-1)),lessThanOrEqual(age,69)))|{$u:age}||displayif=and(or(doesNotEqual(HOOKAH8C,0),equals(isDefined(HOOKAH8,-1),-1)),greaterThan(isDefined(AGE,age),69))|69|, what is the total amount of time you smoked <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 70+
+[HOOKAHLIFEH?,displayif=and(and(equals(HOOKAH1,3),or(equals(HOOKAH4,3),or(equals(HOOKAH7B,0),equals(HOOKAH8C,0)))),and(greaterThanOrEqual(isDefined(AGE,age),70),or(doesNotEqual(HOOKAH8C,0),greaterThanOrEqual(isDefined(HOOKAH8,70),70))))]
+On days that you smoked a hookah or water pipe when you were age |displayif=greaterThanOrEqual(isDefined(HOOKAH3_AGE,-1),70)|{$HOOKAH3_AGE}||displayif=lessThan(isDefined(HOOKAH3_AGE,-1),70)|70| or older, what is the total amount of time you smoked <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+[PIPE1?,displayif=equals(TOBACCO,5)]<b>Tobacco Pipes</b>
+
+The next questions are about your use of tobacco pipes.
+
+How many days have you smoked a <b>tobacco pipe</b> in your life?
+(0) 10 or less -> CURRSM
+(1) 11 to 49 -> CURRSM
+(2) 50 to 99 -> PIPE2
+(3) 100 or more -> PIPE2
+<#NR -> CURRSM>
+
+[PIPE2?,displayif=equals(TOBACCO,5)] How old were you when you <b>first</b> smoked a tobacco pipe?
+
+Age first smoked a tobacco pipe |__|__|min=0 max=sum(isDefined(AGE,age),1)|< -> PIPE3>
+
+[PIPE3?,displayif=equals(TOBACCO,5)]
+How old were you when you started smoking a tobacco pipe on a |popup|regular basis|Informational Text|We understand that the meaning of 'regular basis' might be different for different people. When you answer this question, please think about what "regular basis" means to you.|?
+
+Age started smoking a tobacco pipe on a regular basis |__|__|id=PIPE3_AGE min=isDefined(PIPE2,0) max=sum(isDefined(AGE,age),1)|
+
+[44*] Never smoked on a regular basis
+< -> PIPE4>
+
+[PIPE4?,displayif=equals(TOBACCO,5)] Do you smoke a tobacco pipe now?
+(0) No -> PIPE5
+(1) Yes, but rarely -> PIPE5
+(2) Yes, some days -> PIPE5
+(3) Yes, every day -> PIPE9A
+< #NR -> PIPE5>
+
+[PIPE5?,displayif=equals(TOBACCO,5)] When was the <b>last</b> time you smoked a tobacco pipe?
+(0) In the past month -> PIPE6
+(1) More than a month ago, but in the past year -> PIPE7A
+(2) More than 1 year ago -> PIPE8
+< #NR -> PIPE9A>
+
+[PIPE6?,displayif=equals(TOBACCO,5)] <b>On how many of the past 30 days </b> have you smoked a tobacco pipe?
+#Days smoked a pipe in past 30 days |__|__|min=1 max=30|< -> PIPE9A>
+
+
+[PIPE7A?,displayif=equals(TOBACCO,5)] How many months ago did you <b>last</b> smoke a tobacco pipe?
+#Months ago last smoked a pipe |__|__|min=1 max=11|< -> PIPE7B>
+
+
+[PIPE7B?,displayif=equals(TOBACCO,5)] During that time, did you ever smoke a tobacco pipe <b>every day</b>?
+(0) No -> PIPE7C
+(1) Yes -> PIPE9A
+< #NR -> PIPE7C>
+
+[PIPE7C?,displayif=equals(TOBACCO,5)] During that time, how many days (1 to 30) did you smoke a tobacco pipe in a usual month?
+#Days smoked in usual month  |__|__|min=1 max=30|< -> PIPE9A>
+
+
+[PIPE8?,displayif=equals(TOBACCO,5)] How old were you when you <b>last</b> smoked a tobacco pipe?
+
+Age when last smoked a tobacco pipe |__|__|min=isDefined(isDefined(PIPE3_AGE,PIPE2),0) max=sum(isDefined(AGE,age),1)|< -> PIPE8C>
+
+[PIPE8C?,displayif=equals(TOBACCO,5)] During that time, did you ever smoke a tobacco pipe <b>every day</b>?
+(0) No -> PIPE8D
+(1) Yes -> PIPE9A
+< #NR -> PIPE8D>
+
+[PIPE8D?,displayif=equals(TOBACCO,5)] During that time, how many days (1 to 30) did you smoke a tobacco pipe in a usual month?
+
+#Days smoked in usual month |__|__|min=1 max=30|<-> PIPE9A>
+
+[PIPE9A?,displayif=equals(TOBACCO,5)]
+On days that you |displayif=and(doesNotEqual(PIPE5,1),doesNotEqual(PIPE5,2))|smoke||displayif=or(equals(PIPE5,1),equals(PIPE5,2))|smoked|, how many pipe fills of tobacco |displayif=and(doesNotEqual(PIPE5,1),doesNotEqual(PIPE5,2))|do||displayif=or(equals(PIPE5,1),equals(PIPE5,2))|did| you smoke <b>per day</b>?
+#Pipe fills smoked per day |__|__|min=1 max=99|
+
+[PIPE9B?,displayif=and(doesNotEqual(or(or(equals(PIPE4,3),and(or(or(equals(PIPE4,2),equals(PIPE4,1)),equals(PIPE4,0)),and(equals(PIPE5,1),equals(PIPE7B,0)))),and(or(or(equals(PIPE4,2),equals(PIPE4,1)),equals(PIPE4,0)),and(equals(PIPE5,2),equals(PIPE8C,0)))),1),equals(TOBACCO,5))] Did you ever smoke a tobacco pipe <b>every day</b>?
+(0) No -> CURRSM
+(1) Yes -> PIPE9D
+< #NR -> CURRSM>
+
+[PIPE9D?,displayif=and(doesNotEqual(or(or(equals(PIPE4,3),and(or(or(equals(PIPE4,2),equals(PIPE4,1)),equals(PIPE4,0)),and(equals(PIPE5,1),equals(PIPE7B,0)))),and(or(or(equals(PIPE4,2),equals(PIPE4,1)),equals(PIPE4,0)),and(equals(PIPE5,2),equals(PIPE8C,0)))),1),equals(TOBACCO,5))] How old were you when you stopped smoking a tobacco pipe <b>every day</b>?
+
+Age stopped smoking every day |__|__|min=0 max=sum(isDefined(AGE,age),1)|< -> PIPE9C>
+
+[PIPE9C?,displayif=and(doesNotEqual(or(or(equals(PIPE4,3),and(or(or(equals(PIPE4,2),equals(PIPE4,1)),equals(PIPE4,0)),and(equals(PIPE5,1),equals(PIPE7B,0)))),and(or(or(equals(PIPE4,2),equals(PIPE4,1)),equals(PIPE4,0)),and(equals(PIPE5,2),equals(PIPE8C,0)))),1),equals(TOBACCO,5))] When you were a daily smoker, how many pipe fills of tobacco did you smoke <b>per day</b>?
+#Pipe fills of tobacco smoked per day |__|__|__|min=1 max=99|< -> PIPELIFEA>
+
+// Same logic as CIGLIFEA-CIGLIFEH just with different variable names
+// 0-17
+[PIPELIFEA?,displayif=and(and(and(equals(PIPE1,3),or(equals(PIPE4,3),or(equals(PIPE7B,0),equals(PIPE8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),0),or(doesNotEqual(PIPE8C,0),greaterThanOrEqual(isDefined(PIPE8,0),0)))),lessThanOrEqual(PIPE3_AGE,17))]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(PIPE3_AGE,-1),0)|{$PIPE3_AGE}||displayif=lessThan(isDefined(PIPE3_AGE,-1),0)|0| to |displayif=and(and(equals(PIPE8C,0),doesNotEqual(isDefined(PIPE8,-1),-1)),lessThan(isDefined(PIPE8,17),17))|{$PIPE8}||displayif=and(and(equals(PIPE8C,0),doesNotEqual(isDefined(PIPE8,-1),-1)),greaterThanOrEqual(isDefined(PIPE8,17),17))|17||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(PIPE8C,0),equals(isDefined(PIPE8,-1),-1)),lessThanOrEqual(AGE,17)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(PIPE8C,0),equals(isDefined(PIPE8,-1),-1)),lessThanOrEqual(age,17)))|{$u:age}||displayif=and(or(doesNotEqual(PIPE8C,0),equals(isDefined(PIPE8,-1),-1)),greaterThan(isDefined(AGE,age),17))|17|, about how many pipe fills of tobacco did you smoke <b>per day</b>?
+#PIPE FILLS OF TOBACCO PER DAY |__|__|min=1 max=99|
+
+// 18-24
+[PIPELIFEB?,displayif=and(and(and(equals(PIPE1,3),or(equals(PIPE4,3),or(equals(PIPE7B,0),equals(PIPE8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),18),or(doesNotEqual(PIPE8C,0),greaterThanOrEqual(isDefined(PIPE8,18),18)))),lessThanOrEqual(PIPE3_AGE,24))]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(PIPE3_AGE,-1),18)|{$PIPE3_AGE}||displayif=lessThan(isDefined(PIPE3_AGE,-1),18)|18| to |displayif=and(and(equals(PIPE8C,0),doesNotEqual(isDefined(PIPE8,-1),-1)),lessThan(isDefined(PIPE8,24),24))|{$PIPE8}||displayif=and(and(equals(PIPE8C,0),doesNotEqual(isDefined(PIPE8,-1),-1)),greaterThanOrEqual(isDefined(PIPE8,24),24))|24||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(PIPE8C,0),equals(isDefined(PIPE8,-1),-1)),lessThanOrEqual(AGE,24)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(PIPE8C,0),equals(isDefined(PIPE8,-1),-1)),lessThanOrEqual(age,24)))|{$u:age}||displayif=and(or(doesNotEqual(PIPE8C,0),equals(isDefined(PIPE8,-1),-1)),greaterThan(isDefined(AGE,age),24))|24|, about how many pipe fills of tobacco did you smoke <b>per day</b>?
+#PIPE FILLS OF TOBACCO PER DAY |__|__|min=1 max=99|
+
+// 25-29
+[PIPELIFEC?,displayif=and(and(and(equals(PIPE1,3),or(equals(PIPE4,3),or(equals(PIPE7B,0),equals(PIPE8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),25),or(doesNotEqual(PIPE8C,0),greaterThanOrEqual(isDefined(PIPE8,25),25)))),lessThanOrEqual(PIPE3_AGE,29))]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(PIPE3_AGE,-1),25)|{$PIPE3_AGE}||displayif=lessThan(isDefined(PIPE3_AGE,-1),25)|25| to |displayif=and(and(equals(PIPE8C,0),doesNotEqual(isDefined(PIPE8,-1),-1)),lessThan(isDefined(PIPE8,29),29))|{$PIPE8}||displayif=and(and(equals(PIPE8C,0),doesNotEqual(isDefined(PIPE8,-1),-1)),greaterThanOrEqual(isDefined(PIPE8,29),29))|29||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(PIPE8C,0),equals(isDefined(PIPE8,-1),-1)),lessThanOrEqual(AGE,29)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(PIPE8C,0),equals(isDefined(PIPE8,-1),-1)),lessThanOrEqual(age,29)))|{$u:age}||displayif=and(or(doesNotEqual(PIPE8C,0),equals(isDefined(PIPE8,-1),-1)),greaterThan(isDefined(AGE,age),29))|29|, about how many pipe fills of tobacco did you smoke <b>per day</b>?
+#PIPE FILLS OF TOBACCO PER DAY |__|__|min=1 max=99|
+
+// 30-39
+[PIPELIFED?,displayif=and(and(and(equals(PIPE1,3),or(equals(PIPE4,3),or(equals(PIPE7B,0),equals(PIPE8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),30),or(doesNotEqual(PIPE8C,0),greaterThanOrEqual(isDefined(PIPE8,30),30)))),lessThanOrEqual(PIPE3_AGE,39))]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(PIPE3_AGE,-1),30)|{$PIPE3_AGE}||displayif=lessThan(isDefined(PIPE3_AGE,-1),30)|30| to |displayif=and(and(equals(PIPE8C,0),doesNotEqual(isDefined(PIPE8,-1),-1)),lessThan(isDefined(PIPE8,39),39))|{$PIPE8}||displayif=and(and(equals(PIPE8C,0),doesNotEqual(isDefined(PIPE8,-1),-1)),greaterThanOrEqual(isDefined(PIPE8,39),39))|39||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(PIPE8C,0),equals(isDefined(PIPE8,-1),-1)),lessThanOrEqual(AGE,39)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(PIPE8C,0),equals(isDefined(PIPE8,-1),-1)),lessThanOrEqual(age,39)))|{$u:age}||displayif=and(or(doesNotEqual(PIPE8C,0),equals(isDefined(PIPE8,-1),-1)),greaterThan(isDefined(AGE,age),39))|39|, about how many pipe fills of tobacco did you smoke <b>per day</b>?
+#PIPE FILLS OF TOBACCO PER DAY |__|__|min=1 max=99|
+
+// 40-49
+[PIPELIFEE?,displayif=and(and(and(equals(PIPE1,3),or(equals(PIPE4,3),or(equals(PIPE7B,0),equals(PIPE8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),40),or(doesNotEqual(PIPE8C,0),greaterThanOrEqual(isDefined(PIPE8,40),40)))),lessThanOrEqual(PIPE3_AGE,49))]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(PIPE3_AGE,-1),40)|{$PIPE3_AGE}||displayif=lessThan(isDefined(PIPE3_AGE,-1),40)|40| to |displayif=and(and(equals(PIPE8C,0),doesNotEqual(isDefined(PIPE8,-1),-1)),lessThan(isDefined(PIPE8,49),49))|{$PIPE8}||displayif=and(and(equals(PIPE8C,0),doesNotEqual(isDefined(PIPE8,-1),-1)),greaterThanOrEqual(isDefined(PIPE8,49),49))|49||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(PIPE8C,0),equals(isDefined(PIPE8,-1),-1)),lessThanOrEqual(AGE,49)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(PIPE8C,0),equals(isDefined(PIPE8,-1),-1)),lessThanOrEqual(age,49)))|{$u:age}||displayif=and(or(doesNotEqual(PIPE8C,0),equals(isDefined(PIPE8,-1),-1)),greaterThan(isDefined(AGE,age),49))|49|, about how many pipe fills of tobacco did you smoke <b>per day</b>?
+#PIPE FILLS OF TOBACCO PER DAY |__|__|min=1 max=99|
+
+// 50-59
+[PIPELIFEF?,displayif=and(and(and(equals(PIPE1,3),or(equals(PIPE4,3),or(equals(PIPE7B,0),equals(PIPE8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),50),or(doesNotEqual(PIPE8C,0),greaterThanOrEqual(isDefined(PIPE8,50),50)))),lessThanOrEqual(PIPE3_AGE,59))]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(PIPE3_AGE,-1),50)|{$PIPE3_AGE}||displayif=lessThan(isDefined(PIPE3_AGE,-1),50)|50| to |displayif=and(and(equals(PIPE8C,0),doesNotEqual(isDefined(PIPE8,-1),-1)),lessThan(isDefined(PIPE8,59),59))|{$PIPE8}||displayif=and(and(equals(PIPE8C,0),doesNotEqual(isDefined(PIPE8,-1),-1)),greaterThanOrEqual(isDefined(PIPE8,59),59))|59||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(PIPE8C,0),equals(isDefined(PIPE8,-1),-1)),lessThanOrEqual(AGE,59)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(PIPE8C,0),equals(isDefined(PIPE8,-1),-1)),lessThanOrEqual(age,59)))|{$u:age}||displayif=and(or(doesNotEqual(PIPE8C,0),equals(isDefined(PIPE8,-1),-1)),greaterThan(isDefined(AGE,age),59))|59|, about how many pipe fills of tobacco did you smoke <b>per day</b>?
+#PIPE FILLS OF TOBACCO PER DAY |__|__|min=1 max=99|
+
+// 60-69
+[PIPELIFEG?,displayif=and(and(and(equals(PIPE1,3),or(equals(PIPE4,3),or(equals(PIPE7B,0),equals(PIPE8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),60),or(doesNotEqual(PIPE8C,0),greaterThanOrEqual(isDefined(PIPE8,60),60)))),lessThanOrEqual(PIPE3_AGE,69))]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(PIPE3_AGE,-1),60)|{$PIPE3_AGE}||displayif=lessThan(isDefined(PIPE3_AGE,-1),60)|60| to |displayif=and(and(equals(PIPE8C,0),doesNotEqual(isDefined(PIPE8,-1),-1)),lessThan(isDefined(PIPE8,69),69))|{$PIPE8}||displayif=and(and(equals(PIPE8C,0),doesNotEqual(isDefined(PIPE8,-1),-1)),greaterThanOrEqual(isDefined(PIPE8,69),69))|69||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(PIPE8C,0),equals(isDefined(PIPE8,-1),-1)),lessThanOrEqual(AGE,69)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(PIPE8C,0),equals(isDefined(PIPE8,-1),-1)),lessThanOrEqual(age,69)))|{$u:age}||displayif=and(or(doesNotEqual(PIPE8C,0),equals(isDefined(PIPE8,-1),-1)),greaterThan(isDefined(AGE,age),69))|69|, about how many pipe fills of tobacco did you smoke <b>per day</b>?
+#PIPE FILLS OF TOBACCO PER DAY |__|__|min=1 max=99|
+
+// 70+
+[PIPELIFEH?,displayif=and(and(equals(PIPE1,3),or(equals(PIPE4,3),or(equals(PIPE7B,0),equals(PIPE8C,0)))),and(greaterThanOrEqual(isDefined(AGE,age),70),or(doesNotEqual(PIPE8C,0),greaterThanOrEqual(isDefined(PIPE8,70),70))))]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(PIPE3_AGE,-1),70)|{$PIPE3_AGE}||displayif=lessThan(isDefined(PIPE3_AGE,-1),70)|70| or older, about how many pipe fills of tobacco did you smoke <b>per day</b>?
+#PIPE FILLS OF TOBACCO PER DAY |__|__|min=1 max=99|
+
+[CURRSM?]<b>Secondhand Smoking</b>
+
+We now have some questions about secondhand smoke.
+
+In <b>the past year</b>, about how often were you around tobacco smoke from other people smoking in your home or at work?
+(0) Every day
+(1) Most days of the week -> GRID_SECSMLF2
+(2) A few days per week -> GRID_SECSMLF2
+(3) One day per week -> GRID_SECSMLF2
+(4) A few days per month -> GRID_SECSMLF2
+(5) One day per month -> GRID_SECSMLF2
+(6) A few days per year -> GRID_SECSMLF2
+(44) Never -> GRID_SECSMLF2
+< #NR -> GRID_SECSMLF2>
+
+[CURRSM2?] On days you were around other people’s tobacco smoke in <b>the past year</b> in your home or work, about how many hours per day were you around it?
+(0) Less than 1 hour per day
+(1) 1 to 2 hours per day
+(2) 3 to 5 hours per day
+(3) 6 to 9 hours per day
+(4) 10 to 15 hours per day
+(5) More than 15 hours per day
+<#NR -> GRID_SECSMLF2>
+
+
+|grid?|id="GRID_SECSMLF2"|Thinking about your usual adult life, about how often were you around the tobacco smoke of others, for example in your home, work, or school?|[ 
+
+[SECSMLF2A] Age 0 to age {$e:min(17,valueOrDefault("AGE","age",100)) };
+[SECSMLF2B,displayif=greaterThan(difference(isDefined(AGE,age),2),18)] Age 18 to age {$e:min(24,valueOrDefault("AGE","age",100)) };
+[SECSMLF2C,displayif=greaterThan(difference(isDefined(AGE,age),2),25)] Age 25 to age {$e:min(29,valueOrDefault("AGE","age",100)) };
+[SECSMLF2D,displayif=greaterThan(difference(isDefined(AGE,age),2),30)] Age 30 to age {$e:min(39,valueOrDefault("AGE","age",100)) };
+[SECSMLF2E,displayif=greaterThan(difference(isDefined(AGE,age),2),40)] Age 40 to age {$e:min(49,valueOrDefault("AGE","age",100)) };
+[SECSMLF2F,displayif=greaterThan(difference(isDefined(AGE,age),2),50)] Age 50 to age {$e:min(59,valueOrDefault("AGE","age",100)) };
+[SECSMLF2G,displayif=greaterThan(difference(isDefined(AGE,age),2),60)] Age 60 to age {$e:min(69,valueOrDefault("AGE","age",100)) };
+[SECSMLF2H,displayif=greaterThanOrEqual(isDefined(AGE,age),70)] Age 70 and older;]|
+
+(0:Every day, at least 2 hours each day)
+(1:Every day, less than 2 hours each day)
+(2:Most days of the week)
+(3:A few days per week)
+(4:One day per week)
+(5: A few days per month)
+(6: One day per month)
+(7: few days per year)
+(44: Never)|
+
+|grid?|id="GRID_SECSM"|During each of these age ranges, how many people in your household smoked tobacco (such as cigarettes, cigars, or pipes) in your presence? Please do not include yourself.|[
+
+[SECSMA] Birth to 5 years of age;
+[SECSMB] Ages 6 to 10;
+[SECSMC] Ages 11 to 14;
+[SECSMD] Ages 15 to 17;]|
+
+(0:None)
+(1:One)
+(2:Two)
+(3:Three)
+(4:Four)
+(5: Five or more)|
+
+[INTROMAR] <b>Marijuana</b> <br/> <br/> Next, we will ask you some questions about marijuana (cannabis) use. Many questions will ask you to share the age you were when you started or stopped using a product. Please make your best guess if you are not sure of the age you were when you started or stopped using a product.
+
+Please remember that we protect your privacy. We remove information that can identify you from your survey answers before we share them with researchers.
+
+[MARIJUANA?] Have you ever used any of these <b>marijuana</b> products, even once? Select all that apply.
+[0] Smoking marijuana (such as joints, pipes, bowls, or bongs)
+[1] Smoking a combination of marijuana with tobacco (such as blunts, spliffs, or hollowed out cigars or cigarillos filled with marijuana)
+[2] Using electronic delivery devices that can be vaped, such as a vape pen or pod-mods. These electronic delivery devices are battery-powered and create vapor.
+[3] Eating or drinking (such as food, candy, or beverages)
+[4] THC concentrates via dabbing (such as wax, shatter, butter, hash, or kief)
+[88*] I have <b>not</b> used any of these marijuana products
+< #NR->  INTROALC>
+
+[SMMAR,displayif=equals(MARIJUANA,0)]<b>Smoking Marijuana (Such as Joints, Pipes, Bowls, or Bongs)</b>
+
+The next questions are about smoking marijuana (such as joints, pipes, bowls, or bongs). These questions do not include your use of electronic delivery devices or smoking a combination of marijuana with tobacco. Please answer using information from your experiences smoking marijuana (such as joints, pipes, bowls, or bongs) only.
+
+[SMMAR1?,displayif=equals(MARIJUANA,0)] How many days have you <b>smoked marijuana</b> in your life?
+(0) 10 or less -> TOMAR1
+(1) 11 to 49 -> TOMAR1
+(2) 50 to 99 -> SMMAR2
+(3) 100 or more  -> SMMAR2
+< #NR -> TOMAR1>
+
+[SMMAR2?,displayif=equals(MARIJUANA,0)] How old were you when you <b>first</b> smoked marijuana?
+
+Age first smoked marijuana |__|__|min=0 max=sum(isDefined(AGE,age),1)|< -> SMMAR3>
+
+[SMMAR3?,displayif=equals(MARIJUANA,0)]
+How old were you when you started smoking marijuana on a |popup|regular basis|Informational Text|We understand that the meaning of 'regular basis' might be different for different people. When you answer this question, please think about what "regular basis" means to you.|?
+
+Age started smoking marijuana on a regular basis |__|__|id=REGSMMAR_AGE min=isDefined(SMMAR2,0) max=sum(isDefined(AGE,age),1)|
+
+[44*] Never smoked on a regular basis
+< -> SMMAR4>
+
+[SMMAR4?,displayif=equals(MARIJUANA,0)] Do you smoke marijuana now?
+(0) No -> SMMAR5
+(1) Yes, but rarely -> SMMAR5
+(2) Yes, some days -> SMMAR5
+(3) Yes, every day -> SMMAR9A
+< #NR -> SMMAR5>
+
+[SMMAR5?,displayif=equals(MARIJUANA,0)] When was the <b>last</b> time you smoked marijuana?
+(0) In the past month -> SMMAR6
+(1) More than a month ago, but in the past year -> SMMAR7A
+(2) More than 1 year ago -> SMMAR8
+< #NR -> SMMAR9A>
+
+[SMMAR6?,displayif=equals(MARIJUANA,0)] <b>On how many of the past 30 days </b>have you smoked marijuana?
+
+#Days smoked marijuana in past 30 days |__|__|min=1 max=30|< -> SMMAR9A>
+
+[SMMAR7A?,displayif=equals(MARIJUANA,0)] How many months ago did you <b>last</b> smoke marijuana?
+#Months ago last smoked marijuana |__|__|min=1 max=11|< -> SMMAR7B>
+
+[SMMAR7B?,displayif=equals(MARIJUANA,0)] During that time, did you ever smoke marijuana <b>every day</b>?
+(0) No -> SMMAR7C
+(1) Yes -> SMMAR9A
+< #NR -> SMMAR7C>
+
+[SMMAR7C?,displayif=equals(MARIJUANA,0)] During that time, how many days (1 to 30) did you smoke marijuana in a usual month?
+
+#Days smoked in usual month |__|__|min=1 max=30|<  -> SMMAR9A>
+
+[SMMAR8?,displayif=equals(MARIJUANA,0)] How old were you when you <b>last</b> smoked marijuana?
+
+Age when last smoked marijuana  |__|__|min=isDefined(isDefined(REGSMMAR_AGE,SMMAR2),0) max=sum(isDefined(AGE,age),1)|
+< #NR -> SMMAR8C>
+
+[SMMAR8C?,displayif=equals(MARIJUANA,0)] During that time, did you ever smoke marijuana <b>every day</b>?
+(0) No -> SMMAR8D
+(1) Yes -> SMMAR9A
+< #NR -> SMMAR8D>
+
+[SMMAR8D?,displayif=equals(MARIJUANA,0)] During that time, how many days (1 to 30) did you smoke marijuana in a usual month?
+
+#Days smoked in usual month |__|__|min=1 max=30|<-> SMMAR9A>
+
+[SMMAR9A?,displayif=equals(MARIJUANA,0)]
+On days that you |displayif=and(doesNotEqual(SMMAR5,1),doesNotEqual(SMMAR5,2))|smoke||displayif=or(equals(SMMAR5,1),equals(SMMAR5,2))|smoked| marijuana, what is the total amount of time you |displayif=and(doesNotEqual(SMMAR5,1),doesNotEqual(SMMAR5,2))|smoke||displayif=or(equals(SMMAR5,1),equals(SMMAR5,2))|smoked| <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+<-> SMMAR9B>
+
+[SMMAR9B?,displayif=and(doesNotEqual(or(or(equals(SMMAR4,3),and(or(or(equals(SMMAR4,2),equals(SMMAR4,1)),equals(SMMAR4,0)),and(equals(SMMAR5,1),equals(SMMAR7B,0)))),and(or(or(equals(SMMAR4,2),equals(SMMAR4,1)),equals(SMMAR4,0)),and(equals(SMMAR5,2),equals(SMMAR8C,0)))),1),equals(MARIJUANA,0))] Did you ever smoke marijuana <b>every day</b>?
+(0) No -> SMMAR10
+(1) Yes -> SMMAR9D
+< #NR -> SMMAR10>
+
+[SMMAR9D?,displayif=and(doesNotEqual(or(or(equals(SMMAR4,3),and(or(or(equals(SMMAR4,2),equals(SMMAR4,1)),equals(SMMAR4,0)),and(equals(SMMAR5,1),equals(SMMAR7B,0)))),and(or(or(equals(SMMAR4,2),equals(SMMAR4,1)),equals(SMMAR4,0)),and(equals(SMMAR5,2),equals(SMMAR8C,0)))),1),equals(MARIJUANA,0))] How old were you when you stopped smoking marijuana every day?
+
+Age stopped smoking every day |__|__|min=0 max=sum(isDefined(AGE,age),1)|< -> SMMAR9C>
+
+[SMMAR9C?,displayif=and(doesNotEqual(or(or(equals(SMMAR4,3),and(or(or(equals(SMMAR4,2),equals(SMMAR4,1)),equals(SMMAR4,0)),and(equals(SMMAR5,1),equals(SMMAR7B,0)))),and(or(or(equals(SMMAR4,2),equals(SMMAR4,1)),equals(SMMAR4,0)),and(equals(SMMAR5,2),equals(SMMAR8C,1)))),1),equals(MARIJUANA,0))] When you were a daily smoker of marijuana, what is the total amount of time you smoked <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+< -> SMMAR10>
+
+[SMMAR10?,displayif=equals(MARIJUANA,0)] Why |displayif=or(equals(SMMAR4,3),equals(SMMAR5,0))|do||displayif=or(equals(SMMAR5,1),equals(SMMAR5,2))|did| you smoke marijuana?
+(0) Recreation
+(1) As medicine
+(2) Recreation and as medicine
+(55) Other: Please describe |__|id=SMMAR10OTH|
+(99) Prefer not to answer
+< #NR -> SMMARLIFEA>
+
+// Same logic as CIGLIFEA-CIGLIFEH just with different variable names
+// 0-17
+[SMMARLIFEA?,displayif=and(and(and(equals(SMMAR1,3),or(equals(SMMAR4,3),or(equals(SMMAR7B,0),equals(SMMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),0),or(doesNotEqual(SMMAR8C,0),greaterThanOrEqual(isDefined(SMMAR8,0),0)))),lessThanOrEqual(REGSMMAR_AGE,17))] On days that you smoked marijuana when you were age |displayif=greaterThanOrEqual(isDefined(REGSMMAR_AGE,-1),0)|{$REGSMMAR_AGE}||displayif=lessThan(isDefined(REGSMMAR_AGE,-1),0)|0| to |displayif=and(and(equals(SMMAR8C,0),doesNotEqual(isDefined(SMMAR8,-1),-1)),lessThan(isDefined(SMMAR8,17),17))|{$SMMAR8}||displayif=and(and(equals(SMMAR8C,0),doesNotEqual(isDefined(SMMAR8,-1),-1)),greaterThanOrEqual(isDefined(SMMAR8,17),17))|17||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(SMMAR8C,0),equals(isDefined(SMMAR8,-1),-1)),lessThanOrEqual(AGE,17)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(SMMAR8C,0),equals(isDefined(SMMAR8,-1),-1)),lessThanOrEqual(age,17)))|{$u:age}||displayif=and(or(doesNotEqual(SMMAR8C,0),equals(isDefined(SMMAR8,-1),-1)),greaterThan(isDefined(AGE,age),17))|17|, what is the total amount of time you smoked <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 18-24
+[SMMARLIFEB?,displayif=and(and(and(equals(SMMAR1,3),or(equals(SMMAR4,3),or(equals(SMMAR7B,0),equals(SMMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),18),or(doesNotEqual(SMMAR8C,0),greaterThanOrEqual(isDefined(SMMAR8,18),18)))),lessThanOrEqual(REGSMMAR_AGE,24))] On days that you smoked marijuana when you were age |displayif=greaterThanOrEqual(isDefined(REGSMMAR_AGE,-1),18)|{$REGSMMAR_AGE}||displayif=lessThan(isDefined(REGSMMAR_AGE,-1),18)|18| to |displayif=and(and(equals(SMMAR8C,0),doesNotEqual(isDefined(SMMAR8,-1),-1)),lessThan(isDefined(SMMAR8,24),24))|{$SMMAR8}||displayif=and(and(equals(SMMAR8C,0),doesNotEqual(isDefined(SMMAR8,-1),-1)),greaterThanOrEqual(isDefined(SMMAR8,24),24))|24||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(SMMAR8C,0),equals(isDefined(SMMAR8,-1),-1)),lessThanOrEqual(AGE,24)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(SMMAR8C,0),equals(isDefined(SMMAR8,-1),-1)),lessThanOrEqual(age,24)))|{$u:age}||displayif=and(or(doesNotEqual(SMMAR8C,0),equals(isDefined(SMMAR8,-1),-1)),greaterThan(isDefined(AGE,age),24))|24|, what is the total amount of time you smoked <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 25-29
+[SMMARLIFEC?,displayif=and(and(and(equals(SMMAR1,3),or(equals(SMMAR4,3),or(equals(SMMAR7B,0),equals(SMMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),25),or(doesNotEqual(SMMAR8C,0),greaterThanOrEqual(isDefined(SMMAR8,25),25)))),lessThanOrEqual(REGSMMAR_AGE,29))] On days that you smoked marijuana when you were age |displayif=greaterThanOrEqual(isDefined(REGSMMAR_AGE,-1),25)|{$REGSMMAR_AGE}||displayif=lessThan(isDefined(REGSMMAR_AGE,-1),25)|25| to |displayif=and(and(equals(SMMAR8C,0),doesNotEqual(isDefined(SMMAR8,-1),-1)),lessThan(isDefined(SMMAR8,29),29))|{$SMMAR8}||displayif=and(and(equals(SMMAR8C,0),doesNotEqual(isDefined(SMMAR8,-1),-1)),greaterThanOrEqual(isDefined(SMMAR8,29),29))|29||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(SMMAR8C,0),equals(isDefined(SMMAR8,-1),-1)),lessThanOrEqual(AGE,29)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(SMMAR8C,0),equals(isDefined(SMMAR8,-1),-1)),lessThanOrEqual(age,29)))|{$u:age}||displayif=and(or(doesNotEqual(SMMAR8C,0),equals(isDefined(SMMAR8,-1),-1)),greaterThan(isDefined(AGE,age),29))|29|, what is the total amount of time you smoked <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 30-39
+[SMMARLIFED?,displayif=and(and(and(equals(SMMAR1,3),or(equals(SMMAR4,3),or(equals(SMMAR7B,0),equals(SMMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),30),or(doesNotEqual(SMMAR8C,0),greaterThanOrEqual(isDefined(SMMAR8,30),30)))),lessThanOrEqual(REGSMMAR_AGE,39))] On days that you smoked marijuana when you were age |displayif=greaterThanOrEqual(isDefined(REGSMMAR_AGE,-1),30)|{$REGSMMAR_AGE}||displayif=lessThan(isDefined(REGSMMAR_AGE,-1),30)|30| to |displayif=and(and(equals(SMMAR8C,0),doesNotEqual(isDefined(SMMAR8,-1),-1)),lessThan(isDefined(SMMAR8,39),39))|{$SMMAR8}||displayif=and(and(equals(SMMAR8C,0),doesNotEqual(isDefined(SMMAR8,-1),-1)),greaterThanOrEqual(isDefined(SMMAR8,39),39))|39||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(SMMAR8C,0),equals(isDefined(SMMAR8,-1),-1)),lessThanOrEqual(AGE,39)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(SMMAR8C,0),equals(isDefined(SMMAR8,-1),-1)),lessThanOrEqual(age,39)))|{$u:age}||displayif=and(or(doesNotEqual(SMMAR8C,0),equals(isDefined(SMMAR8,-1),-1)),greaterThan(isDefined(AGE,age),39))|39|, what is the total amount of time you smoked <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 40-49
+[SMMARLIFEE?,displayif=and(and(and(equals(SMMAR1,3),or(equals(SMMAR4,3),or(equals(SMMAR7B,0),equals(SMMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),40),or(doesNotEqual(SMMAR8C,0),greaterThanOrEqual(isDefined(SMMAR8,40),40)))),lessThanOrEqual(REGSMMAR_AGE,49))] On days that you smoked marijuana when you were age |displayif=greaterThanOrEqual(isDefined(REGSMMAR_AGE,-1),40)|{$REGSMMAR_AGE}||displayif=lessThan(isDefined(REGSMMAR_AGE,-1),40)|40| to |displayif=and(and(equals(SMMAR8C,0),doesNotEqual(isDefined(SMMAR8,-1),-1)),lessThan(isDefined(SMMAR8,49),49))|{$SMMAR8}||displayif=and(and(equals(SMMAR8C,0),doesNotEqual(isDefined(SMMAR8,-1),-1)),greaterThanOrEqual(isDefined(SMMAR8,49),49))|49||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(SMMAR8C,0),equals(isDefined(SMMAR8,-1),-1)),lessThanOrEqual(AGE,49)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(SMMAR8C,0),equals(isDefined(SMMAR8,-1),-1)),lessThanOrEqual(age,49)))|{$u:age}||displayif=and(or(doesNotEqual(SMMAR8C,0),equals(isDefined(SMMAR8,-1),-1)),greaterThan(isDefined(AGE,age),49))|49|, what is the total amount of time you smoked <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 50-59
+[SMMARLIFEF?,displayif=and(and(and(equals(SMMAR1,3),or(equals(SMMAR4,3),or(equals(SMMAR7B,0),equals(SMMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),50),or(doesNotEqual(SMMAR8C,0),greaterThanOrEqual(isDefined(SMMAR8,50),50)))),lessThanOrEqual(REGSMMAR_AGE,59))] On days that you smoked marijuana when you were age |displayif=greaterThanOrEqual(isDefined(REGSMMAR_AGE,-1),50)|{$REGSMMAR_AGE}||displayif=lessThan(isDefined(REGSMMAR_AGE,-1),50)|50| to |displayif=and(and(equals(SMMAR8C,0),doesNotEqual(isDefined(SMMAR8,-1),-1)),lessThan(isDefined(SMMAR8,59),59))|{$SMMAR8}||displayif=and(and(equals(SMMAR8C,0),doesNotEqual(isDefined(SMMAR8,-1),-1)),greaterThanOrEqual(isDefined(SMMAR8,59),59))|59||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(SMMAR8C,0),equals(isDefined(SMMAR8,-1),-1)),lessThanOrEqual(AGE,59)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(SMMAR8C,0),equals(isDefined(SMMAR8,-1),-1)),lessThanOrEqual(age,59)))|{$u:age}||displayif=and(or(doesNotEqual(SMMAR8C,0),equals(isDefined(SMMAR8,-1),-1)),greaterThan(isDefined(AGE,age),59))|59|, what is the total amount of time you smoked <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 60-69
+[SMMARLIFEG?,displayif=and(and(and(equals(SMMAR1,3),or(equals(SMMAR4,3),or(equals(SMMAR7B,0),equals(SMMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),60),or(doesNotEqual(SMMAR8C,0),greaterThanOrEqual(isDefined(SMMAR8,60),60)))),lessThanOrEqual(REGSMMAR_AGE,69))] On days that you smoked marijuana when you were age |displayif=greaterThanOrEqual(isDefined(REGSMMAR_AGE,-1),60)|{$REGSMMAR_AGE}||displayif=lessThan(isDefined(REGSMMAR_AGE,-1),60)|60| to |displayif=and(and(equals(SMMAR8C,0),doesNotEqual(isDefined(SMMAR8,-1),-1)),lessThan(isDefined(SMMAR8,69),69))|{$SMMAR8}||displayif=and(and(equals(SMMAR8C,0),doesNotEqual(isDefined(SMMAR8,-1),-1)),greaterThanOrEqual(isDefined(SMMAR8,69),69))|69||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(SMMAR8C,0),equals(isDefined(SMMAR8,-1),-1)),lessThanOrEqual(AGE,69)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(SMMAR8C,0),equals(isDefined(SMMAR8,-1),-1)),lessThanOrEqual(age,69)))|{$u:age}||displayif=and(or(doesNotEqual(SMMAR8C,0),equals(isDefined(SMMAR8,-1),-1)),greaterThan(isDefined(AGE,age),69))|69|, what is the total amount of time you smoked <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 70+
+[SMMARLIFEH?,displayif=and(and(equals(SMMAR1,3),or(equals(SMMAR4,3),or(equals(SMMAR7B,0),equals(SMMAR8C,0)))),and(greaterThanOrEqual(isDefined(AGE,age),70),or(doesNotEqual(SMMAR8C,0),greaterThanOrEqual(isDefined(SMMAR8,70),70))))] On days that you smoked marijuana when you were age |displayif=greaterThanOrEqual(isDefined(REGSMMAR_AGE,-1),70)|{$REGSMMAR_AGE}||displayif=lessThan(isDefined(REGSMMAR_AGE,-1),70)|70| or older, what is the total amount of time you smoked <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+[TOMAR1?,displayif=equals(MARIJUANA,1)]<b>Smoking a Combination of Marijuana with Tobacco (Including Blunts, Spliffs, Hollowed Out Cigars or Cigarillos Filled with Marijuana)</b>
+
+Next we have some questions about your use of a combination of marijuana with tobacco (including blunts, spliffs, or hollowed out cigars or cigarillos filled with marijuana).
+
+How many <b>marijuana products with tobacco</b> have you smoked in your life?
+(0) 10 or less -> ELMAR1
+(1) 11 to 49 -> ELMAR1
+(2) 50 to 99 -> TOMAR2
+(3) 100 or more -> TOMAR2
+< #NR ->  ELMAR1>
+
+[TOMAR2?,displayif=equals(MARIJUANA,1)] How old were you when you <b>first</b> smoked a combination of marijuana with tobacco?
+
+Age first smoked a combination of marijuana with tobacco |__|__|min=0 max=sum(isDefined(AGE,age),1)|< ->  TOMAR3>
+
+[TOMAR3?,displayif=equals(MARIJUANA,1)]
+How old were you when you started smoking a combination of marijuana with tobacco on a |popup|regular basis|Informational Text|We understand that the meaning of 'regular basis' might be different for different people. When you answer this question, please think about what "regular basis" means to you.|?
+
+Age started smoking a combination of marijuana with tobacco on a regular basis |__|__|id=REGTOMAR_AGE min=isDefined(TOMAR2,0) max=sum(isDefined(AGE,age),1)|
+
+[44*] Never smoked on a regular basis
+< ->  TOMAR4>
+
+[TOMAR4?,displayif=equals(MARIJUANA,1)] Do you smoke a combination of marijuana with tobacco now?
+(0) No ->  TOMAR5
+(1) Yes, but rarely ->  TOMAR5
+(2) Yes, some days -> TOMAR5
+(3) Yes, every day ->  TOMAR9A
+< #NR -> TOMAR5>
+
+[TOMAR5?,displayif=equals(MARIJUANA,1)] When was the <b>last</b> time you smoked a combination of marijuana with tobacco?
+(0) In the past month ->  TOMAR6
+(1) More than a month ago, but in the past year -> TOMAR7A
+(2) More than 1 year ago -> TOMAR8
+< #NR -> TOMAR9A>
+
+[TOMAR6?,displayif=equals(MARIJUANA,1)] <b>On how many of the past 30 days </b> have you smoked a combination of marijuana with tobacco?
+
+#Days smoked a combination of marijuana with tobacco in past 30 days |__|__|min=1 max=30|<  -> TOMAR9A>
+
+[TOMAR7A?,displayif=equals(MARIJUANA,1)] How many months ago did you <b>last</b> smoke a combination of marijuana with tobacco?
+
+#Months ago last smoked a combination of marijuana with tobacco |__|__|min=1 max=11|<  -> TOMAR7B>
+
+[TOMAR7B?,displayif=equals(MARIJUANA,1)] During that time, did you ever smoke a combination of marijuana with tobacco <b>every day</b>?
+(0) No -> TOMAR7C
+(1) Yes -> TOMAR9A
+< #NR -> TOMAR7C>
+
+[TOMAR7C?,displayif=equals(MARIJUANA,1)] During that time, how many days (1 to 30) did you smoke a combination of marijuana with tobacco in a usual month?
+
+#Days smoke in usual month |__|__|min=1 max=30|<  -> TOMAR9A>
+
+[TOMAR8?,displayif=equals(MARIJUANA,1)] How old were you when you <b>last</b> smoked a combination of marijuana with tobacco?
+
+Age when last smoked a combination of marijuana with tobacco  |__|__|min=isDefined(isDefined(REGTOMAR_AGE,TOMAR2),0) max=sum(isDefined(AGE,age),1)|< -> TOMAR8C>
+
+[TOMAR8C?,displayif=equals(MARIJUANA,1)] During that time, did you ever smoke a combination of marijuana with tobacco <b>every day</b>?
+(0) No -> TOMAR8D
+(1) Yes -> TOMAR9A
+< #NR -> TOMAR8D>
+
+[TOMAR8D?,displayif=equals(MARIJUANA,1)] During that time, how many days (1 to 30) did you smoke a combination of marijuana with tobacco in a usual month?
+
+#Days smoked in usual month |__|__|min=1 max=30|<-> TOMAR9A >
+
+[TOMAR9A?,displayif=equals(MARIJUANA,1)]
+On days that you |displayif=and(doesNotEqual(TOMAR5,1),doesNotEqual(TOMAR5,2))|smoke||displayif=or(equals(TOMAR5,1),equals(TOMAR5,2))|smoked|, how many times |displayif=and(doesNotEqual(TOMAR5,1),doesNotEqual(TOMAR5,2))|do||displayif=or(equals(TOMAR5,1),equals(TOMAR5,2))|did| you smoke a combination of marijuana with tobacco <b>per day</b>?
+#TIMES PER DAY |__|__|__|min=1 max=999|
+
+[TOMAR9B?,displayif=and(doesNotEqual(or(or(equals(TOMAR4,3),and(or(or(equals(TOMAR4,2),equals(TOMAR4,1)),equals(TOMAR4,0)),and(equals(TOMAR5,1),equals(TOMAR7B,0)))),and(or(or(equals(TOMAR4,2),equals(TOMAR4,1)),equals(TOMAR4,0)),and(equals(TOMAR5,2),equals(TOMAR8C,0)))),1),equals(MARIJUANA,1))] Did you ever smoke a combination of marijuana with tobacco <b>every day</b>?
+(0) No -> TOMAR10
+(1) Yes -> TOMAR9D
+< #NR -> TOMAR10>
+
+[TOMAR9D?,displayif=and(doesNotEqual(or(or(equals(TOMAR4,3),and(or(or(equals(TOMAR4,2),equals(TOMAR4,1)),equals(TOMAR4,0)),and(equals(TOMAR5,1),equals(TOMAR7B,0)))),and(or(or(equals(TOMAR4,2),equals(TOMAR4,1)),equals(TOMAR4,0)),and(equals(TOMAR5,2),equals(TOMAR8C,0)))),1),equals(MARIJUANA,1))] How old were you when you stopped smoking a combination of marijuana with tobacco <b>every day</b>?
+
+Age stopped smoking every day |__|__|min=0 max=sum(isDefined(AGE,age),1)|< -> TOMAR9C>
+
+[TOMAR9C?,displayif=and(doesNotEqual(or(or(equals(TOMAR4,3),and(or(or(equals(TOMAR4,2),equals(TOMAR4,1)),equals(TOMAR4,0)),and(equals(TOMAR5,1),equals(TOMAR7B,0)))),and(or(or(equals(TOMAR4,2),equals(TOMAR4,1)),equals(TOMAR4,0)),and(equals(TOMAR5,2),equals(TOMAR8C,0)))),1),equals(MARIJUANA,1))] When you were a daily smoker of a combination of marijuana with tobacco, about how many times <b>per day</b> did you smoke a combination of marijuana with tobacco?
+#TIMES PER DAY |__|__|min=1 max=99|
+< -> TOMAR10>
+
+[TOMAR10?,displayif=equals(MARIJUANA,1)] Why |displayif=or(equals(TOMAR4,3),equals(TOMAR5,0))|do||displayif=or(equals(TOMAR5,1),equals(TOMAR5,2))|did| you smoke a combination of marijuana with tobacco?
+(0) Recreation
+(1) As medicine
+(2) Recreation and as medicine
+(55) Other: Please describe |__|id=TOMAR10OTH|
+(99) Prefer not to answer
+< -> TOMARLIFEA>
+
+// Same logic as CIGLIFEA-CIGLIFEH just with different variable names
+// 0-17
+[TOMARLIFEA?,displayif=and(and(and(equals(TOMAR1,3),or(equals(TOMAR4,3),or(equals(TOMAR7B,0),equals(TOMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),0),or(doesNotEqual(TOMAR8C,0),greaterThanOrEqual(isDefined(TOMAR8,0),0)))),lessThanOrEqual(REGTOMAR_AGE,17))]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(REGTOMAR_AGE,-1),0)|{$REGTOMAR_AGE}||displayif=lessThan(isDefined(REGTOMAR_AGE,-1),0)|0| to |displayif=and(and(equals(TOMAR8C,0),doesNotEqual(isDefined(TOMAR8,-1),-1)),lessThan(isDefined(TOMAR8,17),17))|{$TOMAR8}||displayif=and(and(equals(TOMAR8C,0),doesNotEqual(isDefined(TOMAR8,-1),-1)),greaterThanOrEqual(isDefined(TOMAR8,17),17))|17||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(TOMAR8C,0),equals(isDefined(TOMAR8,-1),-1)),lessThanOrEqual(AGE,17)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(TOMAR8C,0),equals(isDefined(TOMAR8,-1),-1)),lessThanOrEqual(age,17)))|{$u:age}||displayif=and(or(doesNotEqual(TOMAR8C,0),equals(isDefined(TOMAR8,-1),-1)),greaterThan(isDefined(AGE,age),17))|17|, about how many times did you smoke a combination of marijuana with tobacco <b>per day</b>?
+
+#TIMES PER DAY |__|__|min=1 max=99|
+
+// 18-24
+[TOMARLIFEB?,displayif=and(and(and(equals(TOMAR1,3),or(equals(TOMAR4,3),or(equals(TOMAR7B,0),equals(TOMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),18),or(doesNotEqual(TOMAR8C,0),greaterThanOrEqual(isDefined(TOMAR8,18),18)))),lessThanOrEqual(REGTOMAR_AGE,24))]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(REGTOMAR_AGE,-1),18)|{$REGTOMAR_AGE}||displayif=lessThan(isDefined(REGTOMAR_AGE,-1),18)|18| to |displayif=and(and(equals(TOMAR8C,0),doesNotEqual(isDefined(TOMAR8,-1),-1)),lessThan(isDefined(TOMAR8,24),24))|{$TOMAR8}||displayif=and(and(equals(TOMAR8C,0),doesNotEqual(isDefined(TOMAR8,-1),-1)),greaterThanOrEqual(isDefined(TOMAR8,24),24))|24||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(TOMAR8C,0),equals(isDefined(TOMAR8,-1),-1)),lessThanOrEqual(AGE,24)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(TOMAR8C,0),equals(isDefined(TOMAR8,-1),-1)),lessThanOrEqual(age,24)))|{$u:age}||displayif=and(or(doesNotEqual(TOMAR8C,0),equals(isDefined(TOMAR8,-1),-1)),greaterThan(isDefined(AGE,age),24))|24|, about how many times did you smoke a combination of marijuana with tobacco <b>per day</b>?
+
+#TIMES PER DAY |__|__|min=1 max=99|
+
+// 25-29
+[TOMARLIFEC?,displayif=and(and(and(equals(TOMAR1,3),or(equals(TOMAR4,3),or(equals(TOMAR7B,0),equals(TOMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),25),or(doesNotEqual(TOMAR8C,0),greaterThanOrEqual(isDefined(TOMAR8,25),25)))),lessThanOrEqual(REGTOMAR_AGE,29))]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(REGTOMAR_AGE,-1),25)|{$REGTOMAR_AGE}||displayif=lessThan(isDefined(REGTOMAR_AGE,-1),25)|25| to |displayif=and(and(equals(TOMAR8C,0),doesNotEqual(isDefined(TOMAR8,-1),-1)),lessThan(isDefined(TOMAR8,29),29))|{$TOMAR8}||displayif=and(and(equals(TOMAR8C,0),doesNotEqual(isDefined(TOMAR8,-1),-1)),greaterThanOrEqual(isDefined(TOMAR8,29),29))|29||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(TOMAR8C,0),equals(isDefined(TOMAR8,-1),-1)),lessThanOrEqual(AGE,29)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(TOMAR8C,0),equals(isDefined(TOMAR8,-1),-1)),lessThanOrEqual(age,29)))|{$u:age}||displayif=and(or(doesNotEqual(TOMAR8C,0),equals(isDefined(TOMAR8,-1),-1)),greaterThan(isDefined(AGE,age),29))|29|, about how many times did you smoke a combination of marijuana with tobacco <b>per day</b>?
+
+#TIMES PER DAY |__|__|min=1 max=99|
+
+// 30-39
+[TOMARLIFED?,displayif=and(and(and(equals(TOMAR1,3),or(equals(TOMAR4,3),or(equals(TOMAR7B,0),equals(TOMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),30),or(doesNotEqual(TOMAR8C,0),greaterThanOrEqual(isDefined(TOMAR8,30),30)))),lessThanOrEqual(REGTOMAR_AGE,39))]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(REGTOMAR_AGE,-1),30)|{$REGTOMAR_AGE}||displayif=lessThan(isDefined(REGTOMAR_AGE,-1),30)|30| to |displayif=and(and(equals(TOMAR8C,0),doesNotEqual(isDefined(TOMAR8,-1),-1)),lessThan(isDefined(TOMAR8,39),39))|{$TOMAR8}||displayif=and(and(equals(TOMAR8C,0),doesNotEqual(isDefined(TOMAR8,-1),-1)),greaterThanOrEqual(isDefined(TOMAR8,39),39))|39||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(TOMAR8C,0),equals(isDefined(TOMAR8,-1),-1)),lessThanOrEqual(AGE,39)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(TOMAR8C,0),equals(isDefined(TOMAR8,-1),-1)),lessThanOrEqual(age,39)))|{$u:age}||displayif=and(or(doesNotEqual(TOMAR8C,0),equals(isDefined(TOMAR8,-1),-1)),greaterThan(isDefined(AGE,age),39))|39|, about how many times did you smoke a combination of marijuana with tobacco <b>per day</b>?
+
+#TIMES PER DAY |__|__|min=1 max=99|
+
+// 40-49
+[TOMARLIFEE?,displayif=and(and(and(equals(TOMAR1,3),or(equals(TOMAR4,3),or(equals(TOMAR7B,0),equals(TOMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),40),or(doesNotEqual(TOMAR8C,0),greaterThanOrEqual(isDefined(TOMAR8,40),40)))),lessThanOrEqual(REGTOMAR_AGE,49))]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(REGTOMAR_AGE,-1),40)|{$REGTOMAR_AGE}||displayif=lessThan(isDefined(REGTOMAR_AGE,-1),40)|40| to |displayif=and(and(equals(TOMAR8C,0),doesNotEqual(isDefined(TOMAR8,-1),-1)),lessThan(isDefined(TOMAR8,49),49))|{$TOMAR8}||displayif=and(and(equals(TOMAR8C,0),doesNotEqual(isDefined(TOMAR8,-1),-1)),greaterThanOrEqual(isDefined(TOMAR8,49),49))|49||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(TOMAR8C,0),equals(isDefined(TOMAR8,-1),-1)),lessThanOrEqual(AGE,49)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(TOMAR8C,0),equals(isDefined(TOMAR8,-1),-1)),lessThanOrEqual(age,49)))|{$u:age}||displayif=and(or(doesNotEqual(TOMAR8C,0),equals(isDefined(TOMAR8,-1),-1)),greaterThan(isDefined(AGE,age),49))|49|, about how many times did you smoke a combination of marijuana with tobacco <b>per day</b>?
+
+#TIMES PER DAY |__|__|min=1 max=99|
+
+// 50-59
+[TOMARLIFEF?,displayif=and(and(and(equals(TOMAR1,3),or(equals(TOMAR4,3),or(equals(TOMAR7B,0),equals(TOMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),50),or(doesNotEqual(TOMAR8C,0),greaterThanOrEqual(isDefined(TOMAR8,50),50)))),lessThanOrEqual(REGTOMAR_AGE,59))]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(REGTOMAR_AGE,-1),50)|{$REGTOMAR_AGE}||displayif=lessThan(isDefined(REGTOMAR_AGE,-1),50)|50| to |displayif=and(and(equals(TOMAR8C,0),doesNotEqual(isDefined(TOMAR8,-1),-1)),lessThan(isDefined(TOMAR8,59),59))|{$TOMAR8}||displayif=and(and(equals(TOMAR8C,0),doesNotEqual(isDefined(TOMAR8,-1),-1)),greaterThanOrEqual(isDefined(TOMAR8,59),59))|59||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(TOMAR8C,0),equals(isDefined(TOMAR8,-1),-1)),lessThanOrEqual(AGE,59)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(TOMAR8C,0),equals(isDefined(TOMAR8,-1),-1)),lessThanOrEqual(age,59)))|{$u:age}||displayif=and(or(doesNotEqual(TOMAR8C,0),equals(isDefined(TOMAR8,-1),-1)),greaterThan(isDefined(AGE,age),59))|59|, about how many times did you smoke a combination of marijuana with tobacco <b>per day</b>?
+
+#TIMES PER DAY |__|__|min=1 max=99|
+
+// 60-69
+[TOMARLIFEG?,displayif=and(and(and(equals(TOMAR1,3),or(equals(TOMAR4,3),or(equals(TOMAR7B,0),equals(TOMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),60),or(doesNotEqual(TOMAR8C,0),greaterThanOrEqual(isDefined(TOMAR8,60),60)))),lessThanOrEqual(REGTOMAR_AGE,69))]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(REGTOMAR_AGE,-1),60)|{$REGTOMAR_AGE}||displayif=lessThan(isDefined(REGTOMAR_AGE,-1),60)|60| to |displayif=and(and(equals(TOMAR8C,0),doesNotEqual(isDefined(TOMAR8,-1),-1)),lessThan(isDefined(TOMAR8,69),69))|{$TOMAR8}||displayif=and(and(equals(TOMAR8C,0),doesNotEqual(isDefined(TOMAR8,-1),-1)),greaterThanOrEqual(isDefined(TOMAR8,69),69))|69||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(TOMAR8C,0),equals(isDefined(TOMAR8,-1),-1)),lessThanOrEqual(AGE,69)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(TOMAR8C,0),equals(isDefined(TOMAR8,-1),-1)),lessThanOrEqual(age,69)))|{$u:age}||displayif=and(or(doesNotEqual(TOMAR8C,0),equals(isDefined(TOMAR8,-1),-1)),greaterThan(isDefined(AGE,age),69))|69|, about how many times did you smoke a combination of marijuana with tobacco <b>per day</b>?
+
+#TIMES PER DAY |__|__|min=1 max=99|
+
+// 70+
+[TOMARLIFEH?,displayif=and(and(equals(TOMAR1,3),or(equals(TOMAR4,3),or(equals(TOMAR7B,0),equals(TOMAR8C,0)))),and(greaterThanOrEqual(isDefined(AGE,age),70),or(doesNotEqual(TOMAR8C,0),greaterThanOrEqual(isDefined(TOMAR8,70),70))))]
+On days that you smoked when you were age |displayif=greaterThanOrEqual(isDefined(REGTOMAR_AGE,-1),70)|{$REGTOMAR_AGE}||displayif=lessThan(isDefined(REGTOMAR_AGE,-1),70)|70| or older, about how many times did you smoke a combination of marijuana with tobacco <b>per day</b>?
+
+#TIMES PER DAY |__|__|min=1 max=99|
+
+[ELMAR1?,displayif=equals(MARIJUANA,2)]<b>Electronic Delivery Devices </b>
+
+The following questions ask about your use of electronic marijuana delivery devices that can be vaped, such as vape pens or pod-mods. These electronic devices sometimes look like regular cigarettes but are battery-powered and create vapor instead of smoke.
+
+How many days have you used an <b>electronic delivery device</b> for vaping marijuana in your life?
+(0) 10 or less -> EAMAR1
+(1) 11 to 49 -> EAMAR1
+(2) 50 to 99 -> ELMAR2
+(3) 100 or more -> ELMAR2
+< #NR -> EAMAR1>
+
+[ELMAR2?,displayif=equals(MARIJUANA,2)] How old were you when you <b>first</b> used an electronic delivery device for vaping marijuana?
+
+Age first vaped marijuana |__|__|min=0 max=sum(isDefined(AGE,age),1)|
+< -> ELMAR3>
+
+[ELMAR3?,displayif=equals(MARIJUANA,2)]
+How old were you when you started using electronic marijuana delivery devices for vaping on a |popup|regular basis|Informational Text|We understand that the meaning of 'regular basis' might be different for different people. When you answer this question, please think about what "regular basis" means to you.|?
+
+Age started vaping marijuana on a regular basis |__|__|id=REGELMAR_AGE min=isDefined(ELMAR2,0) max=sum(isDefined(AGE,age),1)|
+
+[44*] Never vaped marijuana on a regular basis
+
+< -> ELMAR4>
+
+[ELMAR4?,displayif=equals(MARIJUANA,2)] Do you use electronic marijuana delivery devices for vaping now?
+(0) No ->  ELMAR5
+(1) Yes, but rarely ->  ELMAR5
+(2) Yes, some days -> ELMAR5
+(3) Yes, every day ->  ELMAR9A
+< #NR -> ELMAR5>
+
+[ELMAR5?,displayif=equals(MARIJUANA,2)] When was the <b>last</b> time you used electronic marijuana delivery devices that can be vaped?
+(0) In the past month ->  ELMAR6
+(1) More than a month ago, but in the past year -> ELMAR7A
+(2) More than 1 year ago -> ELMAR8
+< #NR -> ELMAR9A>
+
+[ELMAR6?,displayif=equals(MARIJUANA,2)] <b>On how many of the past 30 days </b> have you used electronic marijuana delivery devices that can be vaped?
+
+#Days used electronic marijuana delivery devices that can be vaped in past 30 days |__|__|min=1 max=30|< -> ELMAR9A>
+
+
+[ELMAR7A?,displayif=equals(MARIJUANA,2)] How many months ago did you <b>last</b> use electronic marijuana delivery devices that can be vaped?
+
+#Months ago last used electronic marijuana delivery devices that can be vaped |__|__|min=1 max=11|< -> ELMAR7B>
+
+[ELMAR7B?,displayif=equals(MARIJUANA,2)] During that time, did you ever use electronic marijuana delivery devices that can be vaped every day?
+(0) No -> ELMAR7C
+(1) Yes ->  ELMAR9A
+<#NR -> ELMAR7C>
+
+[ELMAR7C?,displayif=equals(MARIJUANA,2)] During that time, how many days (1 to 30) did you use electronic marijuana delivery devices that can be vaped in a usual month?
+
+#Days used in usual month |__|__|min=1 max=30|<  -> ELMAR9A>
+
+[ELMAR8?,displayif=equals(MARIJUANA,2)] How old were you when you <b>last</b> used electronic marijuana delivery devices that can be vaped?
+
+Age when last used electronic marijuana delivery devices that can be vaped |__|__|min=isDefined(isDefined(REGELMAR_AGE,ELMAR2),0) max=sum(isDefined(AGE,age),1)|
+< #NR -> ELMAR8C>
+
+[ELMAR8C?,displayif=equals(MARIJUANA,2)] During that time, did you ever use electronic marijuana delivery devices that can be vaped every day?
+(0) No ->  ELMAR8D
+(1) Yes -> ELMAR9A
+<#NR -> ELMAR8D>
+
+[ELMAR8D?,displayif=equals(MARIJUANA,2)] During that time, how many days (1 to 30) did you use electronic marijuana delivery devices that can be vaped in a usual month?
+
+#Days used in a usual month |__|__|min=1 max=30|< -> ELMAR9A>
+
+[ELMAR9A?,displayif=equals(MARIJUANA,2)]
+On days that you use|displayif=or(equals(ELMAR5,1),equals(ELMAR5,2))|d| electronic marijuana delivery devices that can be vaped, what is the total amount of time you vape|displayif=or(equals(ELMAR5,1),equals(ELMAR5,2))|d| <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+< -> ELMAR9B>
+
+[ELMAR9B?,displayif=and(doesNotEqual(or(or(equals(ELMAR4,3),and(or(or(equals(ELMAR4,2),equals(ELMAR4,1)),equals(ELMAR4,0)),and(equals(ELMAR5,1),equals(ELMAR7B,0)))),and(or(or(equals(ELMAR4,2),equals(ELMAR4,1)),equals(ELMAR4,0)),and(equals(ELMAR5,2),equals(ELMAR8C,0)))),1),equals(MARIJUANA,2))] Did you ever use electronic marijuana delivery devices that can be vaped <b>every day</b>?
+(0) No -> ELMAR10
+(1) Yes ->  ELMAR9D
+< #NR -> ELMAR10>
+
+[ELMAR9D?,displayif=and(doesNotEqual(or(or(equals(ELMAR4,3),and(or(or(equals(ELMAR4,2),equals(ELMAR4,1)),equals(ELMAR4,0)),and(equals(ELMAR5,1),equals(ELMAR7B,0)))),and(or(or(equals(ELMAR4,2),equals(ELMAR4,1)),equals(ELMAR4,0)),and(equals(ELMAR5,2),equals(ELMAR8C,0)))),1),equals(MARIJUANA,2))] How old were you when you stopped using electronic marijuana delivery devices that be vaped <b>every day</b>?
+ Age stopped vaping every day |__|__|min=0 max=sum(isDefined(AGE,age),1)|< -> ELMAR9C>
+
+[ELMAR9C?,displayif=and(doesNotEqual(or(or(equals(ELMAR4,3),and(or(or(equals(ELMAR4,2),equals(ELMAR4,1)),equals(ELMAR4,0)),and(equals(ELMAR5,1),equals(ELMAR7B,0)))),and(or(or(equals(ELMAR4,2),equals(ELMAR4,1)),equals(ELMAR4,0)),and(equals(ELMAR5,2),equals(ELMAR8C,0)))),1),equals(MARIJUANA,2))] When you were a daily user of electronic marijuana delivery devices that can be vaped, what is the total amount of time you vaped <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+<#NR -> ELMAR10>
+
+[ELMAR10?,displayif=equals(MARIJUANA,2)] Why |displayif=or(equals(ELMAR4,3),equals(ELMAR5,0))|do||displayif=or(equals(ELMAR5,1),equals(ELMAR5,2))|did| you use electronic marijuana delivery devices that can be vaped?
+(0) Recreation
+(1) As medicine
+(2) Recreation and as medicine
+(55) Other: Please describe |__|id=ELMAR10OTH|
+(99) Prefer not to answer
+< -> ELMARLIFEA>
+
+// Same logic as CIGLIFEA-CIGLIFEH just with different variable names
+// 0-17
+[ELMARLIFEA?,displayif=and(and(and(equals(ELMAR1,3),or(equals(ELMAR4,3),or(equals(ELMAR7B,0),equals(ELMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),0),or(doesNotEqual(ELMAR8C,0),greaterThanOrEqual(isDefined(ELMAR8,0),0)))),lessThanOrEqual(REGELMAR_AGE,17))]
+On days that you used electronic marijuana delivery devices when you were age |displayif=greaterThanOrEqual(isDefined(REGELMAR_AGE,-1),0)|{$REGELMAR_AGE}||displayif=lessThan(isDefined(REGELMAR_AGE,-1),0)|0| to |displayif=and(and(equals(ELMAR8C,0),doesNotEqual(isDefined(ELMAR8,-1),-1)),lessThan(isDefined(ELMAR8,17),17))|{$ELMAR8}||displayif=and(and(equals(ELMAR8C,0),doesNotEqual(isDefined(ELMAR8,-1),-1)),greaterThanOrEqual(isDefined(ELMAR8,17),17))|17||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(ELMAR8C,0),equals(isDefined(ELMAR8,-1),-1)),lessThanOrEqual(AGE,17)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(ELMAR8C,0),equals(isDefined(ELMAR8,-1),-1)),lessThanOrEqual(age,17)))|{$u:age}||displayif=and(or(doesNotEqual(ELMAR8C,0),equals(isDefined(ELMAR8,-1),-1)),greaterThan(isDefined(AGE,age),17))|17|, what is the total amount of time you vaped <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 18-24
+[ELMARLIFEB?,displayif=and(and(and(equals(ELMAR1,3),or(equals(ELMAR4,3),or(equals(ELMAR7B,0),equals(ELMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),18),or(doesNotEqual(ELMAR8C,0),greaterThanOrEqual(isDefined(ELMAR8,18),18)))),lessThanOrEqual(REGELMAR_AGE,24))]
+On days that you used electronic marijuana delivery devices when you were age |displayif=greaterThanOrEqual(isDefined(REGELMAR_AGE,-1),18)|{$REGELMAR_AGE}||displayif=lessThan(isDefined(REGELMAR_AGE,-1),18)|18| to |displayif=and(and(equals(ELMAR8C,0),doesNotEqual(isDefined(ELMAR8,-1),-1)),lessThan(isDefined(ELMAR8,24),24))|{$ELMAR8}||displayif=and(and(equals(ELMAR8C,0),doesNotEqual(isDefined(ELMAR8,-1),-1)),greaterThanOrEqual(isDefined(ELMAR8,24),24))|24||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(ELMAR8C,0),equals(isDefined(ELMAR8,-1),-1)),lessThanOrEqual(AGE,24)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(ELMAR8C,0),equals(isDefined(ELMAR8,-1),-1)),lessThanOrEqual(age,24)))|{$u:age}||displayif=and(or(doesNotEqual(ELMAR8C,0),equals(isDefined(ELMAR8,-1),-1)),greaterThan(isDefined(AGE,age),24))|24|, what is the total amount of time you vaped <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 25-29
+[ELMARLIFEC?,displayif=and(and(and(equals(ELMAR1,3),or(equals(ELMAR4,3),or(equals(ELMAR7B,0),equals(ELMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),25),or(doesNotEqual(ELMAR8C,0),greaterThanOrEqual(isDefined(ELMAR8,25),25)))),lessThanOrEqual(REGELMAR_AGE,29))]
+On days that you used electronic marijuana delivery devices when you were age |displayif=greaterThanOrEqual(isDefined(REGELMAR_AGE,-1),25)|{$REGELMAR_AGE}||displayif=lessThan(isDefined(REGELMAR_AGE,-1),25)|25| to |displayif=and(and(equals(ELMAR8C,0),doesNotEqual(isDefined(ELMAR8,-1),-1)),lessThan(isDefined(ELMAR8,29),29))|{$ELMAR8}||displayif=and(and(equals(ELMAR8C,0),doesNotEqual(isDefined(ELMAR8,-1),-1)),greaterThanOrEqual(isDefined(ELMAR8,29),29))|29||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(ELMAR8C,0),equals(isDefined(ELMAR8,-1),-1)),lessThanOrEqual(AGE,29)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(ELMAR8C,0),equals(isDefined(ELMAR8,-1),-1)),lessThanOrEqual(age,29)))|{$u:age}||displayif=and(or(doesNotEqual(ELMAR8C,0),equals(isDefined(ELMAR8,-1),-1)),greaterThan(isDefined(AGE,age),29))|29|, what is the total amount of time you vaped <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 30-39
+[ELMARLIFED?,displayif=and(and(and(equals(ELMAR1,3),or(equals(ELMAR4,3),or(equals(ELMAR7B,0),equals(ELMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),30),or(doesNotEqual(ELMAR8C,0),greaterThanOrEqual(isDefined(ELMAR8,30),30)))),lessThanOrEqual(REGELMAR_AGE,39))]
+On days that you used electronic marijuana delivery devices when you were age |displayif=greaterThanOrEqual(isDefined(REGELMAR_AGE,-1),30)|{$REGELMAR_AGE}||displayif=lessThan(isDefined(REGELMAR_AGE,-1),30)|30| to |displayif=and(and(equals(ELMAR8C,0),doesNotEqual(isDefined(ELMAR8,-1),-1)),lessThan(isDefined(ELMAR8,39),39))|{$ELMAR8}||displayif=and(and(equals(ELMAR8C,0),doesNotEqual(isDefined(ELMAR8,-1),-1)),greaterThanOrEqual(isDefined(ELMAR8,39),39))|39||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(ELMAR8C,0),equals(isDefined(ELMAR8,-1),-1)),lessThanOrEqual(AGE,39)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(ELMAR8C,0),equals(isDefined(ELMAR8,-1),-1)),lessThanOrEqual(age,39)))|{$u:age}||displayif=and(or(doesNotEqual(ELMAR8C,0),equals(isDefined(ELMAR8,-1),-1)),greaterThan(isDefined(AGE,age),39))|39|, what is the total amount of time you vaped <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 40-49
+[ELMARLIFEE?,displayif=and(and(and(equals(ELMAR1,3),or(equals(ELMAR4,3),or(equals(ELMAR7B,0),equals(ELMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),40),or(doesNotEqual(ELMAR8C,0),greaterThanOrEqual(isDefined(ELMAR8,40),40)))),lessThanOrEqual(REGELMAR_AGE,49))]
+On days that you used electronic marijuana delivery devices when you were age |displayif=greaterThanOrEqual(isDefined(REGELMAR_AGE,-1),40)|{$REGELMAR_AGE}||displayif=lessThan(isDefined(REGELMAR_AGE,-1),40)|40| to |displayif=and(and(equals(ELMAR8C,0),doesNotEqual(isDefined(ELMAR8,-1),-1)),lessThan(isDefined(ELMAR8,49),49))|{$ELMAR8}||displayif=and(and(equals(ELMAR8C,0),doesNotEqual(isDefined(ELMAR8,-1),-1)),greaterThanOrEqual(isDefined(ELMAR8,49),49))|49||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(ELMAR8C,0),equals(isDefined(ELMAR8,-1),-1)),lessThanOrEqual(AGE,49)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(ELMAR8C,0),equals(isDefined(ELMAR8,-1),-1)),lessThanOrEqual(age,49)))|{$u:age}||displayif=and(or(doesNotEqual(ELMAR8C,0),equals(isDefined(ELMAR8,-1),-1)),greaterThan(isDefined(AGE,age),49))|49|, what is the total amount of time you vaped <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 50-59
+[ELMARLIFEF?,displayif=and(and(and(equals(ELMAR1,3),or(equals(ELMAR4,3),or(equals(ELMAR7B,0),equals(ELMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),50),or(doesNotEqual(ELMAR8C,0),greaterThanOrEqual(isDefined(ELMAR8,50),50)))),lessThanOrEqual(REGELMAR_AGE,59))]
+On days that you used electronic marijuana delivery devices when you were age |displayif=greaterThanOrEqual(isDefined(REGELMAR_AGE,-1),50)|{$REGELMAR_AGE}||displayif=lessThan(isDefined(REGELMAR_AGE,-1),50)|50| to |displayif=and(and(equals(ELMAR8C,0),doesNotEqual(isDefined(ELMAR8,-1),-1)),lessThan(isDefined(ELMAR8,59),59))|{$ELMAR8}||displayif=and(and(equals(ELMAR8C,0),doesNotEqual(isDefined(ELMAR8,-1),-1)),greaterThanOrEqual(isDefined(ELMAR8,59),59))|59||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(ELMAR8C,0),equals(isDefined(ELMAR8,-1),-1)),lessThanOrEqual(AGE,59)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(ELMAR8C,0),equals(isDefined(ELMAR8,-1),-1)),lessThanOrEqual(age,59)))|{$u:age}||displayif=and(or(doesNotEqual(ELMAR8C,0),equals(isDefined(ELMAR8,-1),-1)),greaterThan(isDefined(AGE,age),59))|59|, what is the total amount of time you vaped <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 60-69
+[ELMARLIFEG?,displayif=and(and(and(equals(ELMAR1,3),or(equals(ELMAR4,3),or(equals(ELMAR7B,0),equals(ELMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),60),or(doesNotEqual(ELMAR8C,0),greaterThanOrEqual(isDefined(ELMAR8,60),60)))),lessThanOrEqual(REGELMAR_AGE,69))]
+On days that you used electronic marijuana delivery devices when you were age |displayif=greaterThanOrEqual(isDefined(REGELMAR_AGE,-1),60)|{$REGELMAR_AGE}||displayif=lessThan(isDefined(REGELMAR_AGE,-1),60)|60| to |displayif=and(and(equals(ELMAR8C,0),doesNotEqual(isDefined(ELMAR8,-1),-1)),lessThan(isDefined(ELMAR8,69),69))|{$ELMAR8}||displayif=and(and(equals(ELMAR8C,0),doesNotEqual(isDefined(ELMAR8,-1),-1)),greaterThanOrEqual(isDefined(ELMAR8,69),69))|69||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(ELMAR8C,0),equals(isDefined(ELMAR8,-1),-1)),lessThanOrEqual(AGE,69)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(ELMAR8C,0),equals(isDefined(ELMAR8,-1),-1)),lessThanOrEqual(age,69)))|{$u:age}||displayif=and(or(doesNotEqual(ELMAR8C,0),equals(isDefined(ELMAR8,-1),-1)),greaterThan(isDefined(AGE,age),69))|69|, what is the total amount of time you vaped <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+// 70+
+[ELMARLIFEH?,displayif=and(and(equals(ELMAR1,3),or(equals(ELMAR4,3),or(equals(ELMAR7B,0),equals(ELMAR8C,0)))),and(greaterThanOrEqual(isDefined(AGE,age),70),or(doesNotEqual(ELMAR8C,0),greaterThanOrEqual(isDefined(ELMAR8,70),70))))]
+On days that you used electronic marijuana delivery devices when you were age |displayif=greaterThanOrEqual(isDefined(REGELMAR_AGE,-1),70)|{$REGELMAR_AGE}||displayif=lessThan(isDefined(REGELMAR_AGE,-1),70)|70| or older, what is the total amount of time you vaped <b>per day</b>?
+(0) 15 minutes or less
+(1) 16 to 30 minutes
+(2) 31 to 59 minutes
+(3) 1 hour
+(4) 2 hours or more
+
+
+[EAMAR1?,displayif=equals(MARIJUANA,3)]<b>Consuming Marijuana in Foods or Drinks</b>
+
+The next questions are about consuming marijuana in food or drinks.
+
+How many days have you <b>consumed marijuana in food or drinks</b> in your life?
+(0) 10 or less ->  THMAR1
+(1) 11 to 49 -> THMAR1
+(2) 50 to 99 -> EAMAR2
+(3) 100 or more -> EAMAR2
+<#NR ->  THMAR1>
+
+[EAMAR2?,displayif=equals(MARIJUANA,3)] How old were you when you <b>first</b> consumed marijuana in food or drinks?
+
+Age first consumed marijuana in food or drinks |__|__|min=0 max=sum(isDefined(AGE,age),1)|< ->  EAMAR3 >
+
+[EAMAR3?,displayif=equals(MARIJUANA,3)]
+How old were you when you started consuming marijuana in food or drinks on a |popup|regular basis|Informational Text|We understand that the meaning of 'regular basis' might be different for different people. When you answer this question, please think about what "regular basis" means to you.|?
+
+Age started consuming marijuana in food or drinks on a regular basis |__|__|id=REGEAMAR_AGE min=isDefined(EAMAR2,0) max=sum(isDefined(AGE,age),1)|
+
+[44*] Never consumed marijuana in food or drinks on a regular basis
+< ->  EAMAR4>
+
+[EAMAR4?,displayif=equals(MARIJUANA,3)] Do you consume marijuana in food or drinks now?
+(0) No ->  EAMAR5
+(1) Yes, but rarely ->  EAMAR5
+(2) Yes, some days -> EAMAR5
+(3) Yes, every day ->  EAMAR9A
+< #NR -> EAMAR5>
+
+[EAMAR5?,displayif=equals(MARIJUANA,3)] When was the <b>last</b> time you consumed marijuana in food or drinks?
+(0) In the past month ->  EAMAR6
+(1) More than a month ago, but in the past year -> EAMAR7A
+(2) More than 1 year ago -> EAMAR8
+< #NR -> EAMAR9A>
+
+[EAMAR6?,displayif=equals(MARIJUANA,3)] <b>On how many of the past 30 days</b> have you consumed marijuana in food or drinks?
+
+#Days consumed marijuana in food or drinks in past 30 days |__|__|min=1 max=30|< -> EAMAR9A>
+
+[EAMAR7A?,displayif=equals(MARIJUANA,3)] How many months ago did you <b>last</b> consume marijuana in food or drinks?
+
+#Months ago last consumed marijuana in food or drinks |__|__|min=1 max=11|<  -> EAMAR7B>
+
+[EAMAR7B?,displayif=equals(MARIJUANA,3)] During that time, did you ever consume marijuana in food or drinks <b>every day</b>?
+(0) No -> EAMAR7C
+(1) Yes ->  EAMAR9A
+< #NR -> EAMAR7C>
+
+[EAMAR7C?,displayif=equals(MARIJUANA,3)] During that time, how many days (1 to 30) did you consume marijuana in food or drinks in a usual month?
+
+#Days consumed marijuana in usual month |__|__|min=1 max=30|<  ->  EAMAR9A>
+
+[EAMAR8?,displayif=equals(MARIJUANA,3)] How old were you when you <b>last</b> consumed marijuana in food or drinks?
+
+Age when last consumed marijuana in food or drinks |__|__|min=isDefined(isDefined(REGEAMAR_AGE,EAMAR2),0) max=sum(isDefined(AGE,age),1)| <-> EAMAR8C>
+
+[EAMAR8C?,displayif=equals(MARIJUANA,3)] During that time, did you ever consume marijuana in food or drinks <b>every day</b>?
+(0) No -> EAMAR8D
+(1) Yes ->  EAMAR9A
+< #NR -> EAMAR8D>
+
+[EAMAR8D?,displayif=equals(MARIJUANA,3)] During that time, how many days (1 to 30) did you use consume marijuana in food or drinks in a usual month?
+
+#Days consumed marijuana in a usual month |__|__|min=1 max=30|<  ->  EAMAR9A>
+
+[EAMAR9A?,displayif=equals(MARIJUANA,3)]
+On days that you consume|displayif=or(equals(EAMAR5,1),equals(EAMAR5,2))|d| marijuana in food or drinks, how many servings |displayif=and(doesNotEqual(EAMAR5,1),doesNotEqual(EAMAR5,2))|do||displayif=or(equals(EAMAR5,1),equals(EAMAR5,2))|did| you have <b>per day</b>?
+
+#Servings per day |__|__|__|id=EAMAR9ANUM min=1 max=999|
+[77*] Don’t know
+<->EAMAR9B>
+
+[EAMAR9B?,displayif=and(doesNotEqual(or(or(equals(EAMAR4,3),and(or(or(equals(EAMAR4,2),equals(EAMAR4,1)),equals(EAMAR4,0)),and(equals(EAMAR5,1),equals(EAMAR7B,0)))),and(or(or(equals(EAMAR4,2),equals(EAMAR4,1)),equals(EAMAR4,0)),and(equals(EAMAR5,2),equals(EAMAR8C,0)))),1),equals(MARIJUANA,3))] Did you ever consume marijuana in food or drinks every day?
+(0) No -> EAMAR10
+(1) Yes -> EAMAR9D
+< #NR -> EAMAR10>
+
+[EAMAR9D?,displayif=and(doesNotEqual(or(or(equals(EAMAR4,3),and(or(or(equals(EAMAR4,2),equals(EAMAR4,1)),equals(EAMAR4,0)),and(equals(EAMAR5,1),equals(EAMAR7B,0)))),and(or(or(equals(EAMAR4,2),equals(EAMAR4,1)),equals(EAMAR4,0)),and(equals(EAMAR5,2),equals(EAMAR8C,0)))),1),equals(MARIJUANA,3))] How old were you when you stopped consuming marijuana in food or drinks every day?
+
+Age stopped consuming marijuana in food or drinks every day |__|__|min=0 max=sum(isDefined(AGE,age),1)| < -> EAMAR9C>
+
+[EAMAR9C?,displayif=and(doesNotEqual(or(or(equals(EAMAR4,3),and(or(or(equals(EAMAR4,2),equals(EAMAR4,1)),equals(EAMAR4,0)),and(equals(EAMAR5,1),equals(EAMAR7B,0)))),and(or(or(equals(EAMAR4,2),equals(EAMAR4,1)),equals(EAMAR4,0)),and(equals(EAMAR5,2),equals(EAMAR8C,0)))),1),equals(MARIJUANA,3))] When you were a daily consumer of marijuana in food or drinks, how many servings did you have <b>per day</b>?
+
+#Servings per day |__|__|__|id=EAMAR9CNUM min=1 max=99|
+[77*] Don’t know
+<->EAMAR10>
+
+[EAMAR10?,displayif=equals(MARIJUANA,3)] Why |displayif=or(equals(EAMAR4,3),equals(EAMAR5,0))|do||displayif=or(equals(EAMAR5,1),equals(EAMAR5,2))|did| you use consume marijuana in food or drinks?
+(0) Recreation
+(1) As medicine
+(2) Recreation and as medicine
+(55) Other: Please describe |__|id=EAMAR10OTH|
+(99) Prefer not to answer
+< #NR -> EAMARLIFEA>
+
+// Same logic as CIGLIFEA-CIGLIFEH just with different variable names
+// 0-17
+[EAMARLIFEA?,displayif=and(and(and(equals(EAMAR1,3),or(equals(EAMAR4,3),or(equals(EAMAR7B,0),equals(EAMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),0),or(doesNotEqual(EAMAR8C,0),greaterThanOrEqual(isDefined(EAMAR8,0),0)))),lessThanOrEqual(REGEAMAR_AGE,17))]
+On days that you consumed marijuana in food or drinks when you were age |displayif=greaterThanOrEqual(isDefined(REGEAMAR_AGE,-1),0)|{$REGEAMAR_AGE}||displayif=lessThan(isDefined(REGEAMAR_AGE,-1),0)|0| to |displayif=and(and(equals(EAMAR8C,0),doesNotEqual(isDefined(EAMAR8,-1),-1)),lessThan(isDefined(EAMAR8,17),17))|{$EAMAR8}||displayif=and(and(equals(EAMAR8C,0),doesNotEqual(isDefined(EAMAR8,-1),-1)),greaterThanOrEqual(isDefined(EAMAR8,17),17))|17||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(EAMAR8C,1),equals(isDefined(EAMAR8,-1),-1)),lessThanOrEqual(AGE,17)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(EAMAR8C,0),equals(isDefined(EAMAR8,-1),-1)),lessThanOrEqual(age,17)))|{$u:age}||displayif=and(or(doesNotEqual(EAMAR8C,0),equals(isDefined(EAMAR8,-1),-1)),greaterThan(isDefined(AGE,age),17))|17|, about how many servings did you have <b>per day</b>?
+
+#SERVINGS PER DAY |__|__|min=1 max=99|
+
+// 18-24
+[EAMARLIFEB?,displayif=and(and(and(equals(EAMAR1,3),or(equals(EAMAR4,3),or(equals(EAMAR7B,0),equals(EAMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),18),or(doesNotEqual(EAMAR8C,0),greaterThanOrEqual(isDefined(EAMAR8,18),18)))),lessThanOrEqual(REGEAMAR_AGE,24))]
+On days that you consumed marijuana in food or drinks when you were age |displayif=greaterThanOrEqual(isDefined(REGEAMAR_AGE,-1),18)|{$REGEAMAR_AGE}||displayif=lessThan(isDefined(REGEAMAR_AGE,-1),18)|18| to |displayif=and(and(equals(EAMAR8C,0),doesNotEqual(isDefined(EAMAR8,-1),-1)),lessThan(isDefined(EAMAR8,24),24))|{$EAMAR8}||displayif=and(and(equals(EAMAR8C,0),doesNotEqual(isDefined(EAMAR8,-1),-1)),greaterThanOrEqual(isDefined(EAMAR8,24),24))|24||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(EAMAR8C,0),equals(isDefined(EAMAR8,-1),-1)),lessThanOrEqual(AGE,24)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(EAMAR8C,0),equals(isDefined(EAMAR8,-1),-1)),lessThanOrEqual(age,24)))|{$u:age}||displayif=and(or(doesNotEqual(EAMAR8C,0),equals(isDefined(EAMAR8,-1),-1)),greaterThan(isDefined(AGE,age),24))|24|, about how many servings did you have <b>per day</b>?
+
+#SERVINGS PER DAY |__|__|min=1 max=99|
+
+// 25-29
+[EAMARLIFEC?,displayif=and(and(and(equals(EAMAR1,3),or(equals(EAMAR4,3),or(equals(EAMAR7B,0),equals(EAMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),25),or(doesNotEqual(EAMAR8C,0),greaterThanOrEqual(isDefined(EAMAR8,25),25)))),lessThanOrEqual(REGEAMAR_AGE,29))]
+On days that you consumed marijuana in food or drinks when you were age |displayif=greaterThanOrEqual(isDefined(REGEAMAR_AGE,-1),25)|{$REGEAMAR_AGE}||displayif=lessThan(isDefined(REGEAMAR_AGE,-1),25)|25| to |displayif=and(and(equals(EAMAR8C,0),doesNotEqual(isDefined(EAMAR8,-1),-1)),lessThan(isDefined(EAMAR8,29),29))|{$EAMAR8}||displayif=and(and(equals(EAMAR8C,0),doesNotEqual(isDefined(EAMAR8,-1),-1)),greaterThanOrEqual(isDefined(EAMAR8,29),29))|29||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(EAMAR8C,0),equals(isDefined(EAMAR8,-1),-1)),lessThanOrEqual(AGE,29)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(EAMAR8C,0),equals(isDefined(EAMAR8,-1),-1)),lessThanOrEqual(age,29)))|{$u:age}||displayif=and(or(doesNotEqual(EAMAR8C,0),equals(isDefined(EAMAR8,-1),-1)),greaterThan(isDefined(AGE,age),29))|29|, about how many servings did you have <b>per day</b>?
+
+#SERVINGS PER DAY |__|__|min=1 max=99|
+
+// 30-39
+[EAMARLIFED?,displayif=and(and(and(equals(EAMAR1,3),or(equals(EAMAR4,3),or(equals(EAMAR7B,0),equals(EAMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),30),or(doesNotEqual(EAMAR8C,0),greaterThanOrEqual(isDefined(EAMAR8,30),30)))),lessThanOrEqual(REGEAMAR_AGE,39))]
+On days that you consumed marijuana in food or drinks when you were age |displayif=greaterThanOrEqual(isDefined(REGEAMAR_AGE,-1),30)|{$REGEAMAR_AGE}||displayif=lessThan(isDefined(REGEAMAR_AGE,-1),30)|30| to |displayif=and(and(equals(EAMAR8C,0),doesNotEqual(isDefined(EAMAR8,-1),-1)),lessThan(isDefined(EAMAR8,39),39))|{$EAMAR8}||displayif=and(and(equals(EAMAR8C,0),doesNotEqual(isDefined(EAMAR8,-1),-1)),greaterThanOrEqual(isDefined(EAMAR8,39),39))|39||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(EAMAR8C,0),equals(isDefined(EAMAR8,-1),-1)),lessThanOrEqual(AGE,39)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(EAMAR8C,0),equals(isDefined(EAMAR8,-1),-1)),lessThanOrEqual(age,39)))|{$u:age}||displayif=and(or(doesNotEqual(EAMAR8C,0),equals(isDefined(EAMAR8,-1),-1)),greaterThan(isDefined(AGE,age),39))|39|, about how many servings did you have <b>per day</b>?
+
+#SERVINGS PER DAY |__|__|min=1 max=99|
+
+// 40-49
+[EAMARLIFEE?,displayif=and(and(and(equals(EAMAR1,3),or(equals(EAMAR4,3),or(equals(EAMAR7B,0),equals(EAMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),40),or(doesNotEqual(EAMAR8C,0),greaterThanOrEqual(isDefined(EAMAR8,40),40)))),lessThanOrEqual(REGEAMAR_AGE,49))]
+On days that you consumed marijuana in food or drinks when you were age |displayif=greaterThanOrEqual(isDefined(REGEAMAR_AGE,-1),40)|{$REGEAMAR_AGE}||displayif=lessThan(isDefined(REGEAMAR_AGE,-1),40)|40| to |displayif=and(and(equals(EAMAR8C,0),doesNotEqual(isDefined(EAMAR8,-1),-1)),lessThan(isDefined(EAMAR8,49),49))|{$EAMAR8}||displayif=and(and(equals(EAMAR8C,0),doesNotEqual(isDefined(EAMAR8,-1),-1)),greaterThanOrEqual(isDefined(EAMAR8,49),49))|49||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(EAMAR8C,0),equals(isDefined(EAMAR8,-1),-1)),lessThanOrEqual(AGE,49)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(EAMAR8C,0),equals(isDefined(EAMAR8,-1),-1)),lessThanOrEqual(age,49)))|{$u:age}||displayif=and(or(doesNotEqual(EAMAR8C,0),equals(isDefined(EAMAR8,-1),-1)),greaterThan(isDefined(AGE,age),49))|49|, about how many servings did you have <b>per day</b>?
+
+#SERVINGS PER DAY |__|__|min=1 max=99|
+
+// 50-59
+[EAMARLIFEF?,displayif=and(and(and(equals(EAMAR1,3),or(equals(EAMAR4,3),or(equals(EAMAR7B,0),equals(EAMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),50),or(doesNotEqual(EAMAR8C,0),greaterThanOrEqual(isDefined(EAMAR8,50),50)))),lessThanOrEqual(REGEAMAR_AGE,59))]
+On days that you consumed marijuana in food or drinks when you were age |displayif=greaterThanOrEqual(isDefined(REGEAMAR_AGE,-1),50)|{$REGEAMAR_AGE}||displayif=lessThan(isDefined(REGEAMAR_AGE,-1),50)|50| to |displayif=and(and(equals(EAMAR8C,0),doesNotEqual(isDefined(EAMAR8,-1),-1)),lessThan(isDefined(EAMAR8,59),59))|{$EAMAR8}||displayif=and(and(equals(EAMAR8C,0),doesNotEqual(isDefined(EAMAR8,-1),-1)),greaterThanOrEqual(isDefined(EAMAR8,59),59))|59||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(EAMAR8C,0),equals(isDefined(EAMAR8,-1),-1)),lessThanOrEqual(AGE,59)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(EAMAR8C,0),equals(isDefined(EAMAR8,-1),-1)),lessThanOrEqual(age,59)))|{$u:age}||displayif=and(or(doesNotEqual(EAMAR8C,0),equals(isDefined(EAMAR8,-1),-1)),greaterThan(isDefined(AGE,age),59))|59|, about how many servings did you have <b>per day</b>?
+
+#SERVINGS PER DAY |__|__|min=1 max=99|
+
+// 60-69
+[EAMARLIFEG?,displayif=and(and(and(equals(EAMAR1,3),or(equals(EAMAR4,3),or(equals(EAMAR7B,0),equals(EAMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),60),or(doesNotEqual(EAMAR8C,0),greaterThanOrEqual(isDefined(EAMAR8,60),60)))),lessThanOrEqual(REGEAMAR_AGE,69))]
+On days that you consumed marijuana in food or drinks when you were age |displayif=greaterThanOrEqual(isDefined(REGEAMAR_AGE,-1),60)|{$REGEAMAR_AGE}||displayif=lessThan(isDefined(REGEAMAR_AGE,-1),60)|60| to |displayif=and(and(equals(EAMAR8C,0),doesNotEqual(isDefined(EAMAR8,-1),-1)),lessThan(isDefined(EAMAR8,69),69))|{$EAMAR8}||displayif=and(and(equals(EAMAR8C,0),doesNotEqual(isDefined(EAMAR8,-1),-1)),greaterThanOrEqual(isDefined(EAMAR8,69),69))|69||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(EAMAR8C,0),equals(isDefined(EAMAR8,-1),-1)),lessThanOrEqual(AGE,69)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(EAMAR8C,0),equals(isDefined(EAMAR8,-1),-1)),lessThanOrEqual(age,69)))|{$u:age}||displayif=and(or(doesNotEqual(EAMAR8C,0),equals(isDefined(EAMAR8,-1),-1)),greaterThan(isDefined(AGE,age),69))|69|, about how many servings did you have <b>per day</b>?
+
+#SERVINGS PER DAY |__|__|min=1 max=99|
+
+// 70+
+[EAMARLIFEH?,displayif=and(and(equals(EAMAR1,3),or(equals(EAMAR4,3),or(equals(EAMAR7B,0),equals(EAMAR8C,0)))),and(greaterThanOrEqual(isDefined(AGE,age),70),or(doesNotEqual(EAMAR8C,0),greaterThanOrEqual(isDefined(EAMAR8,70),70))))]
+On days that you consumed marijuana in food or drinks when you were age |displayif=greaterThanOrEqual(isDefined(REGEAMAR_AGE,-1),70)|{$REGEAMAR_AGE}||displayif=lessThan(isDefined(REGEAMAR_AGE,-1),70)|70| or older, about how many servings did you have <b>per day</b>?
+
+#SERVINGS PER DAY |__|__|min=1 max=99|
+
+[THMAR1?,displayif=equals(MARIJUANA,4)]<b>THC Concentrates via Dabbing (Such as Wax, Shatter, Butter, Hash, or Kief)</b>
+
+The next questions are about your use of THC concentrates via dabbing (such as wax, shatter, butter, hash, or kief).
+
+How many days have you used <b>THC concentrates via dabbing</b> in your life?
+(0) 10 or less -> INTROALC
+(1) 11 to 49 -> INTROALC
+(2) 50 to 99 -> THMAR2
+(3) 100 or more -> THMAR2
+< #NR -> INTROALC>
+
+[THMAR2?,displayif=equals(MARIJUANA,4)] How old were you when you <b>first</b> used THC concentrates via dabbing?
+
+Age first used THC concentrates via dabbing |__|__|min=0 max=sum(isDefined(AGE,age),1)| < -> THMAR3 >
+
+[THMAR3?,displayif=equals(MARIJUANA,4)]
+How old were you when you started using THC concentrates via dabbing on a |popup|regular basis|Informational Text|We understand that the meaning of 'regular basis' might be different for different people. When you answer this question, please think about what "regular basis" means to you.|?
+
+Age started using THC concentrates via dabbing on a regular basis |__|__|id=REGTHMAR_AGE min=isDefined(THMAR2,0) max=sum(isDefined(AGE,age),1)|
+
+[44*] Never used THC concentrates via dabbing on a regular basis
+< #NR -> THMAR4>
+
+[THMAR4?,displayif=equals(MARIJUANA,4)] Do you use THC concentrates via dabbing now?
+(0) No -> THMAR5
+(1) Yes, but rarely -> THMAR5
+(2) Yes, some days ->  THMAR5
+(3) Yes, every day -> THMAR9A
+< #NR -> THMAR5>
+
+[THMAR5?,displayif=equals(MARIJUANA,4)] When was the <b>last</b> time you used THC concentrates via dabbing?
+(0) In the past month -> THMAR6
+(1) More than a month ago, but in the past year -> THMAR7A
+(2) More than 1 year ago ->  THMAR8
+< #NR -> THMAR9A>
+
+[THMAR6?,displayif=equals(MARIJUANA,4)] <b>On how many of the past 30 days</b> have you used THC concentrates via dabbing?
+
+#Days used THC concentrates via dabbing in past 30 days |__|__|min=1 max=30|< -> THMAR9A>
+
+
+[THMAR7A?,displayif=equals(MARIJUANA,4)] How many months ago did you <b>last</b> use THC concentrates via dabbing?
+ #Months ago last used THC concentrates via dabbing |__|__|min=1 max=11|< -> THMAR7B >
+
+[THMAR7B?,displayif=equals(MARIJUANA,4)] During that time, did you ever use THC concentrates via dabbing <b>every day</b>?
+(0) No -> THMAR7C
+(1) Yes -> THMAR9A
+< #NR -> THMAR7C>
+
+[THMAR7C?,displayif=equals(MARIJUANA,4)] During that time, how many days (1 to 30) did you use THC concentrates via dabbing in a usual month?
+
+#Days used THC concentrates via dabbing in usual month |__|__|min=1 max=30|< ->  THMAR9A>
+
+[THMAR8?,displayif=equals(MARIJUANA,4)] How old were you when you <b>last</b>	used THC concentrates via dabbing?
+
+Age when last used THC concentrates via dabbing |__|__|min=isDefined(isDefined(REGTHMAR_AGE,THMAR2),0) max=sum(isDefined(AGE,age),1)|< -> THMAR8C>
+
+[THMAR8C?,displayif=equals(MARIJUANA,4)] During that time, did you ever use THC concentrates via dabbing <b>every day</b>?
+(0) No -> THMAR8D
+(1) Yes -> THMAR9A
+< #NR -> THMAR8D>
+
+[THMAR8D?,displayif=equals(MARIJUANA,4)] During that time, how many days (1 to 30) did you use THC concentrates via dabbing in a usual month?
+
+#Days used THC concentrates via dabbing in usual month |__|__|min=1 max=30|<  ->  THMAR9A>
+
+[THMAR9A?,displayif=equals(MARIJUANA,4)]
+On days that you |displayif=and(doesNotEqual(THMAR5,1),doesNotEqual(THMAR5,2))| use||displayif=or(equals(THMAR5,1),equals(THMAR5,2))| used| THC concentrates via dabbing, how many servings |displayif=and(doesNotEqual(THMAR5,1),doesNotEqual(THMAR5,2))| do||displayif=or(equals(THMAR5,1),equals(THMAR5,2))| did| you have <b>per day</b>?
+
+#Servings per day |__|__|__|id=THMAR9ANUM min=1 max=999|
+[77*] Don’t know
+
+[THMAR9B?,displayif=and(doesNotEqual(or(or(equals(THMAR4,3),and(or(or(equals(THMAR4,2),equals(THMAR4,1)),equals(THMAR4,0)),and(equals(THMAR5,1),equals(THMAR7B,0)))),and(or(or(equals(THMAR4,2),equals(THMAR4,1)),equals(THMAR4,0)),and(equals(THMAR5,2),equals(THMAR8C,0)))),1),equals(MARIJUANA,4))] Did you ever use THC concentrates via dabbing <b>every day</b>?
+(0) No -> THMAR10
+(1) Yes -> THMAR9D
+< #NR -> THMAR10>
+
+[THMAR9D?,displayif=and(doesNotEqual(or(or(equals(THMAR4,3),and(or(or(equals(THMAR4,2),equals(THMAR4,1)),equals(THMAR4,0)),and(equals(THMAR5,1),equals(THMAR7B,0)))),and(or(or(equals(THMAR4,2),equals(THMAR4,1)),equals(THMAR4,0)),and(equals(THMAR5,2),equals(THMAR8C,0)))),1),equals(MARIJUANA,4))] How old were you when you stopped using THC concentrates via dabbing <b>every day</b>?
+
+|__|__|min=0 max=sum(isDefined(AGE,age),1)|  Age stopped using THC concentrates via dabbing every day
+< #NR -> THMAR9C>
+
+[THMAR9C?,displayif=and(doesNotEqual(or(or(equals(THMAR4,3),and(or(or(equals(THMAR4,2),equals(THMAR4,1)),equals(THMAR4,0)),and(equals(THMAR5,1),equals(THMAR7B,0)))),and(or(or(equals(THMAR4,2),equals(THMAR4,1)),equals(THMAR4,0)),and(equals(THMAR5,2),equals(THMAR8C,0)))),1),equals(MARIJUANA,4))] When you were a daily user of THC concentrates via dabbing, how many servings did you have <b>per day</b>?
+
+#Servings per day |__|__|__|id=THMAR9CNUM min=1 max=999|
+[77*] Don’t know
+
+[THMAR10?,displayif=equals(MARIJUANA,4)] Why |displayif=or(equals(THMAR4,3),equals(THMAR5,0))|do||displayif=or(equals(THMAR5,1),equals(THMAR5,2))|did| you use THC concentrates via dabbing?
+(0) Recreation
+(1) As medicine
+(2) Recreation and as medicine
+(55) Other: Please describe |__|id=THMAR10OTH|
+(99) Prefer not to answer
+< -> THMARLIFEA>
+
+// Same logic as CIGLIFEA-CIGLIFEH just with different variable names
+// 0-17
+[THMARLIFEA?,displayif=and(and(and(equals(THMAR1,3),or(equals(THMAR4,3),or(equals(THMAR7B,0),equals(THMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),0),or(doesNotEqual(THMAR8C,0),greaterThanOrEqual(isDefined(THMAR8,0),0)))),lessThanOrEqual(REGTHMAR_AGE,17))]
+On days that you used THC concentrates via dabbing when you were age |displayif=greaterThanOrEqual(isDefined(REGTHMAR_AGE,-1),0)|{$REGTHMAR_AGE}||displayif=lessThan(isDefined(REGTHMAR_AGE,-1),0)|0| to |displayif=and(and(equals(THMAR8C,0),doesNotEqual(isDefined(THMAR8,-1),-1)),lessThan(isDefined(THMAR8,17),17))|{$THMAR8}||displayif=and(and(equals(THMAR8C,0),doesNotEqual(isDefined(THMAR8,-1),-1)),greaterThanOrEqual(isDefined(THMAR8,17),17))|17||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(THMAR8C,0),equals(isDefined(THMAR8,-1),-1)),lessThanOrEqual(AGE,17)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(THMAR8C,0),equals(isDefined(THMAR8,-1),-1)),lessThanOrEqual(age,17)))|{$u:age}||displayif=and(or(doesNotEqual(THMAR8C,0),equals(isDefined(THMAR8,-1),-1)),greaterThan(isDefined(AGE,age),17))|17|, about how many servings did you have <b>per day</b>?
+
+#SERVINGS PER DAY |__|__|min=1 max=99|
+
+// 18-24
+[THMARLIFEB?,displayif=and(and(and(equals(THMAR1,3),or(equals(THMAR4,3),or(equals(THMAR7B,0),equals(THMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),18),or(doesNotEqual(THMAR8C,0),greaterThanOrEqual(isDefined(THMAR8,18),18)))),lessThanOrEqual(REGTHMAR_AGE,24))]
+On days that you used THC concentrates via dabbing when you were age |displayif=greaterThanOrEqual(isDefined(REGTHMAR_AGE,-1),18)|{$REGTHMAR_AGE}||displayif=lessThan(isDefined(REGTHMAR_AGE,-1),18)|18| to |displayif=and(and(equals(THMAR8C,0),doesNotEqual(isDefined(THMAR8,-1),-1)),lessThan(isDefined(THMAR8,24),24))|{$THMAR8}||displayif=and(and(equals(THMAR8C,0),doesNotEqual(isDefined(THMAR8,-1),-1)),greaterThanOrEqual(isDefined(THMAR8,24),24))|24||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(THMAR8C,0),equals(isDefined(THMAR8,-1),-1)),lessThanOrEqual(AGE,24)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(THMAR8C,0),equals(isDefined(THMAR8,-1),-1)),lessThanOrEqual(age,24)))|{$u:age}||displayif=and(or(doesNotEqual(THMAR8C,0),equals(isDefined(THMAR8,-1),-1)),greaterThan(isDefined(AGE,age),24))|24|, about how many servings did you have <b>per day</b>?
+
+#SERVINGS PER DAY |__|__|min=1 max=99|
+
+// 25-29
+[THMARLIFEC?,displayif=and(and(and(equals(THMAR1,3),or(equals(THMAR4,3),or(equals(THMAR7B,0),equals(THMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),25),or(doesNotEqual(THMAR8C,0),greaterThanOrEqual(isDefined(THMAR8,25),25)))),lessThanOrEqual(REGTHMAR_AGE,29))]
+On days that you used THC concentrates via dabbing when you were age |displayif=greaterThanOrEqual(isDefined(REGTHMAR_AGE,-1),25)|{$REGTHMAR_AGE}||displayif=lessThan(isDefined(REGTHMAR_AGE,-1),25)|25| to |displayif=and(and(equals(THMAR8C,0),doesNotEqual(isDefined(THMAR8,-1),-1)),lessThan(isDefined(THMAR8,29),29))|{$THMAR8}||displayif=and(and(equals(THMAR8C,0),doesNotEqual(isDefined(THMAR8,-1),-1)),greaterThanOrEqual(isDefined(THMAR8,29),29))|29||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(THMAR8C,0),equals(isDefined(THMAR8,-1),-1)),lessThanOrEqual(AGE,29)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(THMAR8C,0),equals(isDefined(THMAR8,-1),-1)),lessThanOrEqual(age,29)))|{$u:age}||displayif=and(or(doesNotEqual(THMAR8C,0),equals(isDefined(THMAR8,-1),-1)),greaterThan(isDefined(AGE,age),29))|29|, about how many servings did you have <b>per day</b>?
+
+#SERVINGS PER DAY |__|__|min=1 max=99|
+
+// 30-39
+[THMARLIFED?,displayif=and(and(and(equals(THMAR1,3),or(equals(THMAR4,3),or(equals(THMAR7B,0),equals(THMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),30),or(doesNotEqual(THMAR8C,0),greaterThanOrEqual(isDefined(THMAR8,30),30)))),lessThanOrEqual(REGTHMAR_AGE,39))]
+On days that you used THC concentrates via dabbing when you were age |displayif=greaterThanOrEqual(isDefined(REGTHMAR_AGE,-1),30)|{$REGTHMAR_AGE}||displayif=lessThan(isDefined(REGTHMAR_AGE,-1),30)|30| to |displayif=and(and(equals(THMAR8C,0),doesNotEqual(isDefined(THMAR8,-1),-1)),lessThan(isDefined(THMAR8,39),39))|{$THMAR8}||displayif=and(and(equals(THMAR8C,0),doesNotEqual(isDefined(THMAR8,-1),-1)),greaterThanOrEqual(isDefined(THMAR8,39),39))|39||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(THMAR8C,0),equals(isDefined(THMAR8,-1),-1)),lessThanOrEqual(AGE,39)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(THMAR8C,0),equals(isDefined(THMAR8,-1),-1)),lessThanOrEqual(age,39)))|{$u:age}||displayif=and(or(doesNotEqual(THMAR8C,0),equals(isDefined(THMAR8,-1),-1)),greaterThan(isDefined(AGE,age),39))|39|, about how many servings did you have <b>per day</b>?
+
+#SERVINGS PER DAY |__|__|min=1 max=99|
+
+// 40-49
+[THMARLIFEE?,displayif=and(and(and(equals(THMAR1,3),or(equals(THMAR4,3),or(equals(THMAR7B,0),equals(THMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),40),or(doesNotEqual(THMAR8C,0),greaterThanOrEqual(isDefined(THMAR8,40),40)))),lessThanOrEqual(REGTHMAR_AGE,49))]
+On days that you used THC concentrates via dabbing when you were age |displayif=greaterThanOrEqual(isDefined(REGTHMAR_AGE,-1),40)|{$REGTHMAR_AGE}||displayif=lessThan(isDefined(REGTHMAR_AGE,-1),40)|40| to |displayif=and(and(equals(THMAR8C,0),doesNotEqual(isDefined(THMAR8,-1),-1)),lessThan(isDefined(THMAR8,49),49))|{$THMAR8}||displayif=and(and(equals(THMAR8C,0),doesNotEqual(isDefined(THMAR8,-1),-1)),greaterThanOrEqual(isDefined(THMAR8,49),49))|49||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(THMAR8C,0),equals(isDefined(THMAR8,-1),-1)),lessThanOrEqual(AGE,49)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(THMAR8C,0),equals(isDefined(THMAR8,-1),-1)),lessThanOrEqual(age,49)))|{$u:age}||displayif=and(or(doesNotEqual(THMAR8C,0),equals(isDefined(THMAR8,-1),-1)),greaterThan(isDefined(AGE,age),49))|49|, about how many servings did you have <b>per day</b>?
+
+#SERVINGS PER DAY |__|__|min=1 max=99|
+
+// 50-59
+[THMARLIFEF?,displayif=and(and(and(equals(THMAR1,3),or(equals(THMAR4,3),or(equals(THMAR7B,0),equals(THMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),50),or(doesNotEqual(THMAR8C,0),greaterThanOrEqual(isDefined(THMAR8,50),50)))),lessThanOrEqual(REGTHMAR_AGE,59))]
+On days that you used THC concentrates via dabbing when you were age |displayif=greaterThanOrEqual(isDefined(REGTHMAR_AGE,-1),50)|{$REGTHMAR_AGE}||displayif=lessThan(isDefined(REGTHMAR_AGE,-1),50)|50| to |displayif=and(and(equals(THMAR8C,0),doesNotEqual(isDefined(THMAR8,-1),-1)),lessThan(isDefined(THMAR8,59),59))|{$THMAR8}||displayif=and(and(equals(THMAR8C,0),doesNotEqual(isDefined(THMAR8,-1),-1)),greaterThanOrEqual(isDefined(THMAR8,59),59))|59||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(THMAR8C,0),equals(isDefined(THMAR8,-1),-1)),lessThanOrEqual(AGE,59)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(THMAR8C,0),equals(isDefined(THMAR8,-1),-1)),lessThanOrEqual(age,59)))|{$u:age}||displayif=and(or(doesNotEqual(THMAR8C,0),equals(isDefined(THMAR8,-1),-1)),greaterThan(isDefined(AGE,age),59))|59|, about how many servings did you have <b>per day</b>?
+
+#SERVINGS PER DAY |__|__|min=1 max=99|
+
+// 60-69
+[THMARLIFEG?,displayif=and(and(and(equals(THMAR1,3),or(equals(THMAR4,3),or(equals(THMAR7B,0),equals(THMAR8C,0)))),and(greaterThan(difference(isDefined(AGE,age),2),60),or(doesNotEqual(THMAR8C,0),greaterThanOrEqual(isDefined(THMAR8,60),60)))),lessThanOrEqual(REGTHMAR_AGE,69))]
+On days that you used THC concentrates via dabbing when you were age |displayif=greaterThanOrEqual(isDefined(REGTHMAR_AGE,-1),60)|{$REGTHMAR_AGE}||displayif=lessThan(isDefined(REGTHMAR_AGE,-1),60)|60| to |displayif=and(and(equals(THMAR8C,0),doesNotEqual(isDefined(THMAR8,-1),-1)),lessThan(isDefined(THMAR8,69),69))|{$THMAR8}||displayif=and(and(equals(THMAR8C,0),doesNotEqual(isDefined(THMAR8,-1),-1)),greaterThanOrEqual(isDefined(THMAR8,69),69))|69||displayif=and(doesNotEqual(isDefined(AGE,-1),-1),and(or(doesNotEqual(THMAR8C,0),equals(isDefined(THMAR8,-1),-1)),lessThanOrEqual(AGE,69)))|{$AGE}||displayif=and(equals(isDefined(AGE,-1),-1),and(or(doesNotEqual(THMAR8C,0),equals(isDefined(THMAR8,-1),-1)),lessThanOrEqual(age,69)))|{$u:age}||displayif=and(or(doesNotEqual(THMAR8C,0),equals(isDefined(THMAR8,-1),-1)),greaterThan(isDefined(AGE,age),69))|69|, about how many servings did you have <b>per day</b>?
+
+#SERVINGS PER DAY |__|__|min=1 max=99|
+
+// 70+
+[THMARLIFEH?,displayif=and(and(equals(THMAR1,3),or(equals(THMAR4,3),or(equals(THMAR7B,0),equals(THMAR8C,0)))),and(greaterThanOrEqual(isDefined(AGE,age),70),or(doesNotEqual(THMAR8C,0),greaterThanOrEqual(isDefined(THMAR8,70),70))))]
+On days that you used THC concentrates via dabbing when you were age |displayif=greaterThanOrEqual(isDefined(REGTHMAR_AGE,-1),70)|{$REGTHMAR_AGE}||displayif=lessThan(isDefined(REGTHMAR_AGE,-1),70)|70| or older, about how many servings did you have <b>per day</b>?
+
+#SERVINGS PER DAY |__|__|min=1 max=99|
+
+[INTROALC]<b>Alcohol</b> <br/> <br/>  Next, we will ask you some questions about your alcohol use. Many questions will ask you to share the age you were when you started or stopped using a product. Please make your best guess if you are not sure of the age you were when you started or stopped using a product.
+
+Please remember that we protect your privacy. We remove information that can identify you from your survey answers before we share them with researchers.
+
+[ALCOHOL1?] Have you ever had an <b>alcoholic beverage</b> (beer, wine, wine cooler, liquor, cocktail, or a mixed drink) in your life?
+(1) Yes -> ALCOHOL2
+(0) No -> SECTION4
+< #NR -> SECTION4>
+
+[ALCOHOL2?] How many alcoholic beverages have you had in your <b>entire life</b>?
+(0) 10 or less -> SECTION4
+(1) 11 to 49 -> SECTION4
+(2) 50 to 99 -> ALCOHOL3
+(3) 100 or more -> ALCOHOL3
+< #NR -> SECTION4>
+
+[ALCOHOL3?]
+How old were you when you <b>first</b> drank alcohol?
+
+Age first drank alcohol |__|__|min=0 max=sum(isDefined(AGE,age),1)|
+
+< ->  ALCOHOL4>
+
+[ALCOHOL4?]
+How old were you when you started drinking alcohol on a |popup|regular basis|Informational Text|We understand that the meaning of 'regular basis' might be different for different people. When you answer this question, please think about what "regular basis" means to you.|?
+
+Age started drinking alcohol on a regular basis |__|__|id=REGALCOHOL_AGE min=isDefined(ALCOHOL3,0) max=sum(isDefined(AGE,age),1)|
+
+[44*] Never drank on a regular basis
+<-> ALCOHOL5>
+
+[ALCOHOL5?] Over the <b>past 12 months</b>, did you drink alcohol?
+(1) Yes -> ALCOHOL8
+(0) No -> ALCOHOL6
+<#NR -> ALCOHOL6>
+
+[ALCOHOL6?] How old were you when you <b>last</b> drank alcohol?
+
+Age last drank alcohol |__|__|min=isDefined(isDefined(REGALCOHOL_AGE,ALCOHOL3),0) max=sum(isDefined(AGE,age),1)|
+<-> ALCOHOL7>
+
+[ALCOHOL7?] Why did you stop drinking alcohol? Select all that apply.
+[0] Personal choice
+[1] Health or medical reasons
+[2] Interactions with medications
+[55] Other: Please describe |__|id=ALCOHOL7OTH|
+< -> ALCLIFE1>
+
+[ALCOHOL8?] Over the <b>past 12 months</b>, did you drink any of these types of alcohol? Select all that apply.
+[0] Beer or hard cider
+[1] Liquor or mixed drinks
+[2] Wine
+[55] Other (such as wine coolers, "hard soda," spiked seltzer (sparkling water), Smirnoff Ice, malt liquor, or pre-mixed cocktails)
+< #NR -> ALCOHOL9>
+
+[BEER1?,displayif=equals(ALCOHOL8,0)]<b>Beer and Hard Cider</b>
+
+Over the <b>past 12 months</b>, how often did you usually drink <b>beer or hard cider</b>?
+(0) Less than once per month
+(1) Once per month
+(2) 2 to 3 times per month
+(3) 1 to 2 times per week
+(4) 3 to 4 times per week
+(5) 5 to 6 times per week
+(6) Every day
+< -> BEER2>
+
+[BEER2?,displayif=equals(ALCOHOL8,0)] Over the <b>past 12 months</b>, on the days that you drank beer or hard cider, how many 12-ounce beers or hard ciders did you drink <b>per day</b>?
+(0) 1 beer
+(1) 2 beers
+(2) 3 beers
+(3) 4 beers
+(4) 5 beers
+(5) 6 or more beers
+<-> LIQUOR1>
+
+[LIQUOR1?,displayif=equals(ALCOHOL8,1)]<b>Liquor and Mixed Drinks</b>
+
+Over the <b>past 12 months</b>, how often did you usually drink <b>liquor or mixed drinks</b>?
+(0) Less than once per month
+(1) Once per month
+(2) 2 to 3 times per month
+(3) 1 to 2 times per week
+(4) 3 to 4 times per week
+(5) 5 to 6 times per week
+(6) Every day
+< -> LIQUOR2>
+
+[LIQUOR2?,displayif=equals(ALCOHOL8,1)] Over the <b>past 12 months</b>, on the days that you drank liquor or mixed drinks, how many shots of liquor (1 shot = 1.5 ounces) did you drink <b>per day</b>?
+(0) 1 shot
+(1) 2 shots
+(2) 3 shots
+(3) 4 shots
+(4) 5 shots
+(5) 6 or more shots
+< -> WINE1>
+
+[WINE1?,displayif=equals(ALCOHOL8,2)]<b>Wine</b>
+
+Over the <b>past 12 months</b>, how often did you usually drink <b>wine</b>?
+(0) Less than once per month
+(1) Once per month
+(2) 2 to 3 times per month
+(3) 1 to 2 times per week
+(4) 3 to 4 times per week
+(5) 5 to 6 times per week
+(6) Every day
+< -> WINE2>
+
+[WINE2?,displayif=equals(ALCOHOL8,2)] Over the <b>past 12 months</b>, on the days that you drank wine, how many 5-ounce glasses of wine did you drink <b>per day</b>?
+(0) 1 glass
+(1) 2 glasses
+(2) 3 glasses
+(3) 4 glasses
+(4) 5 glasses
+(5) 6 or more glasses
+< -> OTHALC1>
+
+[OTHALC1?,displayif=equals(ALCOHOL8,55)]<b>Other Alcoholic Beverages</b>
+
+Over the <b>past 12 months</b>, how often did you usually drink <b>other alcoholic beverages</b> (such as wine coolers, "hard soda", spiked sparkling water, Smirnoff Ice, malt liquor, or pre-mixed cocktails)?
+(0) Less than once per month
+(1) Once per month
+(2) 2 to 3 times per month
+(3) 1 to 2 times per week
+(4) 3 to 4 times per week
+(5) 5 to 6 times per week
+(6) Every day
+< -> OTHALC2>
+
+[OTHALC2?,displayif=equals(ALCOHOL8,55)]  Over the <b>past 12 months</b>, on the days that you drank other alcoholic beverages, how many servings of these beverages (such as wine coolers, "hard soda", spiked seltzer (sparkling water), Smirnoff Ice, malt liquor, or pre-mixed cocktails) did you drink <b>per day</b>?
+(0) 1 serving
+(1) 2 servings
+(2) 3 servings
+(3) 4 servings
+(4) 5 servings
+(5) 6 or more servings
+< ->  ALCOHOL9>
+
+[ALCOHOL9?,displayif=and(equals(ALCOHOL2,3),and(and(or(doesNotEqual(isDefined(ALCOHOL4,-1),-1),doesNotEqual(isDefined(REGALCOHOL_AGE,-1),-1)),doesNotEqual(isDefined(ALCOHOL5,-1),-1)),or(doesNotEqual(isDefined(ALCOHOL6,-1),-1),equals(ALCOHOL5,1))))] Over the past 12 months, how often did you have |displayif=or(equals(SEX,0),equals(SEX,2))|4||displayif=equals(SEX,1)|5| or more alcoholic beverages at the same sitting or occasion? (One drink is equal to a 12-ounce beer, a 5-ounce glass of wine, one mixed drink, or a shot of liquor.)
+(44) Never
+(1) 1 to 5 times per year
+(2) 6 to 11 times per year
+(3) Once per month
+(4) 2 to 3 times per month
+(5) Once per week
+(6) Twice per week
+(7) 3 to 4 times per week
+(8) 5 to 6 times per week
+(9) Every day
+< -> ALCLIFE1>
+
+[ALCLIFE1,displayif=and(equals(ALCOHOL2,3),and(and(or(doesNotEqual(isDefined(ALCOHOL4,-1),-1),doesNotEqual(isDefined(REGALCOHOL_AGE,-1),-1)),doesNotEqual(isDefined(ALCOHOL5,-1),-1)),or(doesNotEqual(isDefined(ALCOHOL6,-1),-1),equals(ALCOHOL5,1))))]  The next questions ask about how much you drank alcohol at different times in your life. Remember, you can make your best guess if you are not sure about how much alcohol you drank during any of these time periods.
+
+[ALCLIFE2,displayif=and(or(equals(ALCOHOL2,3),equals(ALCOHOL2,2)),and(and(or(doesNotEqual(isDefined(ALCOHOL4,-1),-1),doesNotEqual(isDefined(REGALCOHOL_AGE,-1),-1)),doesNotEqual(isDefined(ALCOHOL5,-1),-1)),or(doesNotEqual(isDefined(ALCOHOL6,-1),-1),equals(ALCOHOL5,1))))] During the year(s) you were drinking when you were age |displayif=doesNotEqual(isDefined(REGALCOHOL_AGE,-1),-1)|{$REGALCOHOL_AGE}||displayif=equals(isDefined(REGALCOHOL_AGE,-1),-1)|{$ALCOHOL3}| to age  |displayif=and(exists("AGE"),doesNotExist("ALCOHOL6"))|{$AGE}||displayif=and(doesNotExist("AGE"),doesNotExist("ALCOHOL6"))|{$u:age}||displayif=exists("ALCOHOL6")|{$ALCOHOL6}|, about how often did you drink alcohol?
+
+|grid?|id="GRID_ALCLIFE2" displayif=and(or(equals(ALCOHOL2,3),equals(ALCOHOL2,2)),and(and(or(doesNotEqual(isDefined(ALCOHOL4,-1),-1),doesNotEqual(isDefined(REGALCOHOL_AGE,-1),-1)),doesNotEqual(isDefined(ALCOHOL5,-1),-1)),or(doesNotEqual(isDefined(ALCOHOL6,-1),-1),equals(ALCOHOL5,1))))| |[
+     [ALCLIFE2A,displayif=and(greaterThanOrEqual(isDefined(isDefined(ALCOHOL6,AGE),age),0),lessThanOrEqual(isDefined(isDefined(REGALCOHOL_AGE,ALCOHOL3),0),17))] Age {$e:valueOrDefault("REGALCOHOL_AGE",0)} to {$e:min(17,valueOrDefault("ALCOHOL6","AGE","age",100)) } ;
+    [ALCLIFE2B,displayif=and(greaterThanOrEqual(isDefined(isDefined(ALCOHOL6,AGE),age),18),lessThanOrEqual(isDefined(isDefined(REGALCOHOL_AGE,ALCOHOL3),0),24))] Age {$e:max(18,valueOrDefault("REGALCOHOL_AGE",0))} to {$e:min(24,valueOrDefault("ALCOHOL6","AGE","age",100))} ;
+    [ALCLIFE2C,displayif=and(greaterThanOrEqual(isDefined(isDefined(ALCOHOL6,AGE),age),25),lessThanOrEqual(isDefined(isDefined(REGALCOHOL_AGE,ALCOHOL3),0),29))] Age {$e:max(25,valueOrDefault("REGALCOHOL_AGE",0))} to {$e:min(29,valueOrDefault("ALCOHOL6","AGE","age",100))} ;
+    [ALCLIFE2D,displayif=and(greaterThanOrEqual(isDefined(isDefined(ALCOHOL6,AGE),age),30),lessThanOrEqual(isDefined(isDefined(REGALCOHOL_AGE,ALCOHOL3),0),39))] Age {$e:max(30,valueOrDefault("REGALCOHOL_AGE",0))} to {$e:min(39,valueOrDefault("ALCOHOL6","AGE","age",100))} ;
+    [ALCLIFE2E,displayif=and(greaterThanOrEqual(isDefined(isDefined(ALCOHOL6,AGE),age),40),lessThanOrEqual(isDefined(isDefined(REGALCOHOL_AGE,ALCOHOL3),0),49))] Age {$e:max(40,valueOrDefault("REGALCOHOL_AGE",0))} to {$e:min(49,valueOrDefault("ALCOHOL6","AGE","age",100))} ;
+    [ALCLIFE2F,displayif=and(greaterThanOrEqual(isDefined(isDefined(ALCOHOL6,AGE),age),50),lessThanOrEqual(isDefined(isDefined(REGALCOHOL_AGE,ALCOHOL3),0),59))] Age {$e:max(50,valueOrDefault("REGALCOHOL_AGE",0))} to {$e:min(59,valueOrDefault("ALCOHOL6","AGE","age",100))} ;
+    [ALCLIFE2G,displayif=and(greaterThanOrEqual(isDefined(isDefined(ALCOHOL6,AGE),age),60),lessThanOrEqual(isDefined(isDefined(REGALCOHOL_AGE,ALCOHOL3),0),69))] Age {$e:max(60,valueOrDefault("REGALCOHOL_AGE",0))} to {$e:min(69,valueOrDefault("ALCOHOL6","AGE","age",100))} ;
+    [ALCLIFE2H,displayif=greaterThanOrEqual(isDefined(isDefined(ALCOHOL6,AGE),age),70)] Age {$e:max(70,valueOrDefault("REGALCOHOL_AGE",0))} and older;]
+|
+    (0:Didn't drink during this time)
+    (1:A few times per year)
+    (2:A few times per month)
+    (3:Once per week)
+    (4:A few times per week)
+    (5:Once per day)
+    (6:2 to 3 times per day)
+    (7:4 to 5 times per day)
+    (8:6 or more times per day)
+    |
+
+
+[ALCLIFE4,displayif=or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(equals(ALCLIFE2A_1,1),equals(ALCLIFE2A_2,1)),equals(ALCLIFE2A_3,1)),equals(ALCLIFE2A_4,1)),equals(ALCLIFE2A_5,1)),equals(ALCLIFE2A_6,1)),equals(ALCLIFE2A_7,1)),equals(ALCLIFE2A_8,1)),equals(ALCLIFE2B_1,1)),equals(ALCLIFE2B_2,1)),equals(ALCLIFE2B_3,1)),equals(ALCLIFE2B_4,1)),equals(ALCLIFE2B_5,1)),equals(ALCLIFE2B_6,1)),equals(ALCLIFE2B_7,1)),equals(ALCLIFE2B_8,1)),equals(ALCLIFE2C_1,1)),equals(ALCLIFE2C_2,1)),equals(ALCLIFE2C_3,1)),equals(ALCLIFE2C_4,1)),equals(ALCLIFE2C_5,1)),equals(ALCLIFE2C_6,1)),equals(ALCLIFE2C_7,1)),equals(ALCLIFE2C_8,1)),equals(ALCLIFE2D_1,1)),equals(ALCLIFE2D_2,1)),equals(ALCLIFE2D_3,1)),equals(ALCLIFE2D_4,1)),equals(ALCLIFE2D_5,1)),equals(ALCLIFE2D_6,1)),equals(ALCLIFE2D_7,1)),equals(ALCLIFE2D_8,1)),equals(ALCLIFE2E_1,1)),equals(ALCLIFE2E_2,1)),equals(ALCLIFE2E_3,1)),equals(ALCLIFE2E_4,1)),equals(ALCLIFE2E_5,1)),equals(ALCLIFE2E_6,1)),equals(ALCLIFE2E_7,1)),equals(ALCLIFE2E_8,1)),equals(ALCLIFE2F_1,1)),equals(ALCLIFE2F_2,1)),equals(ALCLIFE2F_3,1)),equals(ALCLIFE2F_4,1)),equals(ALCLIFE2F_5,1)),equals(ALCLIFE2F_6,1)),equals(ALCLIFE2F_7,1)),equals(ALCLIFE2F_8,1)),equals(ALCLIFE2G_1,1)),equals(ALCLIFE2G_2,1)),equals(ALCLIFE2G_3,1)),equals(ALCLIFE2G_4,1)),equals(ALCLIFE2G_5,1)),equals(ALCLIFE2G_6,1)),equals(ALCLIFE2G_7,1)),equals(ALCLIFE2G_8,1)),equals(ALCLIFE2H_1,1)),equals(ALCLIFE2H_2,1)),equals(ALCLIFE2H_3,1)),equals(ALCLIFE2H_4,1)),equals(ALCLIFE2H_5,1)),equals(ALCLIFE2H_6,1)),equals(ALCLIFE2H_7,1)),equals(ALCLIFE2H_8,1))] What type(s) of alcoholic beverage did you usually drink when you were age |displayif=doesNotEqual(isDefined(REGALCOHOL_AGE,-1),-1)|{$REGALCOHOL_AGE}||displayif=equals(isDefined(REGALCOHOL_AGE,-1),-1)|{$ALCOHOL3}| to age |displayif=and(exists("AGE"),doesNotExist("ALCOHOL6"))|{$AGE}||displayif=and(doesNotExist("AGE"),doesNotExist("ALCOHOL6"))|{$u:age}||displayif=exists("ALCOHOL6")|{$ALCOHOL6}|? Select all that apply.
+
+|grid?|id="GRID_ALCLIFE4" displayif=or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(or(equals(ALCLIFE2A_1,1),equals(ALCLIFE2A_2,1)),equals(ALCLIFE2A_3,1)),equals(ALCLIFE2A_4,1)),equals(ALCLIFE2A_5,1)),equals(ALCLIFE2A_6,1)),equals(ALCLIFE2A_7,1)),equals(ALCLIFE2A_8,1)),equals(ALCLIFE2B_1,1)),equals(ALCLIFE2B_2,1)),equals(ALCLIFE2B_3,1)),equals(ALCLIFE2B_4,1)),equals(ALCLIFE2B_5,1)),equals(ALCLIFE2B_6,1)),equals(ALCLIFE2B_7,1)),equals(ALCLIFE2B_8,1)),equals(ALCLIFE2C_1,1)),equals(ALCLIFE2C_2,1)),equals(ALCLIFE2C_3,1)),equals(ALCLIFE2C_4,1)),equals(ALCLIFE2C_5,1)),equals(ALCLIFE2C_6,1)),equals(ALCLIFE2C_7,1)),equals(ALCLIFE2C_8,1)),equals(ALCLIFE2D_1,1)),equals(ALCLIFE2D_2,1)),equals(ALCLIFE2D_3,1)),equals(ALCLIFE2D_4,1)),equals(ALCLIFE2D_5,1)),equals(ALCLIFE2D_6,1)),equals(ALCLIFE2D_7,1)),equals(ALCLIFE2D_8,1)),equals(ALCLIFE2E_1,1)),equals(ALCLIFE2E_2,1)),equals(ALCLIFE2E_3,1)),equals(ALCLIFE2E_4,1)),equals(ALCLIFE2E_5,1)),equals(ALCLIFE2E_6,1)),equals(ALCLIFE2E_7,1)),equals(ALCLIFE2E_8,1)),equals(ALCLIFE2F_1,1)),equals(ALCLIFE2F_2,1)),equals(ALCLIFE2F_3,1)),equals(ALCLIFE2F_4,1)),equals(ALCLIFE2F_5,1)),equals(ALCLIFE2F_6,1)),equals(ALCLIFE2F_7,1)),equals(ALCLIFE2F_8,1)),equals(ALCLIFE2G_1,1)),equals(ALCLIFE2G_2,1)),equals(ALCLIFE2G_3,1)),equals(ALCLIFE2G_4,1)),equals(ALCLIFE2G_5,1)),equals(ALCLIFE2G_6,1)),equals(ALCLIFE2G_7,1)),equals(ALCLIFE2G_8,1)),equals(ALCLIFE2H_1,1)),equals(ALCLIFE2H_2,1)),equals(ALCLIFE2H_3,1)),equals(ALCLIFE2H_4,1)),equals(ALCLIFE2H_5,1)),equals(ALCLIFE2H_6,1)),equals(ALCLIFE2H_7,1)),equals(ALCLIFE2H_8,1))]| |[
+    [ALCLIFE4A,displayif=and(and(greaterThanOrEqual(isDefined(isDefined(ALCOHOL6,AGE),age),0),lessThanOrEqual(isDefined(isDefined(REGALCOHOL_AGE,ALCOHOL3),0),17)),doesNotEqual(ALCLIFE2A_0,1))] Age {$e:valueOrDefault("REGALCOHOL_AGE",0)} to {$e:min(17,valueOrDefault("ALCOHOL6","AGE","age",100)) };
+    [ALCLIFE4B,displayif=and(and(greaterThanOrEqual(isDefined(isDefined(ALCOHOL6,AGE),age),18),lessThanOrEqual(isDefined(isDefined(REGALCOHOL_AGE,ALCOHOL3),0),24)),doesNotEqual(ALCLIFE2B_0,1))] Age {$e:max(18,valueOrDefault("REGALCOHOL_AGE",0))} to {$e:min(24,valueOrDefault("ALCOHOL6","AGE","age",100))};
+    [ALCLIFE4C,displayif=and(and(greaterThanOrEqual(isDefined(isDefined(ALCOHOL6,AGE),age),25),lessThanOrEqual(isDefined(isDefined(REGALCOHOL_AGE,ALCOHOL3),0),29)),doesNotEqual(ALCLIFE2C_0,1))] Age {$e:max(25,valueOrDefault("REGALCOHOL_AGE",0))} to {$e:min(29,valueOrDefault("ALCOHOL6","AGE","age",100))} ;
+    [ALCLIFE4D,displayif=and(and(greaterThanOrEqual(isDefined(isDefined(ALCOHOL6,AGE),age),30),lessThanOrEqual(isDefined(isDefined(REGALCOHOL_AGE,ALCOHOL3),0),39)),doesNotEqual(ALCLIFE2D_0,1))] Age {$e:max(30,valueOrDefault("REGALCOHOL_AGE",0))} to {$e:min(39,valueOrDefault("ALCOHOL6","AGE","age",100))} ;
+    [ALCLIFE4E,displayif=and(and(greaterThanOrEqual(isDefined(isDefined(ALCOHOL6,AGE),age),40),lessThanOrEqual(isDefined(isDefined(REGALCOHOL_AGE,ALCOHOL3),0),49)),doesNotEqual(ALCLIFE2E_0,1))] Age {$e:max(40,valueOrDefault("REGALCOHOL_AGE",0))} to {$e:min(49,valueOrDefault("ALCOHOL6","AGE","age",100))} ;
+    [ALCLIFE4F,displayif=and(and(greaterThanOrEqual(isDefined(isDefined(ALCOHOL6,AGE),age),50),lessThanOrEqual(isDefined(isDefined(REGALCOHOL_AGE,ALCOHOL3),0),59)),doesNotEqual(ALCLIFE2F_0,1))] Age {$e:max(50,valueOrDefault("REGALCOHOL_AGE",0))} to {$e:min(59,valueOrDefault("ALCOHOL6","AGE","age",100))} ;
+    [ALCLIFE4G,displayif=and(and(greaterThanOrEqual(isDefined(isDefined(ALCOHOL6,AGE),age),60),lessThanOrEqual(isDefined(isDefined(REGALCOHOL_AGE,ALCOHOL3),0),69)),doesNotEqual(ALCLIFE2G_0,1))] Age {$e:max(60,valueOrDefault("REGALCOHOL_AGE",0))} to {$e:min(69,valueOrDefault("ALCOHOL6","AGE","age",100))} ;
+    [ALCLIFE4H,displayif=and(greaterThanOrEqual(isDefined(isDefined(ALCOHOL6,AGE),age),70),doesNotEqual(ALCLIFE2H_0,1))] Age {$e:max(70,valueOrDefault("REGALCOHOL_AGE",0))} and older;]
+    |
+    [0:Beer or hard cider]
+    [1:Liquor or mixed drinks]
+    [2:Wine]
+    [55:Other alcoholic beverages (such as wine coolers, "hard soda," spiked seltzer (sparkling water), Smirnoff Ice, malt liquor, or pre-mixed cocktails)]
+    |
+
+
+[SECTION4]<b>Sun Exposure </b>
+
