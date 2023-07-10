@@ -1,0 +1,44 @@
+[QUESTION_1] What is your favorite color?
+(1) red -> QUESTION_1A_RED
+(2) blue -> QUESTION_1A_BLUE
+(3) yellow -> QUESTION_1A_YELLOW
+(4) none of the above 
+< -> QUESTION_2 >
+
+[QUESTION_1A_RED]  Do you happen to like the raspberries?
+(1) yes
+(0) no
+
+[QUESTION_1A_YELLOW]  Do you happen to like the staring directly into the sun for hours?
+(1) yes
+(0) no
+
+[QUESTION_1A_BLUE]  Do you happen to like the blueberries?
+(1) yes
+(0) no
+
+[QUESTION_2] Do you want to see the vegetable question?
+
+(1) yes
+(0) no -> END
+
+[QUESTION_3] Which vegetables do you eat? Select all that apply
+[1] Broccoli -> [Q3_BROC]
+[2] Cauliflower -> [Q3_CAUL]
+[3] Other
+< #NR -> Q3_NO_RESPONSE>
+< -> END >
+
+[Q3_BROC] Do you like it crunchy or mushy?
+(1) crunchy
+(2) mushy
+
+[Q3_CAUL] Do you like it crunchy or mushy?
+(1) crunchy
+(2) mushy
+
+[Q3_NO_RESPONSE]  Do you realize that vegetables are important for good health?
+(1) yes
+(0) no
+
+[END] Questionnaire should end with a question labelled “END”
