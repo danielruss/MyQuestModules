@@ -1,0 +1,18 @@
+[QUESTION_1] What is your favorite color?
+(1) red
+(2) blue
+(3) yellow
+(4) none of the above
+
+[QUESTION_2] Do you know the way to San Jose?
+
+(1) yes
+(2) no
+
+ [QUESTION_3] Which vegetables do you eat? Select all that apply
+[1] Broccoli
+[2] Cauliflower
+[3] Other
+
+
+[END] Questionnaire should end with a question labelled “END”
