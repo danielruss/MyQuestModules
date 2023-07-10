@@ -23,8 +23,8 @@
 (0) no -> END
 
 [QUESTION_3] Which vegetables do you eat? Select all that apply
-[1] Broccoli -> [Q3_BROC]
-[2] Cauliflower -> [Q3_CAUL]
+[1] Broccoli -> Q3_BROC
+[2] Cauliflower -> Q3_CAUL
 [3] Other
 < #NR -> Q3_NO_RESPONSE>
 < -> END >
