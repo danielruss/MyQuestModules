@@ -43,6 +43,6 @@
 
 [QUESTION_4] What is your first name |__|id=FirstName|
 
-[QUESTION_5] In the last question you |displayif=valueLength("QUESTION_4")==0|did not mention your first name||displayif=valueLength("QUESTION_4")>0|said your name was valueOrDefault("QUESTION_4")|
+[QUESTION_5] In the last question you |displayif=valueLength("QUESTION_4")==0|did not mention your first name||displayif=valueLength("QUESTION_4")>0|said your name was {$QUESTION_4}|
 
 [END] Questionnaire should end with a question labelled “END”
