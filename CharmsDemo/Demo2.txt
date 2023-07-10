@@ -29,11 +29,11 @@
 < #NR -> Q3_NO_RESPONSE>
 < -> END >
 
-[Q3_BROC] Do you like it crunchy or mushy?
+[Q3_BROC] Do you like your Broccoli crunchy or mushy?
 (1) crunchy
 (2) mushy
 
-[Q3_CAUL] Do you like it crunchy or mushy?
+[Q3_CAUL] Do you like your Cauliflower crunchy or mushy?
 (1) crunchy
 (2) mushy
 
